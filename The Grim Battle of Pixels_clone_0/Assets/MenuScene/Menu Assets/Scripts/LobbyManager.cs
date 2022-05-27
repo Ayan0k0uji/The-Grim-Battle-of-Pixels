@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-using System;
-using System.Text;
-using System.Linq;
+//using System;
+//using System.Text;
+//using System.Linq;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
@@ -22,13 +22,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] Image P1I;
     [SerializeField] Image P2I;
     [SerializeField] Sprite[] HeroesIcons = new Sprite[5];
-    private string namePlayer = "";
+    private string roomID = "";
     private bool host = false;
     private bool plReady = false;
-    private string roomID = "";
     private bool connectedToMaster = false;
-    private bool neqid = true;
-    
+    private bool neqName = true;
+
     void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -93,19 +92,32 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        if(host)
+        if (!host && PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
+        {
+            PhotonNetwork.LeaveRoom();
+            neqName = false;
+            JoinError.text = "Nicknames are repeated";
+        }
+        else
+        {
+            neqName = true;
+        }
+
+        if (host && neqName)
         {
             GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
             GameObject.Find("Canvas").transform.GetChild(8).gameObject.SetActive(false);
             GameObject.Find("Canvas").transform.GetChild(12).gameObject.SetActive(true);
+            photonView = PhotonView.Get(this);
+            StartCoroutine("Baty");
         } 
-        else
+        else if(neqName)
         {
             GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
             GameObject.Find("Canvas").transform.GetChild(9).gameObject.SetActive(false);
+            photonView = PhotonView.Get(this);
+            StartCoroutine("Baty");
         }
-        photonView = PhotonView.Get(this);
-        StartCoroutine("Baty");
         //PhotonNetwork.LoadLevel("GameScene");
     }
 
