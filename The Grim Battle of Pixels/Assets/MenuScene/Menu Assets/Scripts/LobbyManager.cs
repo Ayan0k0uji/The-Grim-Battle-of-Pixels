@@ -10,8 +10,10 @@ using System.Linq;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Text JoinError;
+    [SerializeField] private Text CreateError;
     [SerializeField] private Text LogText;
-    [SerializeField] private InputField inputField;
+    [SerializeField] private InputField JoinField;
+    [SerializeField] private InputField CreateField;
     private PhotonView photonView;
     private int P1 = 4;
     private int P2 = 4;
@@ -36,11 +38,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        if (connectedToMaster && roomID == "")
+        if (connectedToMaster && CreateField.textComponent.text != "")
         {
             PhotonNetwork.NickName = "Player1";
             PL1 = true;
-            roomID = getUniqueID();
+            roomID = CreateField.textComponent.text;
             Log(roomID);
             PhotonNetwork.CreateRoom(roomID, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
         }
@@ -48,10 +50,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void JoinRoom()
     {
-        if (connectedToMaster && inputField.textComponent.text != "")
+        if (connectedToMaster && JoinField.textComponent.text != "")
         {
             PhotonNetwork.NickName = "Player2";
-            string inputRoomID = inputField.textComponent.text;
+            string inputRoomID = JoinField.textComponent.text;
             Log(inputRoomID);
             if (PhotonNetwork.JoinRoom(inputRoomID) == false) JoinError.text = "Room ID label is empty";
         }
@@ -68,6 +70,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         StartCoroutine("Baty");
         //PhotonNetwork.LoadLevel("GameScene");
     }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        CreateError.text = message;
+    }
+    
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
