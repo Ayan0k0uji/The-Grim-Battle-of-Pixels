@@ -95,7 +95,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -304,10 +304,10 @@ TextureImporter:
       name: iconsGame_7
       rect:
         serializedVersion: 2
-        x: 4
-        y: 32
-        width: 25
-        height: 25
+        x: 2
+        y: 31
+        width: 29
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -325,10 +325,10 @@ TextureImporter:
       name: iconsGame_8
       rect:
         serializedVersion: 2
-        x: 35
-        y: 32
-        width: 25
-        height: 25
+        x: 33
+        y: 31
+        width: 29
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -346,10 +346,10 @@ TextureImporter:
       name: iconsGame_9
       rect:
         serializedVersion: 2
-        x: 66
-        y: 32
-        width: 25
-        height: 25
+        x: 64
+        y: 31
+        width: 29
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -367,10 +367,10 @@ TextureImporter:
       name: iconsGame_10
       rect:
         serializedVersion: 2
-        x: 97
-        y: 32
-        width: 25
-        height: 25
+        x: 95
+        y: 31
+        width: 29
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -388,10 +388,10 @@ TextureImporter:
       name: iconsGame_11
       rect:
         serializedVersion: 2
-        x: 128
-        y: 32
-        width: 25
-        height: 25
+        x: 126
+        y: 31
+        width: 29
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -409,10 +409,10 @@ TextureImporter:
       name: iconsGame_12
       rect:
         serializedVersion: 2
-        x: 159
-        y: 32
-        width: 25
-        height: 25
+        x: 157
+        y: 31
+        width: 29
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -430,10 +430,10 @@ TextureImporter:
       name: iconsGame_13
       rect:
         serializedVersion: 2
-        x: 190
-        y: 32
-        width: 25
-        height: 25
+        x: 188
+        y: 31
+        width: 29
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -577,10 +577,10 @@ TextureImporter:
       name: iconsGame_20
       rect:
         serializedVersion: 2
-        x: 190
-        y: 3
-        width: 25
-        height: 25
+        x: 188
+        y: 2
+        width: 29
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

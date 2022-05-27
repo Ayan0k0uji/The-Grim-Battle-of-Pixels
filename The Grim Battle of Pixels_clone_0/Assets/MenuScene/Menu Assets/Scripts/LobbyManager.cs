@@ -160,12 +160,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void PlayerReady()
     {
-        if (!PL1)
+        if (PL1)
         {
-            photonView.RPC("SetReady", PhotonNetwork.PlayerList[0]);
+            GameObject.Find("Canvas").transform.GetChild(9).transform.GetChild(6).gameObject.SetActive(true);
+            photonView.RPC("SetReady", PhotonNetwork.PlayerList[1]);
+            StartCoroutine("StartMatch");
         }
         else
-            StartCoroutine("StartMatch");
+        {
+            GameObject.Find("Canvas").transform.GetChild(9).transform.GetChild(7).gameObject.SetActive(true);
+            photonView.RPC("SetReady", PhotonNetwork.PlayerList[0]);
+        }
     }
 
     IEnumerator StartMatch()
@@ -185,5 +190,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void SetReady()
     {
         plReady = true;
+        if (PL1)
+        {
+            GameObject.Find("Canvas").transform.GetChild(9).transform.GetChild(7).gameObject.SetActive(true);
+        }
+        else
+        {
+            GameObject.Find("Canvas").transform.GetChild(9).transform.GetChild(6).gameObject.SetActive(true);
+        }
     }
 }
