@@ -7578,7 +7578,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 707125692}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: LeaveRoom
+        m_MethodName: LeaveRoomButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11463,7 +11463,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 71898841}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11487,7 +11487,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1219819595}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11499,7 +11499,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 707125692}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: LeaveRoom
+        m_MethodName: LeaveRoomButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

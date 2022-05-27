@@ -64,6 +64,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(false);
+        photonView = PhotonView.Get(this);
         StartCoroutine("Baty");
         //PhotonNetwork.LoadLevel("GameScene");
     }
@@ -82,7 +83,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void Select(int chrP)
     {
-        photonView = PhotonView.Get(this);
         if (PL1)
         {
             photonView.RPC("Send_Hero", PhotonNetwork.PlayerList[1], (object)chrP);
@@ -152,10 +152,28 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void LeaveRoom()
+    public void LeaveRoomButton()
+    {
+        if (PL1)
+        {
+            photonView.RPC("LeaveRoomPl", PhotonNetwork.PlayerList[1]);
+        }
+        else
+        {
+            photonView.RPC("LeaveRoomPl", PhotonNetwork.PlayerList[0]);
+        }
+        roomID = "";
+        PhotonNetwork.LeaveRoom();
+    }
+
+    [PunRPC]
+    public void LeaveRoomPl()
     {
         roomID = "";
         PhotonNetwork.LeaveRoom();
+        GameObject.Find("Canvas").transform.GetChild(8).gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void PlayerReady()
