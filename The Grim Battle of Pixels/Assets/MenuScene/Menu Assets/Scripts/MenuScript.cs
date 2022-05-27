@@ -86,7 +86,10 @@ public class MenuScript : MonoBehaviour
 
     public void Start()
     {
-        
+        //GameObject.Find("PlayMenu").SetActive(true);
+        //GameObject.Find("PlayMenu").transform.GetChild(1).gameObject.GetComponent<Button>().Select();
+        GameObject.Find("PlayMenu").SetActive(false);
+        GameObject.Find("MainMenu").transform.GetChild(0).gameObject.GetComponent<Button>().Select();
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
         lastSelectedGO = GameObject.Find("PlayButton"); 
