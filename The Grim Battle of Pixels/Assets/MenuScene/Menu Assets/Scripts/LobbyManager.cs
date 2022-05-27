@@ -44,17 +44,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void ButtonCr()
     {
         PhotonNetwork.NickName = NameField.text;
+        Log(PhotonNetwork.NickName);
         if (PhotonNetwork.NickName != "" && connectedToMaster)
         {
             NameField.transform.parent.gameObject.SetActive(false);
             CreateField.transform.parent.gameObject.SetActive(true);
         }
-            
+        else if (PhotonNetwork.NickName == "")
+            NameError.text = "Enter Name";
+
+
     }
 
     public void ButtonJ()
     {
         PhotonNetwork.NickName = NameField.text;
+        Log(PhotonNetwork.NickName);
         if (PhotonNetwork.NickName != "" && connectedToMaster)
         {
             NameField.transform.parent.gameObject.SetActive(false);
@@ -79,10 +84,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             string inputRoomID = JoinField.textComponent.text;
             Log(inputRoomID);
-            if (PhotonNetwork.JoinRoom(inputRoomID) == false) JoinError.text = "Room ID label is empty";
+            if (PhotonNetwork.JoinRoom(inputRoomID) == false) JoinError.text = "Room Name label is empty";
         }
         else
-            JoinError.text = "Enter the room ID";
+            JoinError.text = "Enter the room Name";
     }
 
 
@@ -92,6 +97,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
             GameObject.Find("Canvas").transform.GetChild(8).gameObject.SetActive(false);
+            GameObject.Find("Canvas").transform.GetChild(12).gameObject.SetActive(true);
         } 
         else
         {
@@ -166,6 +172,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(1f);
             if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
+                GameObject.Find("Canvas").transform.GetChild(12).gameObject.SetActive(false);
                 GameObject.Find("Canvas").transform.GetChild(10).gameObject.SetActive(true);
                 break;
             }
@@ -211,6 +218,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         roomID = "";
         PhotonNetwork.LeaveRoom();
+        GameObject.Find("Canvas").transform.GetChild(11).gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.GetChild(10).gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(true);
         GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
@@ -256,5 +264,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             GameObject.Find("Canvas").transform.GetChild(11).transform.GetChild(6).gameObject.SetActive(true);
         }
+    }
+
+    public void Button3()
+    {
+        PhotonNetwork.LeaveRoom();
+        StopCoroutine("Baty");
     }
 }
