@@ -11,19 +11,24 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Text JoinError;
     [SerializeField] private Text CreateError;
+    [SerializeField] private Text NameError;
     [SerializeField] private Text LogText;
     [SerializeField] private InputField JoinField;
     [SerializeField] private InputField CreateField;
+    [SerializeField] private InputField NameField;
     private PhotonView photonView;
     private int P1 = 4;
     private int P2 = 4;
     [SerializeField] Image P1I;
     [SerializeField] Image P2I;
     [SerializeField] Sprite[] HeroesIcons = new Sprite[5];
-    private bool PL1 = false;
+    private string namePlayer = "";
+    private bool host = false;
     private bool plReady = false;
     private string roomID = "";
     private bool connectedToMaster = false;
+    private bool neqid = true;
+    
     void Start()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -36,12 +41,32 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Log("Connected to Master");
     }
 
+    public void ButtonCr()
+    {
+        PhotonNetwork.NickName = NameField.text;
+        if (PhotonNetwork.NickName != "" && connectedToMaster)
+        {
+            NameField.transform.parent.gameObject.SetActive(false);
+            CreateField.transform.parent.gameObject.SetActive(true);
+        }
+            
+    }
+
+    public void ButtonJ()
+    {
+        PhotonNetwork.NickName = NameField.text;
+        if (PhotonNetwork.NickName != "" && connectedToMaster)
+        {
+            NameField.transform.parent.gameObject.SetActive(false);
+            JoinField.transform.parent.gameObject.SetActive(true);
+        }
+    }
+
     public void CreateRoom()
     {
         if (connectedToMaster && CreateField.textComponent.text != "")
         {
-            PhotonNetwork.NickName = "Player1";
-            PL1 = true;
+            host = true;
             roomID = CreateField.textComponent.text;
             Log(roomID);
             PhotonNetwork.CreateRoom(roomID, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
@@ -52,7 +77,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (connectedToMaster && JoinField.textComponent.text != "")
         {
-            PhotonNetwork.NickName = "Player2";
             string inputRoomID = JoinField.textComponent.text;
             Log(inputRoomID);
             if (PhotonNetwork.JoinRoom(inputRoomID) == false) JoinError.text = "Room ID label is empty";
@@ -64,8 +88,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
-        GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(false);
+        if(host)
+        {
+            GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
+            GameObject.Find("Canvas").transform.GetChild(8).gameObject.SetActive(false);
+        } 
+        else
+        {
+            GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
+            GameObject.Find("Canvas").transform.GetChild(9).gameObject.SetActive(false);
+        }
         photonView = PhotonView.Get(this);
         StartCoroutine("Baty");
         //PhotonNetwork.LoadLevel("GameScene");
@@ -91,7 +123,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void Select(int chrP)
     {
-        if (PL1)
+        if (host)
         {
             photonView.RPC("Send_Hero", PhotonNetwork.PlayerList[1], (object)chrP);
             P1 = chrP;
@@ -103,20 +135,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             P2 = chrP;
             P2I.sprite = HeroesIcons[P2];
         }
-        GameObject.Find("Canvas").transform.GetChild(9).gameObject.SetActive(true);
+        GameObject.Find("Canvas").transform.GetChild(11).gameObject.SetActive(true);
         StartCoroutine("Qwer");
     }
 
     [PunRPC]
     public void Send_Hero(int a)
     {
-        if (PL1)
+        if (host)
             P2 = a;
         else
             P1 = a;
     }
 
-    public string getUniqueID()
+    /*public string getUniqueID()
     {
         StringBuilder builder = new StringBuilder();
         Enumerable.Range(65, 26).Select(e => ((char)e).ToString()).Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
@@ -125,7 +157,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             .Take(10)
             .ToList().ForEach(e => builder.Append(e));
         return builder.ToString();
-    }
+    }*/
 
     IEnumerator Baty()
     {
@@ -134,7 +166,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(1f);
             if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
-                GameObject.Find("Canvas").transform.GetChild(8).gameObject.SetActive(true);
+                GameObject.Find("Canvas").transform.GetChild(10).gameObject.SetActive(true);
                 break;
             }
         }
@@ -147,7 +179,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(0.2f);
             if (P1 != 4 && P2 != 4)
             {
-                if (PL1)
+                if (host)
                 {
                     P2I.sprite = HeroesIcons[P2];
                 }
@@ -162,7 +194,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoomButton()
     {
-        if (PL1)
+        if (host)
         {
             photonView.RPC("LeaveRoomPl", PhotonNetwork.PlayerList[1]);
         }
@@ -179,22 +211,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         roomID = "";
         PhotonNetwork.LeaveRoom();
-        GameObject.Find("Canvas").transform.GetChild(8).gameObject.SetActive(false);
+        GameObject.Find("Canvas").transform.GetChild(10).gameObject.SetActive(false);
         GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(true);
         GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
     }
 
     public void PlayerReady()
     {
-        if (PL1)
+        if (host)
         {
-            GameObject.Find("Canvas").transform.GetChild(9).transform.GetChild(6).gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.GetChild(11).transform.GetChild(6).gameObject.SetActive(true);
             photonView.RPC("SetReady", PhotonNetwork.PlayerList[1]);
             StartCoroutine("StartMatch");
         }
         else
         {
-            GameObject.Find("Canvas").transform.GetChild(9).transform.GetChild(7).gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.GetChild(11).transform.GetChild(7).gameObject.SetActive(true);
             photonView.RPC("SetReady", PhotonNetwork.PlayerList[0]);
         }
     }
@@ -216,13 +248,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void SetReady()
     {
         plReady = true;
-        if (PL1)
+        if (host)
         {
-            GameObject.Find("Canvas").transform.GetChild(9).transform.GetChild(7).gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.GetChild(11).transform.GetChild(7).gameObject.SetActive(true);
         }
         else
         {
-            GameObject.Find("Canvas").transform.GetChild(9).transform.GetChild(6).gameObject.SetActive(true);
+            GameObject.Find("Canvas").transform.GetChild(11).transform.GetChild(6).gameObject.SetActive(true);
         }
     }
 }
