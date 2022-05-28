@@ -1764,21 +1764,9 @@ MonoBehaviour:
       - m_Target: {fileID: 707125692}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
         m_MethodName: ButtonJ
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1370910892}
-        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
-        m_MethodName: ForSelectButton
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 147071087}
+          m_ObjectArgument: {fileID: 332918454}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2105,7 +2093,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0421\u041E\u0417\u0414\u0410\u0422\u042C"
+  m_Text: "[ \u0421\u041E\u0417\u0414\u0410\u0422\u042C ]"
 --- !u!222 &199730283
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2401,10 +2389,10 @@ MonoBehaviour:
       - m_Target: {fileID: 707125692}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
         m_MethodName: JoinRoom
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 649232756}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2457,9 +2445,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 332918454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53722b3278c88ed48a0f2b142b780d5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 343d29790f8882c43ad3a57584da0455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standartText: "\u041F\u0420\u0418\u0421\u041E\u0415\u0414\u0418\u041D\u0418\u0422\u042C\u0421\u042F"
 --- !u!1 &336505413
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,10 +2536,10 @@ MonoBehaviour:
       - m_Target: {fileID: 707125692}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
         m_MethodName: CreateRoom
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 649232756}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2603,9 +2592,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 336505413}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53722b3278c88ed48a0f2b142b780d5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 343d29790f8882c43ad3a57584da0455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standartText: "\u0421\u041E\u0417\u0414\u0410\u0422\u042C"
 --- !u!1 &347999095
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,7 +2993,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0421\u041E\u0417\u0414\u0410\u0422\u042C"
+  m_Text: "[ \u0421\u041E\u0417\u0414\u0410\u0422\u042C ]"
 --- !u!222 &356659200
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4758,7 +4748,6 @@ GameObject:
   - component: {fileID: 649232760}
   - component: {fileID: 649232759}
   - component: {fileID: 649232758}
-  - component: {fileID: 649232761}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -4904,18 +4893,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649232756}
   m_CullTransparentMesh: 1
---- !u!114 &649232761
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649232756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53722b3278c88ed48a0f2b142b780d5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &659734881
 GameObject:
   m_ObjectHideFlags: 0
@@ -5423,6 +5400,7 @@ MonoBehaviour:
   CreateField: {fileID: 587195539}
   NameField: {fileID: 1613696388}
   onlineMenu: {fileID: 182282850}
+  title: {fileID: 1065070297}
   P1I: {fileID: 1866744462}
   P2I: {fileID: 1345987770}
   HeroesIcons:
@@ -6519,7 +6497,7 @@ MonoBehaviour:
         m_MethodName: ForSelectButton
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1613696386}
+          m_ObjectArgument: {fileID: 1172120964}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -8314,21 +8292,9 @@ MonoBehaviour:
       - m_Target: {fileID: 707125692}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
         m_MethodName: ButtonCr
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1370910892}
-        m_TargetAssemblyTypeName: MenuScript, Assembly-CSharp
-        m_MethodName: ForSelectButton
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 587195537}
+          m_ObjectArgument: {fileID: 336505413}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -8382,9 +8348,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172120964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53722b3278c88ed48a0f2b142b780d5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 987867f9e30ad68448aba824a3c39c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standartText: "\u0421\u041E\u0417\u0414\u0410\u0422\u042C"
 --- !u!1 &1183289547
 GameObject:
   m_ObjectHideFlags: 0
@@ -8661,7 +8628,7 @@ MonoBehaviour:
         m_MethodName: ForSelectButton
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1613696386}
+          m_ObjectArgument: {fileID: 1172120964}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -8788,7 +8755,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041F\u0420\u0418\u0421\u041E\u0415\u0414\u0418\u041D\u0418\u0422\u042C\u0421\u042F"
+  m_Text: "[ \u041F\u0420\u0418\u0421\u041E\u0415\u0414\u0418\u041D\u0418\u0422\u042C\u0421\u042F
+    ]"
 --- !u!222 &1233566030
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9870,7 +9838,7 @@ MonoBehaviour:
         m_MethodName: ForSelectButton
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1613696386}
+          m_ObjectArgument: {fileID: 1172120964}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -10443,7 +10411,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041D\u0410\u0417\u0410\u0414"
+  m_Text: "[ \u041D\u0410\u0417\u0410\u0414 ]"
 --- !u!222 &1556175950
 CanvasRenderer:
   m_ObjectHideFlags: 0

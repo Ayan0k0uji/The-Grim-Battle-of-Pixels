@@ -17,6 +17,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private InputField CreateField;
     [SerializeField] private InputField NameField;
     [SerializeField] private GameObject onlineMenu;
+    [SerializeField] private GameObject title;
     private PhotonView photonView;
     public static int P1 = 4;
     public static int P2 = 4;
@@ -41,7 +42,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Log("Connected to Master");
     }
 
-    public void ButtonCr()
+    public void ButtonCr(GameObject s)
     {
         PhotonNetwork.NickName = NameField.text;
         Log(PhotonNetwork.NickName);
@@ -49,6 +50,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             NameField.transform.parent.gameObject.SetActive(false);
             CreateField.transform.parent.gameObject.SetActive(true);
+            // костыли от артема
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(s);
+            // конец костылей
         }
         else if (PhotonNetwork.NickName == "")
             NameError.text = "Enter Name";
@@ -56,7 +60,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     }
 
-    public void ButtonJ()
+    public void ButtonJ(GameObject s)
     {
         PhotonNetwork.NickName = NameField.text;
         Log(PhotonNetwork.NickName);
@@ -64,27 +68,43 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             NameField.transform.parent.gameObject.SetActive(false);
             JoinField.transform.parent.gameObject.SetActive(true);
+            // костыли от артема
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(s);
+            // конец костылей
         }
+        // это тоже артем добавил
+        else if (PhotonNetwork.NickName == "")
+            NameError.text = "Enter Name";
     }
 
-    public void CreateRoom()
+    public void CreateRoom(GameObject s)
     {
         if (connectedToMaster && CreateField.textComponent.text != "")
         {
             host = true;
             roomID = CreateField.textComponent.text;
             Log(roomID);
+            // костыли от артема
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(s);
+            // конец костылей
             PhotonNetwork.CreateRoom(roomID, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
         }
+        else
+            JoinError.text = "Enter the room Name";
     }
 
-    public void JoinRoom()
+    public void JoinRoom(GameObject s)
     {
         if (connectedToMaster && JoinField.textComponent.text != "")
         {
             string inputRoomID = JoinField.textComponent.text;
             Log(inputRoomID);
-            if (PhotonNetwork.JoinRoom(inputRoomID) == false) JoinError.text = "Room Name label is empty";
+            // костыли от артема
+            
+            // конец костылей
+            if (PhotonNetwork.JoinRoom(inputRoomID) == false) 
+                JoinError.text = "Room Name label is empty";
+            
         }
         else
             JoinError.text = "Enter the room Name";
@@ -275,6 +295,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveRoom();
         StopCoroutine("Baty");
+        //GameObject.Find("Title").SetActive(true);
+        // костыли от артема
+        if (onlineMenu.transform.GetChild(1).gameObject.activeSelf == false)
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(onlineMenu.transform.GetChild(1).gameObject.transform.GetChild(2).gameObject);
+        else
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(onlineMenu.transform.GetChild(2).gameObject.transform.GetChild(2).gameObject);
+
+        title.SetActive(true);
+        // конец костылей
     }
 
     public int GetP1()
