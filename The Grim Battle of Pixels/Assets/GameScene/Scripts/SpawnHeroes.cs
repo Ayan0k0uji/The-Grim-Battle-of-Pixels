@@ -26,8 +26,8 @@ public class SpawnHeroes : MonoBehaviour
         //Player1 = msc.getP1();
         //Player2 = msc.getP2();
 
-        Player1 = MenuScript.P1;
-        Player2 = MenuScript.P2;
+        //Player1 = MenuScript.P1;
+        //Player2 = MenuScript.P2;
 
         PL1 = Instantiate(Heroes[Player1], GameObject.Find("Player1").transform, false);
         PL2 = Instantiate(Heroes[Player2], GameObject.Find("Player2").transform, false);
