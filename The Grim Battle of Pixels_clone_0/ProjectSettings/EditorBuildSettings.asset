@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/MenuScene/MainMenu.unity
     guid: 1a613e8b75ae812469a002a76965e290
   - enabled: 1
-    path: Assets/GameScene/GameScene.unity
+    path: Assets/OnlineScene/OnlineGameScene.unity
     guid: 686bd890934e51c4e8fea4fa1be4ac69
   - enabled: 1
     path: Assets/EventScene/EventScene.unity

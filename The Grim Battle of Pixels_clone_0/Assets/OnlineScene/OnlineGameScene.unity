@@ -1973,23 +1973,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ab6d1978eb67a42b8d5467699b6f0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d2e0fa6c3b9c99479197b3183c135ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Heroes:
-  - {fileID: 5830204234942577056, guid: 8435a40863274ef43b21aca9364d3ac1, type: 3}
-  - {fileID: 7758705625075949293, guid: 57d0b4690d0c2d24894d36b7d495058b, type: 3}
-  - {fileID: 1541631004922513756, guid: 62e9546674c3e2748b86d38e070a5f36, type: 3}
-  - {fileID: 6255632630319321196, guid: ce277f8f47914eb4185d3cc6760992ff, type: 3}
-  - {fileID: 0}
-  Player1: 1
-  Player2: 2
+  Player1: 0
+  Player2: 0
   HeroesIcons:
-  - {fileID: -2978653956524333172, guid: 96b86b352c1839d46835c8ff8994cdb3, type: 3}
-  - {fileID: -299690340437171572, guid: 96b86b352c1839d46835c8ff8994cdb3, type: 3}
-  - {fileID: -1290855366162983238, guid: 96b86b352c1839d46835c8ff8994cdb3, type: 3}
-  - {fileID: -2248273014285675650, guid: 96b86b352c1839d46835c8ff8994cdb3, type: 3}
-  - {fileID: -2696506250795634678, guid: 96b86b352c1839d46835c8ff8994cdb3, type: 3}
+  - {fileID: -567314784578620594, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
+  - {fileID: -4179326876580852194, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
+  - {fileID: 7560058272791360924, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
+  - {fileID: 2940729737560329014, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
+  - {fileID: 4436755340336084312, guid: 0de470884762a854a8e738c63860bb67, type: 3}
 --- !u!1 &531753748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3619,6 +3613,36 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!1 &968973580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 968973582}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &968973582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968973580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.680729, y: 0.35397634, z: -3.9415364}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &976912732
 GameObject:
   m_ObjectHideFlags: 0

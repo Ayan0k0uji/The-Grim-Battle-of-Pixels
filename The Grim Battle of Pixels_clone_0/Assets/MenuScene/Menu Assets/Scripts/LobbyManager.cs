@@ -18,8 +18,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private InputField NameField;
     [SerializeField] private GameObject onlineMenu;
     private PhotonView photonView;
-    private int P1 = 4;
-    private int P2 = 4;
+    public static int P1 = 4;
+    public static int P2 = 4;
     [SerializeField] Image P1I;
     [SerializeField] Image P2I;
     [SerializeField] Sprite[] HeroesIcons = new Sprite[5];
@@ -155,7 +155,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             P2I.sprite = HeroesIcons[P2];
         }
         onlineMenu.transform.GetChild(4).gameObject.SetActive(true);
-        //GameObject.Find("Canvas").transform.GetChild(11).gameObject.SetActive(true);
         StartCoroutine("Qwer");
     }
 
@@ -167,17 +166,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         else
             P1 = a;
     }
-
-    /*public string getUniqueID()
-    {
-        StringBuilder builder = new StringBuilder();
-        Enumerable.Range(65, 26).Select(e => ((char)e).ToString()).Concat(Enumerable.Range(97, 26).Select(e => ((char)e).ToString()))
-            .Concat(Enumerable.Range(0, 10).Select(e => e.ToString()))
-            .OrderBy(e => Guid.NewGuid())
-            .Take(10)
-            .ToList().ForEach(e => builder.Append(e));
-        return builder.ToString();
-    }*/
 
     IEnumerator Baty()
     {
@@ -259,7 +247,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             if (plReady)
             {
-                PhotonNetwork.LoadLevel("GameScene");
+                PhotonNetwork.LoadLevel("OnlineGameScene");
                 break;
             }
             yield return new WaitForSeconds(1f);
@@ -285,5 +273,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveRoom();
         StopCoroutine("Baty");
+    }
+
+    public int GetP1()
+    {
+        return P1;
+    }
+
+    public int GetP2()
+    {
+        return P2;
     }
 }

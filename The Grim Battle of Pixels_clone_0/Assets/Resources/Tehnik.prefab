@@ -47,6 +47,8 @@ GameObject:
   - component: {fileID: 3551188111463680067}
   - component: {fileID: 7326669701645792636}
   - component: {fileID: 4398131253767328387}
+  - component: {fileID: 4700798163336024723}
+  - component: {fileID: 8001662988655471801}
   m_Layer: 0
   m_Name: Tehnik
   m_TagString: Untagged
@@ -240,6 +242,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1caccd027d4d22f4e95978ab00738b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4700798163336024723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541631004922513756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
+--- !u!114 &8001662988655471801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541631004922513756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 4700798163336024723}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &72216757409933213
 PrefabInstance:
   m_ObjectHideFlags: 0
