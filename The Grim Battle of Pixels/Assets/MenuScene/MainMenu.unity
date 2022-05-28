@@ -5421,6 +5421,7 @@ MonoBehaviour:
   JoinField: {fileID: 147071089}
   CreateField: {fileID: 587195539}
   NameField: {fileID: 1613696388}
+  onlineMenu: {fileID: 182282850}
   P1I: {fileID: 1866744462}
   P2I: {fileID: 1345987770}
   HeroesIcons:

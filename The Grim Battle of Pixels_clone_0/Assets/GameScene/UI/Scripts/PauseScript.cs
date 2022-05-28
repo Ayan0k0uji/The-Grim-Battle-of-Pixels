@@ -9,6 +9,11 @@ public class PauseScript : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameOverScript gov;
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !gov.getGameOver())

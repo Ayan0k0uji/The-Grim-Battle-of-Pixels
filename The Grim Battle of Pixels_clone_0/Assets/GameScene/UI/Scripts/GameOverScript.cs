@@ -14,6 +14,11 @@ public class GameOverScript : MonoBehaviour
     [SerializeField] Image player2Label;
     private bool gameOver = false;
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         if ((cpt.getWin() > 0) && !gameOver)

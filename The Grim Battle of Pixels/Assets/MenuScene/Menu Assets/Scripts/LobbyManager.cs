@@ -16,6 +16,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private InputField JoinField;
     [SerializeField] private InputField CreateField;
     [SerializeField] private InputField NameField;
+    [SerializeField] private GameObject onlineMenu;
     private PhotonView photonView;
     private int P1 = 4;
     private int P2 = 4;
@@ -106,15 +107,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (host && neqName)
         {
             GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
-            GameObject.Find("Canvas").transform.GetChild(8).gameObject.SetActive(false);
-            GameObject.Find("Canvas").transform.GetChild(12).gameObject.SetActive(true);
+            onlineMenu.transform.GetChild(1).gameObject.SetActive(false);
+            onlineMenu.transform.GetChild(5).gameObject.SetActive(true);
             photonView = PhotonView.Get(this);
             StartCoroutine("Baty");
         } 
         else if(neqName)
         {
             GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(false);
-            GameObject.Find("Canvas").transform.GetChild(9).gameObject.SetActive(false);
+            onlineMenu.transform.GetChild(2).gameObject.SetActive(false);
             photonView = PhotonView.Get(this);
             StartCoroutine("Baty");
         }
@@ -153,7 +154,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             P2 = chrP;
             P2I.sprite = HeroesIcons[P2];
         }
-        GameObject.Find("Canvas").transform.GetChild(11).gameObject.SetActive(true);
+        onlineMenu.transform.GetChild(4).gameObject.SetActive(true);
+        //GameObject.Find("Canvas").transform.GetChild(11).gameObject.SetActive(true);
         StartCoroutine("Qwer");
     }
 
@@ -184,8 +186,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(1f);
             if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
-                GameObject.Find("Canvas").transform.GetChild(12).gameObject.SetActive(false);
-                GameObject.Find("Canvas").transform.GetChild(10).gameObject.SetActive(true);
+                onlineMenu.transform.GetChild(3).gameObject.SetActive(true);
+                onlineMenu.transform.GetChild(5).gameObject.SetActive(false);
                 break;
             }
         }
@@ -230,9 +232,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         roomID = "";
         PhotonNetwork.LeaveRoom();
-        GameObject.Find("Canvas").transform.GetChild(11).gameObject.SetActive(false);
-        GameObject.Find("Canvas").transform.GetChild(10).gameObject.SetActive(false);
-        GameObject.Find("Canvas").transform.GetChild(6).gameObject.SetActive(true);
+        onlineMenu.transform.GetChild(3).gameObject.SetActive(false);
+        onlineMenu.transform.GetChild(4).gameObject.SetActive(false);
+        onlineMenu.transform.GetChild(0).gameObject.SetActive(true);
         GameObject.Find("Canvas").transform.GetChild(1).gameObject.SetActive(true);
     }
 
@@ -240,13 +242,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (host)
         {
-            GameObject.Find("Canvas").transform.GetChild(11).transform.GetChild(6).gameObject.SetActive(true);
+            onlineMenu.transform.GetChild(4).transform.GetChild(6).gameObject.SetActive(true);
             photonView.RPC("SetReady", PhotonNetwork.PlayerList[1]);
             StartCoroutine("StartMatch");
         }
         else
         {
-            GameObject.Find("Canvas").transform.GetChild(11).transform.GetChild(7).gameObject.SetActive(true);
+            onlineMenu.transform.GetChild(4).transform.GetChild(7).gameObject.SetActive(true);
             photonView.RPC("SetReady", PhotonNetwork.PlayerList[0]);
         }
     }
@@ -270,11 +272,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         plReady = true;
         if (host)
         {
-            GameObject.Find("Canvas").transform.GetChild(11).transform.GetChild(7).gameObject.SetActive(true);
+            onlineMenu.transform.GetChild(4).transform.GetChild(7).gameObject.SetActive(true);
         }
         else
         {
-            GameObject.Find("Canvas").transform.GetChild(11).transform.GetChild(6).gameObject.SetActive(true);
+            onlineMenu.transform.GetChild(4).transform.GetChild(6).gameObject.SetActive(true);
+
         }
     }
 
