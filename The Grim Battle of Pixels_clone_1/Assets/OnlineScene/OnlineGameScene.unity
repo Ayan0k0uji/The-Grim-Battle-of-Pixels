@@ -1979,8 +1979,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player1: 0
   Player2: 0
-  PL1: {fileID: 0}
-  PL2: {fileID: 0}
   HeroesIcons:
   - {fileID: -567314784578620594, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
   - {fileID: -4179326876580852194, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}

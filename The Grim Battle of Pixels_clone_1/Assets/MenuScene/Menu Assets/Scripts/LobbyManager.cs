@@ -203,6 +203,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void LeaveRoomButton()
     {
+        P1I.sprite = HeroesIcons[4];
+        P2I.sprite = HeroesIcons[4];
         if (host)
         {
             photonView.RPC("LeaveRoomPl", PhotonNetwork.PlayerList[1]);
