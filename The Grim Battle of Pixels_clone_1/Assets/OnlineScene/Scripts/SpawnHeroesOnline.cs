@@ -41,7 +41,7 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
                 PL1 = PhotonNetwork.Instantiate(nameHeroes[Player1], Vector3.zero, Quaternion.identity);
                 PL1.transform.SetParent(GameObject.Find("Player1").transform);
                 PL1.transform.localPosition = Vector3.zero;
-               // GameObject.Find(nameHeroes[Player2] + "(clone)").transform.SetParent(GameObject.Find("Player2").transform);
+               //GameObject.Find(nameHeroes[Player2] + "(clone)").transform.SetParent(GameObject.Find("Player2").transform);
                 
 
         }
@@ -83,16 +83,20 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
-        if (GameObject.Find(nameHeroes[Player1] + "(clone)") && flag)
+        GameObject.Find(nameHeroes[Player1] + " clone").transform.SetParent(GameObject.Find("Player1").transform);
+        GameObject.Find("Babka(Clone)").transform.parent = GameObject.Find("Player2").transform;
+        /*if (GameObject.Find(nameHeroes[Player1] + "(clone)") && flag)
         {
-            GameObject.Find(nameHeroes[Player1] + "(clone)").transform.SetParent(GameObject.Find("Player1").transform);
-            flag = false;
+            Debug.Log("as");
+            *//*GameObject.Find(nameHeroes[Player1] + "(clone)").transform.SetParent(GameObject.Find("Player1").transform);
+            flag = false;*//*
         }
         if (GameObject.Find(nameHeroes[Player2] + "(clone)") && flag)
         {
-            GameObject.Find(nameHeroes[Player2] + "(clone)").transform.SetParent(GameObject.Find("Player2").transform);
-            flag = false;
-        }
+            Debug.Log("qw");
+           *//* GameObject.Find(nameHeroes[Player2] + "(clone)").transform.SetParent(GameObject.Find("Player2").transform);
+            flag = false;*//*
+        }*/
     }
 
 
