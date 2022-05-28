@@ -620,7 +620,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u0418\u0413\u0420\u0410\u0422\u042C \u0421\u041D\u041E\u0412\u0410"
+  m_Text: "[ \u0418\u0413\u0420\u0410\u0422\u042C \u0421\u041D\u041E\u0412\u0410
+    ]"
 --- !u!222 &96435890
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2210,7 +2211,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041F\u0420\u041E\u0414\u041E\u041B\u0416\u0418\u0422\u042C"
+  m_Text: "[ \u041F\u0420\u041E\u0414\u041E\u041B\u0416\u0418\u0422\u042C ]"
 --- !u!222 &617237531
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4807,7 +4808,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1404730672
 Animator:
@@ -6097,9 +6098,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1958902928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53722b3278c88ed48a0f2b142b780d5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 987867f9e30ad68448aba824a3c39c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standartText: "\u041F\u0420\u041E\u0414\u041E\u041B\u0416\u0418\u0422\u042C"
 --- !u!1 &2009437933
 GameObject:
   m_ObjectHideFlags: 0
@@ -6364,9 +6366,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2019209466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53722b3278c88ed48a0f2b142b780d5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 987867f9e30ad68448aba824a3c39c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standartText: "\u0418\u0413\u0420\u0410\u0422\u042C \u0421\u041D\u041E\u0412\u0410"
 --- !u!1 &2035747808
 GameObject:
   m_ObjectHideFlags: 0
