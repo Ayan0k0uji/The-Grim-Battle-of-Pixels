@@ -2929,9 +2929,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 348294623}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53722b3278c88ed48a0f2b142b780d5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 987867f9e30ad68448aba824a3c39c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standartText: "\u041A\u041B\u0410\u0421\u0421\u0418\u0427\u0415\u0421\u041A\u0418\u0419"
 --- !u!1 &356659197
 GameObject:
   m_ObjectHideFlags: 0
@@ -3081,7 +3082,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041D\u0410\u0427\u0410\u0422\u042C"
+  m_Text: "[ \u041D\u0410\u0427\u0410\u0422\u042C ]"
 --- !u!222 &397280939
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12472,7 +12473,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041A\u041B\u0410\u0421\u0418\u0427\u0415\u0421\u041A\u0418\u0419"
+  m_Text: "[ \u041A\u041B\u0410\u0421\u0421\u0418\u0427\u0415\u0421\u041A\u0418\u0419
+    ]"
 --- !u!222 &1873337612
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13726,9 +13728,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2091310247}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53722b3278c88ed48a0f2b142b780d5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 987867f9e30ad68448aba824a3c39c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  standartText: "\u041D\u0410\u0427\u0410\u0422\u042C"
 --- !u!1 &2125048160
 GameObject:
   m_ObjectHideFlags: 0
