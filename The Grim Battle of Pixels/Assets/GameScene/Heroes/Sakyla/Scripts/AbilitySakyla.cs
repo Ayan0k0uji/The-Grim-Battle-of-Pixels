@@ -10,12 +10,12 @@ public class AbilitySakyla : MonoBehaviour
     private PlayerStatus plStEnemy;
     private PlayerStatus myPlSt;
     private Rigidbody2D rb;
+    [SerializeField] GameObject vodavrot;
     private bool ulta = false;
     private bool ability = false;
     private bool flag = true;
     private Vector2 temp;
     private Transform UltaPosition;
-    [SerializeField] GameObject snot;
 
 
     void Start()
@@ -65,5 +65,12 @@ public class AbilitySakyla : MonoBehaviour
             plStEnemy.TakeDamage(20);
             ability = false;
         }
+    }
+
+    public void Vodavrot()
+    {
+        GameObject sn = Instantiate(vodka, new Vector3(transform.position.x - 2 * transform.localScale.x, transform.position.y, transform.position.z),
+            Quaternion.identity);
+        sn.transform.parent = transform;
     }
 }

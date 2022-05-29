@@ -10,6 +10,7 @@ public class AnimatorSakyla : AnimationAbstract
     private BoxCollider2D box;
     private PlayerStatus plSt;
     [SerializeField] GameObject vodka;
+    [SerializeField] GameObject vodavrot;
     private bool pl;
     private bool flagAbility = true;
     private float time = 0;
@@ -161,6 +162,13 @@ public class AnimatorSakyla : AnimationAbstract
     }
 
     public void Vodka()
+    {
+        GameObject sn = Instantiate(vodka, new Vector3(transform.position.x - 2 * transform.localScale.x, transform.position.y, transform.position.z),
+            Quaternion.identity);
+        sn.transform.parent = transform;
+    }
+
+    public void Vodavrot()
     {
         GameObject sn = Instantiate(vodka, new Vector3(transform.position.x - 2 * transform.localScale.x, transform.position.y, transform.position.z),
             Quaternion.identity);
