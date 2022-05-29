@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CooldownBarScript : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private GameObject playerCommon1;
     private GameObject playerCommon2;
     private AnimationAbstract player1;
@@ -16,14 +17,16 @@ public class CooldownBarScript : MonoBehaviour
 
     private void Start()
     {
-        playerCommon1 = GameObject.Find("Player1");
-        playerCommon2 = GameObject.Find("Player2");
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
+
+        playerCommon1 = GameObject.Find(spawnHeroes.GetNamePl1());
+        playerCommon2 = GameObject.Find(spawnHeroes.GetNamePl2());
 
         cooldownUI1 = GameObject.Find("CDP1");
         cooldownUI2 = GameObject.Find("CDP2");
 
-        player1 = playerCommon1.transform.GetChild(0).GetComponent<AnimationAbstract>();
-        player2 = playerCommon2.transform.GetChild(0).GetComponent<AnimationAbstract>();
+        player1 = playerCommon1.GetComponent<AnimationAbstract>();
+        player2 = playerCommon2.GetComponent<AnimationAbstract>();
     }
 
     private void Update()

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AnimationPonchic : AnimationAbstract
 {
-    
+    private SpawnHeroes spawnHeroes;
     private Animator animator;
     private Rigidbody2D rb;
     private BoxCollider2D box;
@@ -16,12 +16,15 @@ public class AnimationPonchic : AnimationAbstract
 
     private void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         box = GetComponent<BoxCollider2D>();
-        plSt = transform.parent.gameObject.GetComponent<PlayerStatus>();
-        if (transform.parent.gameObject.name == "Player1")
+        plSt = GetComponent<PlayerStatus>();
+
+        if (name == spawnHeroes.GetNamePl1())
             pl = true;
         else
             pl = false;
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }

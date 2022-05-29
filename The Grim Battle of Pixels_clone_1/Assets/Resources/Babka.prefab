@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 1951213784}
   - component: {fileID: 8942178748465539298}
   - component: {fileID: 2158079956009126832}
+  - component: {fileID: 2290820929351316430}
   m_Layer: 0
   m_Name: Babka
   m_TagString: Player
@@ -281,3 +282,15 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &2290820929351316430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5830204234942577056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc822f6bcbcb2b45ba0328c99ddbc90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

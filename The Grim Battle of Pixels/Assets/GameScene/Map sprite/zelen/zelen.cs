@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class zelen : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private Animator ani;
     private string Player1;
     private string Player2;
@@ -11,9 +12,10 @@ public class zelen : MonoBehaviour
 
     public void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         ani = GetComponent<Animator>();
-        Player1 = GameObject.Find("Player1").transform.GetChild(0).name;
-        Player2 = GameObject.Find("Player2").transform.GetChild(0).name;
+        Player1 = spawnHeroes.GetNamePl1();
+        Player2 = spawnHeroes.GetNamePl2();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

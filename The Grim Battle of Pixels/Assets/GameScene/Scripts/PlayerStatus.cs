@@ -7,6 +7,7 @@ public class PlayerStatus : MonoBehaviour
     private GameObject player;
     private Animator animator;
     private CapsuleCollider2D circle;
+    private SpawnHeroes spawnHeroes;
     private Rigidbody2D rb;
     private Vector2 force;
     private float speed = 500.0f;
@@ -14,7 +15,7 @@ public class PlayerStatus : MonoBehaviour
     private bool facingRight = true;
     private bool squat = false;
     private float deltaX = 0;
-    private bool pl;
+    private bool pl = false;
     private bool proverka;
     private bool grounded = false;
     private bool forceEnemy = false;
@@ -26,17 +27,19 @@ public class PlayerStatus : MonoBehaviour
     private bool flagPoison = false;
     private void Start()
     {
-        if (name == "Player1")
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
+
+        if (name == spawnHeroes.GetNamePl1())
         {
-            player = GameObject.Find("Player1").transform.GetChild(0).gameObject;
+            player = GameObject.Find(spawnHeroes.GetNamePl1());
             pl = true;
         }
         else
         {
-            player = GameObject.Find("Player2").transform.GetChild(0).gameObject;
-            pl = false;
+            player = GameObject.Find(spawnHeroes.GetNamePl2());
             Flip();
         }
+
         animator = player.GetComponent<Animator>();
         circle = player.GetComponent<CapsuleCollider2D>();
         currentHeath = maxHeath;
@@ -59,7 +62,7 @@ public class PlayerStatus : MonoBehaviour
             Vector2 corner2 = new Vector2(min.x + .3f, min.y - .2f);
             Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
 
-            if (hit != null && (!hit.isTrigger || hit.tag == "Player"))
+            if (hit != null && (!hit.isTrigger || hit.name == spawnHeroes.GetNamePl2()))
                 grounded = true;
             else
                 grounded = false;
@@ -83,7 +86,7 @@ public class PlayerStatus : MonoBehaviour
             Vector2 corner2 = new Vector2(min.x + .3f, min.y - .2f);
             Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
 
-            if (hit != null && (!hit.isTrigger || hit.tag == "Player"))
+            if (hit != null && (!hit.isTrigger || hit.name == spawnHeroes.GetNamePl1()))
                 grounded = true;
             else
                 grounded = false;
@@ -218,5 +221,4 @@ public class PlayerStatus : MonoBehaviour
             currentMana = maxMana;
         else currentMana += newMana;
     }
-
 }

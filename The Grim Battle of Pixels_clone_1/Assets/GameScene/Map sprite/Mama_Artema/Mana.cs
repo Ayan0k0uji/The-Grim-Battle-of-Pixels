@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class Mana : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private Animator ani;
     private BoxCollider2D box;
     private string Player1;
     private string Player2;
-    private int mana = 30;
-    private float timeManaSpawn = 15f;
+    private int mana = 100;
+    private float timeManaSpawn = 1f;
 
     private void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         ani = GetComponent<Animator>();
         box = GetComponent<BoxCollider2D>();
-        Player1 = GameObject.Find("Player1").transform.GetChild(0).name;
-        Player2 = GameObject.Find("Player2").transform.GetChild(0).name;
+        Player1 = spawnHeroes.GetNamePl1();
+        Player2 = spawnHeroes.GetNamePl2();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == Player1 || collision.name == Player2)
+        if ((collision.name == Player1 || collision.name == Player2) && !collision.isTrigger)
         {
-            collision.transform.parent.gameObject.GetComponent<PlayerStatus>().setCurrentMana(mana);
+            collision.GetComponent<PlayerStatus>().setCurrentMana(mana);
             StartCoroutine(BatFly());
         }
     }

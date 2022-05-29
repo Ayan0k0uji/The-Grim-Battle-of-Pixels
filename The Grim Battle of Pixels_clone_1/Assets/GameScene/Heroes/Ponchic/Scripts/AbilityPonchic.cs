@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AbilityPonchic : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private Animator animator;
     private GameObject Enemy;
     private PlayerStatus plSt;
@@ -18,20 +19,20 @@ public class AbilityPonchic : MonoBehaviour
 
     void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         animator = GetComponent<Animator>();
-        plSt = transform.parent.gameObject.GetComponent<PlayerStatus>();
-        if (transform.parent.gameObject.name == "Player1")
+        plSt = GetComponent<PlayerStatus>();
+        if (name == spawnHeroes.GetNamePl1())
         {
-            plStEnemy = GameObject.Find("Player2").GetComponent<PlayerStatus>();
-            Enemy = GameObject.Find("Player2").gameObject;
-            rb = Enemy.transform.GetChild(0).gameObject.GetComponent<Rigidbody2D>();
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl2()).gameObject;
         }
         else
         {
-            plStEnemy = GameObject.Find("Player1").GetComponent<PlayerStatus>();
-            Enemy = GameObject.Find("Player1").gameObject;
-            rb = Enemy.transform.GetChild(0).gameObject.GetComponent<Rigidbody2D>();
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl1()).gameObject;
         }
+
+        plStEnemy = Enemy.GetComponent<PlayerStatus>();
+        rb = Enemy.GetComponent<Rigidbody2D>();
     }
 
 
@@ -39,7 +40,7 @@ public class AbilityPonchic : MonoBehaviour
     {
         if (flagColor)
         {
-            Enemy.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.4f, 0.6f, 1f);
+            Enemy.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.4f, 0.6f, 1f);
         }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
@@ -66,23 +67,23 @@ public class AbilityPonchic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (ulta && collision != null && collision.name == Enemy.transform.GetChild(0).name
+        if (ulta && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("ulta_walking") && !collision.isTrigger && flag1)
         {
             Enemy.GetComponent<PlayerStatus>().setForceEnemy(true);
-            Enemy.GetComponent<PlayerStatus>().setForce(15 * new Vector2(Enemy.transform.GetChild(0).transform.position.x - transform.position.x,
-                Enemy.transform.GetChild(0).transform.position.y - transform.position.y));
+            Enemy.GetComponent<PlayerStatus>().setForce(15 * new Vector2(Enemy.transform.position.x - transform.position.x,
+                Enemy.transform.position.y - transform.position.y));
             plStEnemy.TakeDamage(7);
             flag1 = false;
             Invoke("sFlag1", 0.5f);
         }
 
-        if (ability && collision != null && collision.name == Enemy.transform.GetChild(0).name
+        if (ability && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && !collision.isTrigger)
         {
             plStEnemy.TakeDamage(15);
             flagColor = true;
-            Enemy.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.4f, 0.6f, 1f);
+            Enemy.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.4f, 0.6f, 1f);
             Invoke("abilityDamage", 7);
             ability = false;
         }
@@ -92,7 +93,7 @@ public class AbilityPonchic : MonoBehaviour
     {
         plStEnemy.TakeDamage(20);
         flagColor = false;
-        Enemy.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        Enemy.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
     }
 
     public void sFlag1()

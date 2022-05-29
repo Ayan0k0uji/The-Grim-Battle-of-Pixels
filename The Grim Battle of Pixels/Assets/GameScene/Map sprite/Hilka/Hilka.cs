@@ -4,6 +4,7 @@ using System;
 
 public class Hilka : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private Animator ani;
     private BoxCollider2D box;
     private SpriteRenderer sprite;
@@ -16,11 +17,12 @@ public class Hilka : MonoBehaviour
 
     private void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         sprite = GetComponent<SpriteRenderer>();
         ani = GetComponent<Animator>();
         box = GetComponent<BoxCollider2D>();
-        Player1 = GameObject.Find("Player1").transform.GetChild(0).name;
-        Player2 = GameObject.Find("Player2").transform.GetChild(0).name;
+        Player1 = spawnHeroes.GetNamePl1();
+        Player2 = spawnHeroes.GetNamePl2();
         sprite.enabled = false;
         box.enabled = false;
         n = rnd.Next() % 6;
@@ -50,9 +52,9 @@ public class Hilka : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == Player1 || collision.name == Player2)
+        if ((collision.name == Player1 || collision.name == Player2) && !collision.isTrigger)
         {
-            collision.transform.parent.gameObject.GetComponent<PlayerStatus>().Hill(hp);
+            collision.GetComponent<PlayerStatus>().Hill(hp);
             StartCoroutine(Hilka1());
         }
     }

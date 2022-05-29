@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BattlePonchic : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private Animator animator;
     private PlayerStatus plStEnemy;
     private PlayerStatus plSt;
@@ -15,18 +16,20 @@ public class BattlePonchic : MonoBehaviour
 
     void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         animator = GetComponent<Animator>();
-        plSt = transform.parent.gameObject.GetComponent<PlayerStatus>();
-        if (transform.parent.gameObject.name == "Player1")
+        plSt = GetComponent<PlayerStatus>();
+
+        if (name == spawnHeroes.GetNamePl1())
         {
-            plStEnemy = GameObject.Find("Player2").GetComponent<PlayerStatus>();
-            Enemy = GameObject.Find("Player2").gameObject;
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl2());
         }
         else
         {
-            plStEnemy = GameObject.Find("Player1").GetComponent<PlayerStatus>();
-            Enemy = GameObject.Find("Player1").gameObject;
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl1());
         }
+
+        plStEnemy = Enemy.GetComponent<PlayerStatus>();
     }
 
 
@@ -55,14 +58,14 @@ public class BattlePonchic : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (bot_kick && collision != null && collision.name == Enemy.transform.GetChild(0).name
+        if (bot_kick && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick") && !collision.isTrigger)
         {
             plSt.setCurrentMana(5);
             plStEnemy.TakeDamage(bot_damage);
             bot_kick = false;
         }
-        if (t_kick && collision != null && collision.name == Enemy.transform.GetChild(0).name
+        if (t_kick && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !collision.isTrigger)
         {
             plSt.setCurrentMana(5);

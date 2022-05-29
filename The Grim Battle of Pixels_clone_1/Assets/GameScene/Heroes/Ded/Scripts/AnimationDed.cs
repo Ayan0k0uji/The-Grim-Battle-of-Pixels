@@ -3,6 +3,7 @@ using System.Collections;
 
 public class AnimationDed : AnimationAbstract
 {
+    private SpawnHeroes spawnHeroes;
     private Animator animator;
     private Animator animatorCepi;
     private Animator animatorPepel;
@@ -19,12 +20,12 @@ public class AnimationDed : AnimationAbstract
 
     private void Start()
     {
-
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         box = GetComponent<BoxCollider2D>();
         animatorCepi = gameObject.transform.GetChild(1).GetComponent<Animator>();
         animatorPepel = gameObject.transform.GetChild(0).GetComponent<Animator>();
-        plSt = transform.parent.gameObject.GetComponent<PlayerStatus>();
-        if (transform.parent.gameObject.name == "Player1")
+        plSt = GetComponent<PlayerStatus>();
+        if (name == spawnHeroes.GetNamePl1())
             pl = true;
         else
             pl = false;
@@ -152,29 +153,29 @@ public class AnimationDed : AnimationAbstract
 
     public void sdgujdsv()
     {
-        if (gameObject.transform.localScale.x == -1)
+        if (transform.localScale.x == -1)
         {
-            Vector3 theScale = gameObject.transform.GetChild(0).GetComponent<Transform>().localScale;
+            Vector3 theScale = transform.GetChild(0).GetComponent<Transform>().localScale;
             theScale.x *= -1;
-            gameObject.transform.GetChild(0).GetComponent<Transform>().localScale = theScale;
+            transform.GetChild(0).GetComponent<Transform>().localScale = theScale;
         }
         animatorPepel.SetBool("Death", true);
     }
 
     public void sdgujdsv1()
     {
-        if (gameObject.transform.localScale.x == -1)
+        if (transform.localScale.x == -1)
         {
-            Vector3 theScale = gameObject.transform.GetChild(0).GetComponent<Transform>().localScale;
+            Vector3 theScale = transform.GetChild(0).GetComponent<Transform>().localScale;
             theScale.x *= -1;
-            gameObject.transform.GetChild(0).GetComponent<Transform>().localScale = theScale;
+            transform.GetChild(0).GetComponent<Transform>().localScale = theScale;
         }
         animatorPepel.SetBool("Death", false);
     }
 
     public void activCepi()
     {
-        gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
 
     }
 }

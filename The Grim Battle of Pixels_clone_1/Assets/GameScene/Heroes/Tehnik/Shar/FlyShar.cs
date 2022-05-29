@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlyShar : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private float speed = 800f;
     private Rigidbody2D _body;
     private GameObject enemy;
@@ -15,17 +16,19 @@ public class FlyShar : MonoBehaviour
 
     private void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         ani = GetComponent<Animator>();
         _body = GetComponent<Rigidbody2D>();
         player = transform.parent.gameObject;
-        if (transform.parent.gameObject.transform.parent.gameObject.name == "Player1")
+        if (player.name == spawnHeroes.GetNamePl1())
         {
             pl = true;
-            enemy = GameObject.Find("Player2").transform.GetChild(0).gameObject;
+            enemy = GameObject.Find(spawnHeroes.GetNamePl2());
         }
         else
-            enemy = GameObject.Find("Player1").transform.GetChild(0).gameObject;
-        plSt = enemy.transform.parent.gameObject.GetComponent<PlayerStatus>();
+            enemy = GameObject.Find(spawnHeroes.GetNamePl1());
+
+        plSt = enemy.GetComponent<PlayerStatus>();
         gameObject.transform.parent = null;
     }
 

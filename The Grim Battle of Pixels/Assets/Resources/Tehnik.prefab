@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 4398131253767328387}
   - component: {fileID: 4700798163336024723}
   - component: {fileID: 8001662988655471801}
+  - component: {fileID: -7657565448572005304}
   m_Layer: 0
   m_Name: Tehnik
   m_TagString: Untagged
@@ -281,6 +282,18 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-7657565448572005304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541631004922513756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc822f6bcbcb2b45ba0328c99ddbc90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &72216757409933213
 PrefabInstance:
   m_ObjectHideFlags: 0

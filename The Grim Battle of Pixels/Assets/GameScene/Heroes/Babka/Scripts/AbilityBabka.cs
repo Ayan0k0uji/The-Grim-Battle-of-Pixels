@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AbilityBabka : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private Animator animator;
     private GameObject Enemy;
     private PlayerStatus plStEnemy;
@@ -19,20 +20,22 @@ public class AbilityBabka : MonoBehaviour
 
     void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
+
         animator = GetComponent<Animator>();
-        myPlSt = transform.parent.gameObject.GetComponent<PlayerStatus>();
-        if (transform.parent.gameObject.name == "Player1")
+        myPlSt = GetComponent<PlayerStatus>();
+
+        if (name == spawnHeroes.GetNamePl1())
         {
-            plStEnemy = GameObject.Find("Player2").GetComponent<PlayerStatus>();
-            Enemy = GameObject.Find("Player2").gameObject;
-            rb = Enemy.transform.GetChild(0).gameObject.GetComponent<Rigidbody2D>();
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl2());
         }
         else
         {
-            plStEnemy = GameObject.Find("Player1").GetComponent<PlayerStatus>();
-            Enemy = GameObject.Find("Player1").gameObject;
-            rb = Enemy.transform.GetChild(0).gameObject.GetComponent<Rigidbody2D>();
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl1());
         }
+
+        plStEnemy = Enemy.GetComponent<PlayerStatus>();
+        rb = Enemy.GetComponent<Rigidbody2D>();
     }
 
 
@@ -50,11 +53,11 @@ public class AbilityBabka : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (ability && collision != null && collision.name == Enemy.transform.GetChild(0).name
+        if (ability && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && !collision.isTrigger)
         {
             Enemy.GetComponent<PlayerStatus>().setForceEnemy(true);
-            if (Enemy.transform.GetChild(0).transform.position.x - transform.position.x < 0)
+            if (Enemy.transform.position.x - transform.position.x < 0)
                 temp = Vector2.left;
             else
                 temp = Vector2.right;

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class AnimationBabka : AnimationAbstract
 {
+    private SpawnHeroes spawnHeroes;
     private Animator animator;
     private Rigidbody2D rb;
     private PlayerStatus plSt;
@@ -18,10 +19,11 @@ public class AnimationBabka : AnimationAbstract
 
     private void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
 
         box = GetComponent<BoxCollider2D>();
-        plSt = transform.parent.gameObject.GetComponent<PlayerStatus>();
-        if (transform.parent.gameObject.name == "Player1")
+        plSt = GetComponent<PlayerStatus>();
+        if (name == spawnHeroes.GetNamePl1())
             pl = true;
         else
             pl = false;

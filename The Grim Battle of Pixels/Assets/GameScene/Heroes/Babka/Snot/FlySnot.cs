@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlySnot : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private float speed = 3000f;
     private Rigidbody2D _body;
     private GameObject enemy;
@@ -16,14 +17,18 @@ public class FlySnot : MonoBehaviour
 
     private void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
+
         ani = GetComponent<Animator>();
         _body = GetComponent<Rigidbody2D>();
         player = transform.parent.gameObject;
-        if (transform.parent.gameObject.transform.parent.gameObject.name == "Player1")
-            enemy = GameObject.Find("Player2").transform.GetChild(0).gameObject;
+
+        if (player.name == spawnHeroes.GetNamePl1())
+            enemy = GameObject.Find(spawnHeroes.GetNamePl2());
         else
-            enemy = GameObject.Find("Player1").transform.GetChild(0).gameObject;
-        plStEnemy = enemy.transform.parent.gameObject.GetComponent<PlayerStatus>();
+            enemy = GameObject.Find(spawnHeroes.GetNamePl1());
+
+        plStEnemy = enemy.GetComponent<PlayerStatus>();
         spriteRenderer = enemy.GetComponent<SpriteRenderer>();
         Vector2 movement = Vector2.right * speed * Time.deltaTime * player.GetComponent<Transform>().localScale.x;
         _body.velocity = movement;
@@ -35,7 +40,7 @@ public class FlySnot : MonoBehaviour
         if (collision.name == enemy.name && !collision.isTrigger)
         {
             plStEnemy.TakeDamage(40 / damage);
-            enemy.transform.parent.transform.GetComponent<PlayerStatus>().setSpeed(200);
+            enemy.GetComponent<PlayerStatus>().setSpeed(200);
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             StartCoroutine("BatFly");
@@ -69,7 +74,7 @@ public class FlySnot : MonoBehaviour
         }
         plStEnemy.setFlagPoison(false);
         spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
-        enemy.transform.parent.transform.GetComponent<PlayerStatus>().setSpeed(500);
+        enemy.GetComponent<PlayerStatus>().setSpeed(500);
         Destroy(gameObject);
     }
 }

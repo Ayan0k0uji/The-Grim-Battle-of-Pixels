@@ -19,11 +19,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject onlineMenu;
     [SerializeField] private GameObject title;
     private PhotonView photonView;
-    public static int P1 = 4;
-    public static int P2 = 4;
+    public static int P1 = 5;
+    public static int P2 = 5;
     [SerializeField] Image P1I;
     [SerializeField] Image P2I;
-    [SerializeField] Sprite[] HeroesIcons = new Sprite[5];
+    [SerializeField] Sprite[] HeroesIcons = new Sprite[6];
     private string roomID = "";
     private bool host = false;
     private bool plReady = false;
@@ -206,7 +206,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         while (true)
         {
             yield return new WaitForSeconds(0.2f);
-            if (P1 != 4 && P2 != 4)
+            if (P1 != 5 && P2 != 5)
             {
                 if (host)
                 {

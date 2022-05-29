@@ -4,6 +4,7 @@ using UnityEngine;
 public class Capture : MonoBehaviour
 {
     private Animator animator;
+    private SpawnHeroes spawnHeroes;
     private string Player1;
     private string Player2;
     private float time1 = 0;
@@ -20,8 +21,9 @@ public class Capture : MonoBehaviour
 
     public void Start()
     {
-        Player1 = GameObject.Find("Player1").transform.GetChild(0).name;
-        Player2 = GameObject.Find("Player2").transform.GetChild(0).name;
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
+        Player1 = spawnHeroes.GetNamePl1();
+        Player2 = spawnHeroes.GetNamePl2();
         animator = GetComponent<Animator>();
     }
 

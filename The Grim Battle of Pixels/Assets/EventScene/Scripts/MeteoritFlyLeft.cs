@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MeteoritFlyLeft : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private Transform transform1;
     private Animator animator;
     private PlayerStatus plSt1;
@@ -12,8 +13,9 @@ public class MeteoritFlyLeft : MonoBehaviour
 
     void Start()
     {
-        plSt1 = GameObject.Find("Player1").transform.GetComponent<PlayerStatus>();
-        plSt2 = GameObject.Find("Player2").transform.GetComponent<PlayerStatus>();
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
+        plSt1 = GameObject.Find(spawnHeroes.GetNamePl1()).GetComponent<PlayerStatus>();
+        plSt2 = GameObject.Find(spawnHeroes.GetNamePl2()).GetComponent<PlayerStatus>();
         animator = GetComponent<Animator>();
         transform1 = GetComponent<Transform>();
         StartCoroutine("MeteorFly");
@@ -29,12 +31,12 @@ public class MeteoritFlyLeft : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision != null && !collision.isTrigger && collision.transform.parent.transform.name == "Player1")
+        if (collision != null && !collision.isTrigger && collision.name == spawnHeroes.GetNamePl1())
         {
             plSt1.TakeDamage(100);
             Destroy(gameObject);
         }
-        if (collision != null && !collision.isTrigger && collision.transform.parent.transform.name == "Player2")
+        if (collision != null && !collision.isTrigger && collision.name == spawnHeroes.GetNamePl2())
         {
             plSt2.TakeDamage(100);
             Destroy(gameObject);

@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 
-public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
+public class SpawnHeroesOnline : SpawnHeroes
 {
     [SerializeField] int Player1;
     [SerializeField] int Player2;
@@ -12,8 +12,8 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
     private GameObject PL2;
     private PhotonView photonView;
     private bool host = false;
-    private string[] nameHeroes = new string[5] {"Babka", "Ponchic", "Tehnik", "Ded", "" };
-
+    private string[] nameHeroes = new string[5] {"Babka", "Ponchic", "Tehnik", "Ded", "Sakyla" };
+    private string namePl1, namePl2;
     [SerializeField] Sprite[] HeroesIcons = new Sprite[5];
     private Image P1I;
     private Image P2I;
@@ -23,7 +23,7 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
     //private MenuScript msc;
 
 
-    private void Start()
+    private void Awake()
     {
         photonView = GetComponent<PhotonView>();
         if (PhotonNetwork.IsMasterClient)
@@ -32,15 +32,16 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
         Player1 = LobbyManager.P1;
         Player2 = LobbyManager.P2;
 
+        namePl1 = nameHeroes[Player1];
+        namePl2 = nameHeroes[Player2];
+
         if (host)
         {
                  
                  /*  PL1 = PhotonNetwork.Instantiate(nameHeroes[Player1], GameObject.Find("Player1").transform.position, Quaternion.identity);
                    PL1.transform.parent = GameObject.Find("Player1").transform;
                    PL1.transform.localPosition = Vector3.zero;*/
-                PL1 = PhotonNetwork.Instantiate(nameHeroes[Player1], Vector3.zero, Quaternion.identity);
-                PL1.transform.SetParent(GameObject.Find("Player1").transform);
-                PL1.transform.localPosition = Vector3.zero;
+                PL1 = PhotonNetwork.Instantiate(namePl1, new Vector3(-7, -2, 0), Quaternion.identity);
                //GameObject.Find(nameHeroes[Player2] + "(clone)").transform.SetParent(GameObject.Find("Player2").transform);
                 
 
@@ -51,14 +52,14 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
             PL2.transform.parent = GameObject.Find("Player2").transform;
             PL2.transform.localPosition = Vector3.zero;*/
 
-            PL2 = PhotonNetwork.Instantiate(nameHeroes[Player2], Vector3.zero, Quaternion.identity);
-            PL2.transform.SetParent(GameObject.Find("Player2").transform);
-            PL2.transform.localPosition = Vector3.zero;
+            PL2 = PhotonNetwork.Instantiate(namePl2, new Vector3(7, -2, 0), Quaternion.identity);
             //GameObject.Find(nameHeroes[Player1] + "(clone)").transform.SetParent(GameObject.Find("Player1").transform);
             
         }
 
-        
+
+        namePl1 = nameHeroes[Player1] + "(Clone)";
+        namePl2 = nameHeroes[Player2] + "(Clone)";
         /*if (host)
         {
             photonView.RPC("spawnEnemy", PhotonNetwork.PlayerList[1]);
@@ -67,7 +68,7 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
         {
             photonView.RPC("spawnEnemy", PhotonNetwork.PlayerList[0]);
         }*/
-        
+
 
 
 
@@ -81,11 +82,11 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
         P1I.sprite = HeroesIcons[Player1];
         P2I.sprite = HeroesIcons[Player2];
     }
-    private void Update()
+    /*private void Update()
     {
         GameObject.Find(nameHeroes[Player1] + " clone").transform.SetParent(GameObject.Find("Player1").transform);
         GameObject.Find("Babka(Clone)").transform.parent = GameObject.Find("Player2").transform;
-        /*if (GameObject.Find(nameHeroes[Player1] + "(clone)") && flag)
+        *//*if (GameObject.Find(nameHeroes[Player1] + "(clone)") && flag)
         {
             Debug.Log("as");
             *//*GameObject.Find(nameHeroes[Player1] + "(clone)").transform.SetParent(GameObject.Find("Player1").transform);
@@ -96,8 +97,8 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
             Debug.Log("qw");
            *//* GameObject.Find(nameHeroes[Player2] + "(clone)").transform.SetParent(GameObject.Find("Player2").transform);
             flag = false;*//*
-        }*/
-    }
+        }*//*
+    }*/
 
 
     /*[PunRPC]
@@ -116,4 +117,16 @@ public class SpawnHeroesOnline : MonoBehaviourPunCallbacks
             PL1.transform.parent = GameObject.Find("Player1").transform;
         }
     }*/
+
+    override
+    public string GetNamePl1()
+    {
+        return namePl1;
+    }
+
+    override
+    public string GetNamePl2()
+    {
+        return namePl2;
+    }
 }

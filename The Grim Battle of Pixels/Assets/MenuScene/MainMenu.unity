@@ -5432,11 +5432,12 @@ MonoBehaviour:
   P1I: {fileID: 1866744462}
   P2I: {fileID: 1345987770}
   HeroesIcons:
-  - {fileID: -567314784578620594, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
-  - {fileID: -4179326876580852194, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
-  - {fileID: 7560058272791360924, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
-  - {fileID: 2940729737560329014, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
-  - {fileID: 6293477752222215979, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
+  - {fileID: 5299278809203757658, guid: 0de470884762a854a8e738c63860bb67, type: 3}
+  - {fileID: -2055291313031853559, guid: 0de470884762a854a8e738c63860bb67, type: 3}
+  - {fileID: -1873185631172208427, guid: 0de470884762a854a8e738c63860bb67, type: 3}
+  - {fileID: -4388114851121367780, guid: 0de470884762a854a8e738c63860bb67, type: 3}
+  - {fileID: 9092118315076536493, guid: 0de470884762a854a8e738c63860bb67, type: 3}
+  - {fileID: -6623102538692597632, guid: 0de470884762a854a8e738c63860bb67, type: 3}
 --- !u!114 &707125693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6252,7 +6253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6293477752222215979, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
+  m_Sprite: {fileID: 9092118315076536493, guid: 0de470884762a854a8e738c63860bb67, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9363,7 +9364,7 @@ MonoBehaviour:
   - {fileID: -4179326876580852194, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
   - {fileID: 7560058272791360924, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
   - {fileID: 2940729737560329014, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
-  - {fileID: 6293477752222215979, guid: facb6c6b8bef0ef4183f00a8ca2b7b8b, type: 3}
+  - {fileID: 4436755340336084312, guid: 0de470884762a854a8e738c63860bb67, type: 3}
   P1I: {fileID: 1054722556}
   P2I: {fileID: 2143897415}
 --- !u!1 &1372959394

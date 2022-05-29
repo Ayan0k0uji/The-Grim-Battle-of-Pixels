@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AbilityTehnik : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private Animator animator;
     private GameObject Enemy;
     private PlayerStatus plSt;
@@ -13,17 +14,17 @@ public class AbilityTehnik : MonoBehaviour
 
     void Start()
     {
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         animator = GetComponent<Animator>();
-        if (transform.parent.gameObject.name == "Player1")
+        if (name == spawnHeroes.GetNamePl1())
         {
-            plSt = GameObject.Find("Player2").GetComponent<PlayerStatus>();
-            Enemy = GameObject.Find("Player2").gameObject;
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl2()).gameObject; 
         }
         else
         {
-            plSt = GameObject.Find("Player1").GetComponent<PlayerStatus>();
-            Enemy = GameObject.Find("Player1").gameObject;
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl1()).gameObject;
         }
+        plSt = Enemy.GetComponent<PlayerStatus>();
     }
 
 
@@ -41,7 +42,7 @@ public class AbilityTehnik : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (ability && collision != null && collision.name == Enemy.transform.GetChild(0).name
+        if (ability && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && !collision.isTrigger)
         {
 
