@@ -24,6 +24,7 @@ public class PlayerStatus : MonoBehaviour
     private int maxHeath = 100;
     private int currentMana = 0;
     private int currentHeath = 0;
+    private int currentArmor = 0;
     private bool flagPoison = false;
     private void Start()
     {
@@ -158,7 +159,19 @@ public class PlayerStatus : MonoBehaviour
     {
         if (!flagPoison)
             StartCoroutine(colr());
-        currentHeath -= damage;
+        if (currentArmor > 0)
+        {
+            if (currentArmor - damage > 0)
+                currentArmor -= damage;
+            else
+            {
+                currentHeath -= damage - currentArmor;
+                currentArmor = 0;
+            }
+        }
+        else
+            currentHeath -= damage;
+
         if (currentHeath <= 0)
             StartCoroutine(reincarnation());
     }
@@ -228,5 +241,15 @@ public class PlayerStatus : MonoBehaviour
         if (currentMana + newMana >= maxMana)
             currentMana = maxMana;
         else currentMana += newMana;
+    }
+
+    public void SetCurrentArmor(int a)
+    {
+        currentArmor = a;
+    }
+
+    public int GetCurrentArmor()
+    {
+        return currentArmor;
     }
 }
