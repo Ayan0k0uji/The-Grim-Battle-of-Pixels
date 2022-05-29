@@ -6,6 +6,8 @@ public class AnimatorSakyla : AnimationAbstract
 {
     private SpawnHeroes spawnHeroes;
     private Animator animator;
+    [SerializeField] GameObject vodka;
+    [SerializeField] GameObject vodavrot;
     private Rigidbody2D rb;
     private BoxCollider2D box;
     private PlayerStatus plSt;
@@ -74,7 +76,8 @@ public class AnimatorSakyla : AnimationAbstract
                 if (Input.GetAxisRaw("Ability1").Equals(1) && flagAbility)
                 {
                     animator.SetBool("ability", true);
-                    transform.position = new Vector3(transform.position.x + 3 * transform.localScale.x, transform.position.y, transform.position.z);
+                    Vodka();
+                    transform.position = new Vector3(transform.position.x + 4 * transform.localScale.x, transform.position.y, transform.position.z);
                     
                 }
                 else
@@ -118,7 +121,11 @@ public class AnimatorSakyla : AnimationAbstract
                     animator.SetBool("ulta", false);
 
                 if (Input.GetAxisRaw("Ability2").Equals(1) && flagAbility)
+                {
                     animator.SetBool("ability", true);
+                    Vodka();
+                    transform.position = new Vector3(transform.position.x + 4 * transform.localScale.x, transform.position.y, transform.position.z);
+                }
                 else
                     animator.SetBool("ability", false);
 
@@ -153,5 +160,18 @@ public class AnimatorSakyla : AnimationAbstract
     public bool getFlagAbility()
     {
         return flagAbility;
+    }
+
+    public void Vodka()
+    {
+        GameObject sn = Instantiate(vodka, new Vector3(transform.position.x - 2 * transform.localScale.x, transform.position.y, transform.position.z), Quaternion.identity);
+        sn.transform.parent = transform;
+    }
+
+    public void Vodavrot()
+    {
+        GameObject sn = Instantiate(vodavrot, transform.GetChild(0).position, Quaternion.identity);
+        sn.transform.localScale = transform.localScale;
+        sn.transform.parent = transform;
     }
 }

@@ -24,7 +24,6 @@ public class Controller : MonoBehaviour
         if (collision.name == enemy.name && !collision.isTrigger)
         {
             plStEnemy.TakeDamage(20);
-           
         }
     }
     void KrugOff(){

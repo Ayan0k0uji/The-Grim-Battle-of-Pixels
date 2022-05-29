@@ -72,12 +72,6 @@ public class FlyVodavrot : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void Inviz()
-    {
-        
-        //enemy.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1, enemy.transform.position.z);
-    }
-
     public void Vixod()
     {
         enemy.GetComponent<Rigidbody2D>().gravityScale = 3;
