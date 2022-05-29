@@ -170,8 +170,8 @@ public class AnimatorSakyla : AnimationAbstract
 
     public void Vodavrot()
     {
-        GameObject sn = Instantiate(vodka, new Vector3(transform.position.x - 2 * transform.localScale.x, transform.position.y, transform.position.z),
-            Quaternion.identity);
+        GameObject sn = Instantiate(vodavrot, transform.GetChild(0).position, Quaternion.identity);
+        sn.transform.localScale = transform.localScale;
         sn.transform.parent = transform;
     }
 }

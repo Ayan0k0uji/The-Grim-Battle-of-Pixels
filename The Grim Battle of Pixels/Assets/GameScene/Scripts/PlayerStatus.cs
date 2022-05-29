@@ -9,7 +9,7 @@ public class PlayerStatus : MonoBehaviour
     private CapsuleCollider2D circle;
     private SpawnHeroes spawnHeroes;
     private Rigidbody2D rb;
-    private Vector2 force;
+    private Vector2 force = Vector2.zero;
     private float speed = 500.0f;
     private float jumpForce = 15.0f;
     private bool facingRight = true;
@@ -215,6 +215,8 @@ public class PlayerStatus : MonoBehaviour
     public void setForceEnemy(bool flag) { forceEnemy = flag; }
     public void setForce(Vector2 vec) { force = vec; }
     public void setFlagPoison(bool f) { flagPoison = f; }
+
+    public void setJumpForce(int a) { jumpForce = a;}
     public void setCurrentMana(int newMana)
     {
         if (currentMana + newMana >= maxMana)

@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vodka: {fileID: 9194047016682260357, guid: d6004c554b61dbb47a355bb88b916469, type: 3}
+  vodavrot: {fileID: 6973988788608976714, guid: 99dd541d681a527428fee5f9bf268108, type: 3}
 --- !u!114 &-8753257018761377294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8588001422407209329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 1, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6551079295087791333}

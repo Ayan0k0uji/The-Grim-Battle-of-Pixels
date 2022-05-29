@@ -45,13 +45,13 @@ public class AbilityPonchic : MonoBehaviour
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
             ulta = true;
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta_walking"))
+        /*else if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta_walking"))
             plSt.setSpeed(1000f);
         else
         {
             plSt.setSpeed(500f);
             ulta = false;
-        }
+        }*/
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ability"))
             flag = true;
@@ -101,4 +101,14 @@ public class AbilityPonchic : MonoBehaviour
         flag1 = true;
     }
 
+    public void newSpeed()
+    {
+        plSt.setSpeed(1000f);
+    }
+
+    public void newSpeed1()
+    {
+        plSt.setSpeed(500f);
+        ulta = false;
+    }
 }
