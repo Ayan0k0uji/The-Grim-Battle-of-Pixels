@@ -75,7 +75,7 @@ public class AbilityPonchic : MonoBehaviour
                 Enemy.transform.position.y - transform.position.y));
             plStEnemy.TakeDamage(7);
             flag1 = false;
-            Invoke("sFlag1", 0.5f);
+            Invoke("sFlag1", 0.2f);
         }
 
         if (ability && collision != null && collision.name == Enemy.name

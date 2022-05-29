@@ -171,6 +171,12 @@ public class PlayerStatus : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Static;
         yield return new WaitForSeconds(5f);
         rb.bodyType = RigidbodyType2D.Dynamic;
+
+        if (pl)
+            transform.position = new Vector3(-7, -5, 0);
+        else
+            transform.position = new Vector3(7, -5, 0);
+
         animator.SetBool("die", false);
 
         currentHeath = maxHeath;
