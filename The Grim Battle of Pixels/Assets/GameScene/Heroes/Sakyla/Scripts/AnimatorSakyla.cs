@@ -65,13 +65,17 @@ public class AnimatorSakyla : MonoBehaviour
 
                 if (Input.GetAxisRaw("Ability1").Equals(-1) && plSt.getCurrentMana() == 100)
                 {
+                    
                     animator.SetBool("ulta", true);
                 }
                 else
                     animator.SetBool("ulta", false);
 
                 if (Input.GetAxisRaw("Ability1").Equals(1) && flagAbility)
+                {
                     animator.SetBool("ability", true);
+                    transform.position = new Vector3(transform.position.x + 3 * transform.localScale.x, transform.position.y, transform.position.z);
+                }
                 else
                     animator.SetBool("ability", false);
 
