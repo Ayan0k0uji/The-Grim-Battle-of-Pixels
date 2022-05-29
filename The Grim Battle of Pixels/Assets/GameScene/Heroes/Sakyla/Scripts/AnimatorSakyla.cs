@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorSakyla : MonoBehaviour
+public class AnimatorSakyla : AnimationAbstract
 {
     private SpawnHeroes spawnHeroes;
     private Animator animator;
     private Rigidbody2D rb;
     private BoxCollider2D box;
     private PlayerStatus plSt;
+    [SerializeField] GameObject vodka;
     private bool pl;
     private bool flagAbility = true;
     private float time = 0;
@@ -37,7 +38,7 @@ public class AnimatorSakyla : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
         {
             flagAbility = false;
-            //StartCoroutine("timeAbility");
+            StartCoroutine("timeAbility");
             flag = false;
 
         }
@@ -74,7 +75,8 @@ public class AnimatorSakyla : MonoBehaviour
                 if (Input.GetAxisRaw("Ability1").Equals(1) && flagAbility)
                 {
                     animator.SetBool("ability", true);
-                    transform.position = new Vector3(transform.position.x + 3 * transform.localScale.x, transform.position.y, transform.position.z);
+                    Vodka();
+                    transform.position = new Vector3(transform.position.x + 4 * transform.localScale.x, transform.position.y, transform.position.z);
                 }
                 else
                     animator.SetBool("ability", false);
@@ -117,7 +119,11 @@ public class AnimatorSakyla : MonoBehaviour
                     animator.SetBool("ulta", false);
 
                 if (Input.GetAxisRaw("Ability2").Equals(1) && flagAbility)
+                {
                     animator.SetBool("ability", true);
+                    Vodka();
+                    transform.position = new Vector3(transform.position.x + 4 * transform.localScale.x, transform.position.y, transform.position.z);
+                }
                 else
                     animator.SetBool("ability", false);
 
@@ -128,5 +134,36 @@ public class AnimatorSakyla : MonoBehaviour
             else
                 animator.SetBool("squat", true);
         }
+    }
+
+    IEnumerator timeAbility()
+    {
+        while (time < 9)
+        {
+            yield return new WaitForSeconds(0.25f);
+            time += 0.25f;
+        }
+        time = 0;
+        flagAbility = true;
+        flag = true;
+    }
+
+    override
+    public float getTime()
+    {
+        return time;
+    }
+
+    override
+    public bool getFlagAbility()
+    {
+        return flagAbility;
+    }
+
+    public void Vodka()
+    {
+        GameObject sn = Instantiate(vodka, new Vector3(transform.position.x - 2 * transform.localScale.x, transform.position.y, transform.position.z),
+            Quaternion.identity);
+        sn.transform.parent = transform;
     }
 }

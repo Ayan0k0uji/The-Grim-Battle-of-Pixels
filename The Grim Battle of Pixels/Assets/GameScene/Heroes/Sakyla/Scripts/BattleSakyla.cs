@@ -12,7 +12,7 @@ public class BattleSakyla : MonoBehaviour
     private bool check_kick;
     private bool bk, tk;
     private bool bot_kick = false, t_kick = false;
-    private int bot_damage = 12, top_damage = 10;
+    private int bot_damage = 22, top_damage = 30;
 
     void Start()
     {
@@ -36,7 +36,7 @@ public class BattleSakyla : MonoBehaviour
     {
         if (check_kick)
             tk = bk = true;
-        check_kick = !animator.GetCurrentAnimatorStateInfo(0).IsName("botton_kick")
+        check_kick = !animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick")
                             && !animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick");
     }
 
@@ -57,7 +57,7 @@ public class BattleSakyla : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (bot_kick && collision != null && collision.name == Enemy.name
-                    && animator.GetCurrentAnimatorStateInfo(0).IsName("botton_kick") && !collision.isTrigger)
+                    && animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick") && !collision.isTrigger)
         {
             plStEnemy.setCurrentMana(5);
             plSt.TakeDamage(bot_damage);

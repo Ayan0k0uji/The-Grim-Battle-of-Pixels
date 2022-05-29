@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+    private SpawnHeroes spawnHeroes;
     private GameObject enemy;
     private PlayerStatus plStEnemy;
     private void Start()
     {
-        plStEnemy = enemy.transform.parent.gameObject.GetComponent<PlayerStatus>();
-        if (transform.parent.gameObject.transform.parent.gameObject.name == "Player1")
-            enemy = GameObject.Find("Player2").transform.GetChild(0).gameObject;
+        spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
+        
+        if (transform.parent.name == spawnHeroes.GetNamePl1())
+            enemy = GameObject.Find(spawnHeroes.GetNamePl2());
         else
-            enemy = GameObject.Find("Player1").transform.GetChild(0).gameObject;
+            enemy = GameObject.Find(spawnHeroes.GetNamePl1());
+
+        plStEnemy = enemy.GetComponent<PlayerStatus>();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == enemy.name && !collision.isTrigger)
         {
-            plStEnemy.TakeDamage(40);
+            plStEnemy.TakeDamage(20);
            
         }
     }
