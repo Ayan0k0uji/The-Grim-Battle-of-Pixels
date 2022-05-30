@@ -16,7 +16,11 @@ public class MenuScript : MonoBehaviour
     [SerializeField] Sprite[] HeroesIcons = new Sprite[5];
     [SerializeField] Image P1I;
     [SerializeField] Image P2I;
-    
+
+    [SerializeField] GameObject namesAuthors;
+    [SerializeField] GameObject linksAuthors;
+
+    private bool authorSwitch = true;
 
     GameObject lastSelectedGO;
 
@@ -88,6 +92,22 @@ public class MenuScript : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(s);
     }
 
+    public void AuthorSwitchButton()
+    {
+        if (authorSwitch)
+        {
+            namesAuthors.SetActive(false);
+            linksAuthors.SetActive(true);
+            authorSwitch = !authorSwitch;
+        }
+        else
+        {
+            namesAuthors.SetActive(true);
+            linksAuthors.SetActive(false);
+            authorSwitch = !authorSwitch;
+        }
+    }
+
     public void Awake()
     {
         //P1I = GameObject.Find("MImageP1").GetComponent<Image>();
@@ -100,8 +120,6 @@ public class MenuScript : MonoBehaviour
         //GameObject.Find("ChooseMenu").transform.GetChild(2).gameObject.SetActive(false);
         //GameObject.Find("ChooseMenu").SetActive(false);
         //GameObject.Find("MainMenu").transform.GetChild(0).gameObject.GetComponent<Button>().Select();
-
-
         //Cursor.visible = false;
         //Cursor.lockState = CursorLockMode.Locked;
     }
