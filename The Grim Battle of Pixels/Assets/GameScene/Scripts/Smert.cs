@@ -7,7 +7,6 @@ public class Smert : MonoBehaviour
 
     private SpawnHeroes spawnHeroes;
     private GameObject pl1, pl2;
-    // Start is called before the first frame update
     void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();

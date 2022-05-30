@@ -763,7 +763,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.3125
-    functionName: flagAb1
+    functionName: SetOncePerTick
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -8,7 +8,7 @@ public class CepiScript : MonoBehaviour
     private Animator animatorPlayer;
     private GameObject Enemy;
     private PlayerStatus plSt;
-    private bool flag = true;
+    private bool damageByChainsOncePer = true;
 
 
     private void Start()
@@ -35,16 +35,16 @@ public class CepiScript : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision != null && collision.name == Enemy.name
-                    && !collision.isTrigger && flag)
+                    && !collision.isTrigger && damageByChainsOncePer)
         {
-            flag = false;
+            damageByChainsOncePer = false;
             plSt.TakeDamage(4);
-            Invoke("sFlag1", 0.2f);
+            Invoke("changeFlag", 0.2f);
         }
     }
 
-    private void sFlag1()
+    private void changeFlag()
     {
-        flag = true;
+        damageByChainsOncePer = true;
     }
 }

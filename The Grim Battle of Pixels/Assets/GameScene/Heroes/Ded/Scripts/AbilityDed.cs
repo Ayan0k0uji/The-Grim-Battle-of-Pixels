@@ -8,21 +8,15 @@ public class AbilityDed : MonoBehaviour
     private Animator animator;
     private GameObject Enemy;
     private PlayerStatus plStEnemy;
-    private PlayerStatus plSt;
-    private Rigidbody2D rb;
-    private bool ulta = false;
-    private bool ability = false;
-    private bool flag = true;
-    private bool flagAb = true;
-    private Vector2 temp;
-    private Transform UltaPosition;
+    private bool isAbilityReady = false;
+    private bool isAbilityRunning = true;
+    private bool oncePerTick = true;             // ограничивает урон за один прыжок
 
 
     void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         animator = GetComponent<Animator>();
-        plSt = GetComponent<PlayerStatus>();
         if (name == spawnHeroes.GetNamePl1())
         {
             Enemy = GameObject.Find(spawnHeroes.GetNamePl2());
@@ -32,7 +26,6 @@ public class AbilityDed : MonoBehaviour
             Enemy = GameObject.Find(spawnHeroes.GetNamePl1());
         }
         plStEnemy = Enemy.GetComponent<PlayerStatus>();
-        rb = Enemy.GetComponent<Rigidbody2D>();
     }
 
 
@@ -40,25 +33,25 @@ public class AbilityDed : MonoBehaviour
     {
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ability"))
-            flag = true;
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
+            isAbilityRunning = true;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityRunning)
         {
-            ability = true;
-            flag = false;
+            isAbilityReady = true;
+            isAbilityRunning = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (ability && collision != null && collision.name == Enemy.name
-                    && animator.GetCurrentAnimatorStateInfo(0).IsName("ability1") && !collision.isTrigger && flagAb)
+        if (isAbilityReady && collision != null && collision.name == Enemy.name
+                    && animator.GetCurrentAnimatorStateInfo(0).IsName("ability1") && !collision.isTrigger && oncePerTick)
         {
             plStEnemy.TakeDamage(14);
-            flagAb = false;
+            oncePerTick = false;
         }
     }
 
-    private void flagAb1() {
-        flagAb = true;
+    private void SetOncePerTick() {
+        oncePerTick = true;
     }
 }

@@ -5,16 +5,14 @@ public class AnimationDed : AnimationAbstract
 {
     private SpawnHeroes spawnHeroes;
     private Animator animator;
-    private Animator animatorCepi;
     private Animator animatorPepel;
     private Rigidbody2D rb;
     private PlayerStatus plSt;
     private BoxCollider2D box;
-    private bool pl;
-    private bool flagAbility = true;
+    private bool isPlayer1;
+    private bool isAbilityReady = true;
     private float time = 0;
-    private Transform UltaPosition;
-    private bool flag = true;
+    private bool isAbilityRunning = true;
 
 
 
@@ -22,13 +20,12 @@ public class AnimationDed : AnimationAbstract
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         box = GetComponent<BoxCollider2D>();
-        animatorCepi = gameObject.transform.GetChild(1).GetComponent<Animator>();
         animatorPepel = gameObject.transform.GetChild(0).GetComponent<Animator>();
         plSt = GetComponent<PlayerStatus>();
         if (name == spawnHeroes.GetNamePl1())
-            pl = true;
+            isPlayer1 = true;
         else
-            pl = false;
+            isPlayer1 = false;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -39,14 +36,14 @@ public class AnimationDed : AnimationAbstract
             box.enabled = false;
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
             plSt.nullMana();
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityRunning)
         {
-            flagAbility = false;
+            isAbilityReady = false;
             StartCoroutine("timeAbility");
-            flag = false;
+            isAbilityRunning = false;
 
         }
-        if (pl)
+        if (isPlayer1)
         {
             if (!plSt.getSquat())
             {
@@ -73,7 +70,7 @@ public class AnimationDed : AnimationAbstract
                     animator.SetBool("ulta", true);
                 }
 
-                if (Input.GetAxisRaw("Ability1").Equals(1) && flagAbility)
+                if (Input.GetAxisRaw("Ability1").Equals(1) && isAbilityReady)
                     animator.SetBool("ability", true);
                 else
                     animator.SetBool("ability", false);
@@ -113,7 +110,7 @@ public class AnimationDed : AnimationAbstract
                     animator.SetBool("ulta", true);
                 }
 
-                if (Input.GetAxisRaw("Ability2").Equals(1) && flagAbility)
+                if (Input.GetAxisRaw("Ability2").Equals(1) && isAbilityReady)
                     animator.SetBool("ability", true);
                 else
                     animator.SetBool("ability", false);
@@ -135,8 +132,8 @@ public class AnimationDed : AnimationAbstract
             time += 0.25f;
         }
         time = 0;
-        flagAbility = true;
-        flag = true;
+        isAbilityReady = true;
+        isAbilityRunning = true;
     }
 
     override
@@ -148,10 +145,10 @@ public class AnimationDed : AnimationAbstract
     override
     public bool getFlagAbility()
     {
-        return flagAbility;
+        return isAbilityReady;
     }
 
-    public void sdgujdsv()
+    public void OffAsh()
     {
         if (transform.localScale.x == -1)
         {
@@ -162,7 +159,7 @@ public class AnimationDed : AnimationAbstract
         animatorPepel.SetBool("Death", true);
     }
 
-    public void sdgujdsv1()
+    public void OnAsh()
     {
         if (transform.localScale.x == -1)
         {
@@ -173,7 +170,7 @@ public class AnimationDed : AnimationAbstract
         animatorPepel.SetBool("Death", false);
     }
 
-    public void activCepi()
+    public void OnChains()
     {
         transform.GetChild(1).gameObject.SetActive(true);
 
