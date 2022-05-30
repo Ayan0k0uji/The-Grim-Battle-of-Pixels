@@ -5,13 +5,13 @@ using System;
 public class Hilka : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
-    private Animator ani;
+    private Animator animatorHeal;
     private BoxCollider2D box;
     private SpriteRenderer sprite;
     System.Random rnd = new System.Random();
     private int timeSpawn = 1;
     private int hp = 20;
-    private int n = 0;
+    private int nForRandom = 0;
     private string Player1;
     private string Player2;
 
@@ -19,14 +19,14 @@ public class Hilka : MonoBehaviour
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         sprite = GetComponent<SpriteRenderer>();
-        ani = GetComponent<Animator>();
+        animatorHeal = GetComponent<Animator>();
         box = GetComponent<BoxCollider2D>();
         Player1 = spawnHeroes.GetNamePl1();
         Player2 = spawnHeroes.GetNamePl2();
         sprite.enabled = false;
         box.enabled = false;
-        n = rnd.Next() % 6;
-        switch (n)
+        nForRandom = rnd.Next() % 6;
+        switch (nForRandom)
         {
             case 0:
                 transform.position = new Vector2(-2.845f, -1.688f);
@@ -55,18 +55,18 @@ public class Hilka : MonoBehaviour
         if ((collision.name == Player1 || collision.name == Player2) && !collision.isTrigger)
         {
             collision.GetComponent<PlayerStatus>().Hill(hp);
-            StartCoroutine(Hilka1());
+            StartCoroutine("HilkaSpawnPoint");
         }
     }
 
-    IEnumerator Hilka1()
+    IEnumerator HilkaSpawnPoint()
     {
         box.enabled = false;
-        ani.SetBool("HilkaFly", true);
+        animatorHeal.SetBool("HilkaFly", true);
         yield return new WaitForSeconds(0.6f);
         sprite.enabled = false;
-        n = rnd.Next() % 6;
-        switch (n)
+        nForRandom = rnd.Next() % 6;
+        switch (nForRandom)
         {
             case 0:
                 transform.position = new Vector2(-2.845f, -1.688f);
@@ -92,7 +92,7 @@ public class Hilka : MonoBehaviour
 
     public void HilkaSpawn()
     {
-        ani.SetBool("HilkaFly", false);
+        animatorHeal.SetBool("HilkaFly", false);
         sprite.enabled = true;
         box.enabled = true;
     }

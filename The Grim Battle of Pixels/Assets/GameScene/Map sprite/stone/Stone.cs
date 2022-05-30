@@ -5,14 +5,14 @@ using UnityEngine;
 public class Stone : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
-    private Animator ani;
+    private Animator animatorStone;
     private string Player1;
     private string Player2;
 
     public void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
-        ani = GetComponent<Animator>();
+        animatorStone = GetComponent<Animator>();
         Player1 = spawnHeroes.GetNamePl1();
         Player2 = spawnHeroes.GetNamePl2();
     }
@@ -21,15 +21,15 @@ public class Stone : MonoBehaviour
     {
         if (collision.name == Player1 || collision.name == Player2)
         {
-            StartCoroutine(CheFly());
+            StartCoroutine("StoneCrushed");
         }
     }
 
 
-    IEnumerator CheFly()
+    IEnumerator StoneCrushed()
     {
-        ani.SetBool("stone", true);
+        animatorStone.SetBool("stone", true);
         yield return new WaitForSeconds(0.1f);
-        ani.SetBool("stone", false);                    
+        animatorStone.SetBool("stone", false);                    
     }
 }

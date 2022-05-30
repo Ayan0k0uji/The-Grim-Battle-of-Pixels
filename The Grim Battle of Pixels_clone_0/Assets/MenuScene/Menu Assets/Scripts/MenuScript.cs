@@ -26,19 +26,29 @@ public class MenuScript : MonoBehaviour
     //P1 - true; P2 - flase
     public void CharacterChooseP1Button(int chrP)
     {
-        //EventSystem.current.SetSelectedGameObject(null);
-        //lastSelectedGO = GameObject.Find("Charecter1pl2");
         EventSystem.current.SetSelectedGameObject(GameObject.Find("Charecter1pl2"));
         P1 = chrP;
         P1I.sprite = HeroesIcons[P1];
     }
 
+    public void CharacterChooseP1ButtonRandom()
+    {
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("Charecter1pl2"));
+        P1 = Random.Range(0, 5);
+        P1I.sprite = HeroesIcons[P1];
+    }
+
     public void CharacterChooseP2Button(int chrP)
     {
-        //EventSystem.current.SetSelectedGameObject(null);
-        //lastSelectedGO = GameObject.Find("StartPlayButton");
         EventSystem.current.SetSelectedGameObject(GameObject.Find("StartPlayButton"));
         P2 = chrP;
+        P2I.sprite = HeroesIcons[P2];
+    }
+
+    public void CharacterChooseP2ButtonRandom()
+    {
+        EventSystem.current.SetSelectedGameObject(GameObject.Find("StartPlayButton"));
+        P2 = Random.Range(0, 5);
         P2I.sprite = HeroesIcons[P2];
     }
 

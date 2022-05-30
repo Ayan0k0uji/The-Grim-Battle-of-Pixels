@@ -5,7 +5,7 @@ using UnityEngine;
 public class zelen : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
-    private Animator ani;
+    private Animator animatorGrass;
     private string Player1;
     private string Player2;
     private int count;
@@ -13,7 +13,7 @@ public class zelen : MonoBehaviour
     public void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
-        ani = GetComponent<Animator>();
+        animatorGrass = GetComponent<Animator>();
         Player1 = spawnHeroes.GetNamePl1();
         Player2 = spawnHeroes.GetNamePl2();
     }
@@ -24,17 +24,17 @@ public class zelen : MonoBehaviour
         {
             count++;
             if (count > 0)
-                ani.SetBool("zelen", true);
+                animatorGrass.SetBool("zelen", true);
             else
-                ani.SetBool("zelen", false);
+                animatorGrass.SetBool("zelen", false);
         }
         if (collision.name == Player2 && !collision.isTrigger)
         {
             count++;
             if (count > 0)
-                ani.SetBool("zelen", true);
+                animatorGrass.SetBool("zelen", true);
             else
-                ani.SetBool("zelen", false);
+                animatorGrass.SetBool("zelen", false);
         }
     }
 
@@ -44,17 +44,17 @@ public class zelen : MonoBehaviour
         {
             count--;
             if (count > 0)
-                ani.SetBool("zelen", true);
+                animatorGrass.SetBool("zelen", true);
             else
-                ani.SetBool("zelen", false);
+                animatorGrass.SetBool("zelen", false);
         }
         if (collision.name == Player2 && !collision.isTrigger)
         {
             count--;
             if (count > 0)
-                ani.SetBool("zelen", true);
+                animatorGrass.SetBool("zelen", true);
             else
-                ani.SetBool("zelen", false);
+                animatorGrass.SetBool("zelen", false);
         }
     }
 }

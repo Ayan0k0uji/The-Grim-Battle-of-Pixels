@@ -8,11 +8,11 @@ public class Chervyak : MonoBehaviour
 	private void Start()
 	{
 		animator = GetComponent<Animator>();
-		StartCoroutine(CheFly());
+		StartCoroutine("WormMove");
 	}
 
 
-	IEnumerator CheFly()
+	IEnumerator WormMove()
 	{
 		while (true)
 		{

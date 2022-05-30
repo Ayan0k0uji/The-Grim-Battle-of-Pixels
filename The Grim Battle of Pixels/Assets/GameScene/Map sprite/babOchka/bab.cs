@@ -3,22 +3,22 @@ using UnityEngine;
 
 public class bab : MonoBehaviour
 {
-	private Animator animator;
+	private Animator animatorButterfly;
 
 	private void Start()
 	{
-		animator = GetComponent<Animator>();
-		StartCoroutine(BatFly());
+		animatorButterfly = GetComponent<Animator>();
+		StartCoroutine("ButterflyFly");
 	}
 
 
-	IEnumerator BatFly()
+	IEnumerator ButterflyFly()
 	{
 		while (true)
 		{
-			animator.SetBool("Bab", true);
+			animatorButterfly.SetBool("Bab", true);
 			yield return new WaitForSeconds(0.1f);
-			animator.SetBool("Bab", false);
+			animatorButterfly.SetBool("Bab", false);
 			yield return new WaitForSeconds(10f);
 		}
 	}

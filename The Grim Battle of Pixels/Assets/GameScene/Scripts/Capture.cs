@@ -43,12 +43,12 @@ public class Capture : MonoBehaviour
         }
         else if (pl1 && flagP1)
         {
-            StartCoroutine("pt1");
+            StartCoroutine("Player1CaptFlag");
             flagP1 = false;
         }
         else if (pl2 && flagP2)
         {
-            StartCoroutine("pt2");
+            StartCoroutine("Player2CaptFlag");
             flagP2 = false;
         }
 
@@ -83,7 +83,7 @@ public class Capture : MonoBehaviour
             pl1 = false;
             count--;
             animator.SetBool("flag", false);
-            StopCoroutine("pt1");
+            StopCoroutine("Player1CaptFlag");
             flagP1 = true;
         }
         if (collision.name == Player2 && !collision.isTrigger)
@@ -91,7 +91,7 @@ public class Capture : MonoBehaviour
             pl2 = false;
             count--;
             animator.SetBool("flag", false);
-            StopCoroutine("pt2");
+            StopCoroutine("Player2CaptFlag");
             flagP2 = true;
         }
     }
@@ -99,7 +99,7 @@ public class Capture : MonoBehaviour
 
 
 
-    IEnumerator pt1()
+    IEnumerator Player1CaptFlag()
     {
         animator.SetBool("flag", true);
         while (true)
@@ -108,7 +108,7 @@ public class Capture : MonoBehaviour
             time1 += 0.25f;
         }
     }
-    IEnumerator pt2()
+    IEnumerator Player2CaptFlag()
     {
         animator.SetBool("flag", true);
         while (true)
