@@ -5,67 +5,67 @@ using UnityEngine;
 public class AbilityTehnik : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
-    [SerializeField] GameObject shit;
-    private Animator animator;
-    private Animator anim;
+    [SerializeField] GameObject shield;             // объект щита
+    private Animator playerAnimator;                // аниматор персонажа
+    private Animator shieldAnimator;                // аниматор щита
     private GameObject Enemy;
-    private PlayerStatus plSt;
-    private PlayerStatus myPlSt;
-    private bool ability = false;
-    private bool flag = true;
+    private PlayerStatus enemyStatus;
+    private PlayerStatus playerStatus;
+    private bool isAbilityRunning = false;          // если выполняется анимация способности
+    private bool isAbilityComplited = true;         // если анимация способности закончена
 
 
     void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
-        animator = GetComponent<Animator>();
-        anim = shit.GetComponent<Animator>();
+        playerAnimator = GetComponent<Animator>();
+        shieldAnimator = shield.GetComponent<Animator>();
         if (name == spawnHeroes.GetNamePl1())
         {
-            Enemy = GameObject.Find(spawnHeroes.GetNamePl2()).gameObject; 
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl2()); 
         }
         else
         {
-            Enemy = GameObject.Find(spawnHeroes.GetNamePl1()).gameObject;
+            Enemy = GameObject.Find(spawnHeroes.GetNamePl1());
         }
-        plSt = Enemy.GetComponent<PlayerStatus>();
-        myPlSt = GetComponent<PlayerStatus>();
+        enemyStatus = Enemy.GetComponent<PlayerStatus>();
+        playerStatus = GetComponent<PlayerStatus>();
     }
 
 
     void Update()
     {
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ability"))
-            flag = true;
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
+        if (!playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("ability"))
+            isAbilityComplited = true;
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityComplited)
         {
-            ability = true;
-            flag = false;
+            isAbilityRunning = true;
+            isAbilityComplited = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (ability && collision != null && collision.name == Enemy.name
-                    && animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && !collision.isTrigger)
+        if (isAbilityRunning && collision != null && collision.name == Enemy.name               
+                    && playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("ability") && !collision.isTrigger)             // если попали способностью
         {
-            shit.SetActive(true);
-            myPlSt.SetCurrentArmor(30);
-            plSt.TakeDamage(35);
-            ability = false;
-            StartCoroutine("Armor");
+            shield.SetActive(true);
+            playerStatus.SetCurrentArmor(30);
+            enemyStatus.TakeDamage(35);
+            isAbilityRunning = false;
+            StartCoroutine("isArmor");
         }
     }
 
-    IEnumerator Armor()
+    IEnumerator isArmor()                                 // корутина, которая проверяет, есть ли у персонажа броня от щита
     {
         while (true)
         {
             yield return new WaitForSeconds(0.01f);
-            if (myPlSt.GetCurrentArmor() == 0)
+            if (playerStatus.GetCurrentArmor() == 0)
             {
-                anim.SetBool("shit", true);
+                shieldAnimator.SetBool("shit", true);
                 break;
             }
         }

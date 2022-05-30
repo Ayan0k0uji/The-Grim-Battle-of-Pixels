@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8019544367729048113}
   - component: {fileID: 6945453410438023856}
   m_Layer: 0
-  m_Name: kiber_na_meste_(8)_1
+  m_Name: TechnikSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

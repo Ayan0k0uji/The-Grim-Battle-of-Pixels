@@ -9,12 +9,11 @@ public class AbilityPonchic : MonoBehaviour
     private GameObject Enemy;
     private PlayerStatus plSt;
     private PlayerStatus plStEnemy;
-    private Rigidbody2D rb;
-    private bool ulta = false;
-    private bool ability = false;
-    private bool flag = true;
-    private bool flag1 = true;
-    private bool flagColor = false;
+    private bool isUltaReady = false;
+    private bool isAbilityReady = false;
+    private bool isAbilityRunning = true;
+    private bool isUltaRunning = true;
+    private bool isEnemyPoisoned = false;
 
 
     void Start()
@@ -32,34 +31,26 @@ public class AbilityPonchic : MonoBehaviour
         }
 
         plStEnemy = Enemy.GetComponent<PlayerStatus>();
-        rb = Enemy.GetComponent<Rigidbody2D>();
     }
 
 
     void Update()
     {
-        if (flagColor)
+        if (isEnemyPoisoned)
         {
             Enemy.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.4f, 0.6f, 1f);
         }
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
-            ulta = true;
-        /*else if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta_walking"))
-            plSt.setSpeed(1000f);
-        else
-        {
-            plSt.setSpeed(500f);
-            ulta = false;
-        }*/
+            isUltaReady = true;
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ability"))
-            flag = true;
+            isAbilityRunning = true;
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityRunning)
         {
-            ability = true;
-            flag = false;
+            isAbilityReady = true;
+            isAbilityRunning = false;
         }
 
     }
@@ -68,48 +59,48 @@ public class AbilityPonchic : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("ass");
-        if (ulta && collision != null && collision.name == Enemy.name
-                    && animator.GetCurrentAnimatorStateInfo(0).IsName("ulta_walking") && !collision.isTrigger && flag1)
+        if (isUltaReady && collision != null && collision.name == Enemy.name
+                    && animator.GetCurrentAnimatorStateInfo(0).IsName("ulta_walking") && !collision.isTrigger && isUltaRunning)
         {
             Enemy.GetComponent<PlayerStatus>().setForceEnemy(true);
             Enemy.GetComponent<PlayerStatus>().setForce(15 * new Vector2(Enemy.transform.position.x - transform.position.x,
                 Enemy.transform.position.y - transform.position.y));
             plStEnemy.TakeDamage(7);
-            flag1 = false;
-            Invoke("sFlag1", 0.2f);
+            isUltaRunning = false;
+            Invoke("setIsUltaRunning", 0.2f);
         }
 
-        if (ability && collision != null && collision.name == Enemy.name
+        if (isAbilityReady && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && !collision.isTrigger)
         {
             plStEnemy.TakeDamage(15);
-            flagColor = true;
+            isEnemyPoisoned = true;
             Enemy.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.4f, 0.6f, 1f);
             Invoke("abilityDamage", 7);
-            ability = false;
+            isAbilityReady = false;
         }
     }
 
-    public void abilityDamage()
+    public void abilityDamage()                     // второй тик способности
     {
         plStEnemy.TakeDamage(20);
-        flagColor = false;
+        isEnemyPoisoned = false;
         Enemy.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
     }
 
-    public void sFlag1()
+    public void setIsUltaRunning()
     {
-        flag1 = true;
+        isUltaRunning = true;
     }
 
-    public void newSpeed()
+    public void newSpeed()              // присвоить скорость в ульте
     {
-        plSt.setSpeed(1000f);
+        plSt.setSpeed(1000);
     }
 
-    public void newSpeed1()
+    public void newSpeed1()             // присвоить скорость после ульты
     {
-        plSt.setSpeed(500f);
-        ulta = false;
+        plSt.setSpeed(500);
+        isUltaReady = false;
     }
 }

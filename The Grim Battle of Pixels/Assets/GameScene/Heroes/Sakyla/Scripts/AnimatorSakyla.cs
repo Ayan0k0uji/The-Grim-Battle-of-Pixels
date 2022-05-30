@@ -6,15 +6,15 @@ public class AnimatorSakyla : AnimationAbstract
 {
     private SpawnHeroes spawnHeroes;
     private Animator animator;
-    [SerializeField] GameObject vodka;
-    [SerializeField] GameObject vodavrot;
+    [SerializeField] GameObject waterTraceObject;
+    [SerializeField] GameObject whirlpoolObject;
     private Rigidbody2D rb;
-    private BoxCollider2D box;
+    private BoxCollider2D box;              // коллайдер, отвечающий за удары сакулы
     private PlayerStatus plSt;
-    private bool pl;
-    private bool flagAbility = true;
+    private bool isPlayer1;
+    private bool isAbilityReady = true;
     private float time = 0;
-    private bool flag = true;
+    private bool isAbilityRunning = true;
 
 
     private void Start()
@@ -23,9 +23,9 @@ public class AnimatorSakyla : AnimationAbstract
         box = GetComponent<BoxCollider2D>();
         plSt = GetComponent<PlayerStatus>();
         if (name == spawnHeroes.GetNamePl1())
-            pl = true;
+            isPlayer1 = true;
         else
-            pl = false;
+            isPlayer1 = false;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -36,14 +36,14 @@ public class AnimatorSakyla : AnimationAbstract
             box.enabled = false;
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
             plSt.nullMana();
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityRunning)
         {
-            flagAbility = false;
+            isAbilityReady = false;
             StartCoroutine("timeAbility");
-            flag = false;
+            isAbilityRunning = false;
 
         }
-        if (pl)
+        if (isPlayer1)
         {
             if (!plSt.getSquat())
             {
@@ -73,10 +73,10 @@ public class AnimatorSakyla : AnimationAbstract
                 else
                     animator.SetBool("ulta", false);
 
-                if (Input.GetAxisRaw("Ability1").Equals(1) && flagAbility)
+                if (Input.GetAxisRaw("Ability1").Equals(1) && isAbilityReady)
                 {
                     animator.SetBool("ability", true);
-                    Vodka();
+                    WaterTraceSpawn();
                     transform.position = new Vector3(transform.position.x + 4 * transform.localScale.x, transform.position.y, transform.position.z);
                     
                 }
@@ -120,10 +120,10 @@ public class AnimatorSakyla : AnimationAbstract
                 else
                     animator.SetBool("ulta", false);
 
-                if (Input.GetAxisRaw("Ability2").Equals(1) && flagAbility)
+                if (Input.GetAxisRaw("Ability2").Equals(1) && isAbilityReady)
                 {
                     animator.SetBool("ability", true);
-                    Vodka();
+                    WaterTraceSpawn();
                     transform.position = new Vector3(transform.position.x + 4 * transform.localScale.x, transform.position.y, transform.position.z);
                 }
                 else
@@ -146,8 +146,8 @@ public class AnimatorSakyla : AnimationAbstract
             time += 0.25f;
         }
         time = 0;
-        flagAbility = true;
-        flag = true;
+        isAbilityReady = true;
+        isAbilityRunning = true;
     }
 
     override
@@ -159,19 +159,19 @@ public class AnimatorSakyla : AnimationAbstract
     override
     public bool getFlagAbility()
     {
-        return flagAbility;
+        return isAbilityReady;
     }
 
-    public void Vodka()
+    public void WaterTraceSpawn()
     {
-        GameObject sn = Instantiate(vodka, new Vector3(transform.position.x - 2 * transform.localScale.x, transform.position.y, transform.position.z), Quaternion.identity);
-        sn.transform.parent = transform;
+        GameObject waterTrace = Instantiate(this.waterTraceObject, new Vector3(transform.position.x - 2 * transform.localScale.x, transform.position.y, transform.position.z), Quaternion.identity);
+        waterTrace.transform.parent = transform;
     }
 
-    public void Vodavrot()
+    public void WhirlpoolSpawn()
     {
-        GameObject sn = Instantiate(vodavrot, transform.GetChild(0).position, Quaternion.identity);
-        sn.transform.localScale = transform.localScale;
-        sn.transform.parent = transform;
+        GameObject whirlpool = Instantiate(this.whirlpoolObject, transform.GetChild(0).position, Quaternion.identity);
+        whirlpool.transform.localScale = transform.localScale;
+        whirlpool.transform.parent = transform;
     }
 }

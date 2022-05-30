@@ -8,10 +8,10 @@ public class AnimationPonchic : AnimationAbstract
     private Rigidbody2D rb;
     private BoxCollider2D box;
     private PlayerStatus plSt;
-    private bool pl;
-    private bool flagAbility = true;
+    private bool isPlayer1;
+    private bool isAbilityReady = true;
     private float time = 0;
-    private bool flag = true;
+    private bool isAbilityRunning = true;
 
 
     private void Start()
@@ -21,9 +21,9 @@ public class AnimationPonchic : AnimationAbstract
         plSt = GetComponent<PlayerStatus>();
 
         if (name == spawnHeroes.GetNamePl1())
-            pl = true;
+            isPlayer1 = true;
         else
-            pl = false;
+            isPlayer1 = false;
 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -35,14 +35,14 @@ public class AnimationPonchic : AnimationAbstract
             box.enabled = false;
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
             plSt.nullMana();
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityRunning)
         {
-            flagAbility = false;
+            isAbilityReady = false;
             StartCoroutine("timeAbility");
-            flag = false;
+            isAbilityRunning = false;
 
         }
-        if (pl)
+        if (isPlayer1)
         {
             if (!plSt.getSquat())
             {
@@ -71,7 +71,7 @@ public class AnimationPonchic : AnimationAbstract
                 else
                     animator.SetBool("ulta", false);
 
-                if (Input.GetAxisRaw("Ability1").Equals(1) && flagAbility)
+                if (Input.GetAxisRaw("Ability1").Equals(1) && isAbilityReady)
                     animator.SetBool("ability", true);
                 else
                     animator.SetBool("ability", false);
@@ -113,7 +113,7 @@ public class AnimationPonchic : AnimationAbstract
                 else
                     animator.SetBool("ulta", false);
 
-                if (Input.GetAxisRaw("Ability2").Equals(1) && flagAbility)
+                if (Input.GetAxisRaw("Ability2").Equals(1) && isAbilityReady)
                     animator.SetBool("ability", true);
                 else
                     animator.SetBool("ability", false);
@@ -135,8 +135,8 @@ public class AnimationPonchic : AnimationAbstract
             time += 0.25f;
         }
         time = 0;
-        flagAbility = true;
-        flag = true;
+        isAbilityReady = true;
+        isAbilityRunning = true;
     }
 
     override
@@ -148,6 +148,6 @@ public class AnimationPonchic : AnimationAbstract
     override
     public bool getFlagAbility()
     {
-        return flagAbility;
+        return isAbilityReady;
     }
 }

@@ -9,7 +9,7 @@ public class ScriptSh : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-    public void onActiv()
+    public void offShield()           // выключить щит
     {
         animator.SetBool("shit", false);
         gameObject.SetActive(false);

@@ -5,51 +5,50 @@ using UnityEngine;
 public class FlyVodavrot : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
-    private float speed = 3000f;
+    private float speed = 3000f;                        // скорость водоворота
     private Rigidbody2D _body;
     private GameObject enemy;
     private GameObject player;
     private PlayerStatus plStEnemy;
-    private Animator ani;
-    private Animator aniPlayer;
-    private bool flag = true;
+    private Animator whirlpoolAnimator;                   // аниматор водоворота
+    private Animator playerAnimator;                     // аниматор сакулы
 
     private void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
 
-        ani = GetComponent<Animator>();
+        whirlpoolAnimator = GetComponent<Animator>();
         _body = GetComponent<Rigidbody2D>();
 
-        if (transform.parent.gameObject.name == spawnHeroes.GetNamePl1())
+        if (transform.parent.gameObject.name == spawnHeroes.GetNamePl1())       // если сакула 1 игрок
         {
             enemy = GameObject.Find(spawnHeroes.GetNamePl2());
             player = GameObject.Find(spawnHeroes.GetNamePl1());
         }
-        else
+        else                                                                    // если сакула 2 игрок
         {
             enemy = GameObject.Find(spawnHeroes.GetNamePl1());
             player = GameObject.Find(spawnHeroes.GetNamePl2());
         }
 
-        aniPlayer = player.GetComponent<Animator>();
+        playerAnimator = player.GetComponent<Animator>();
         plStEnemy = enemy.GetComponent<PlayerStatus>();
         Vector2 movement = Vector2.right * speed * Time.deltaTime * player.GetComponent<Transform>().localScale.x;
         _body.velocity = movement;
         transform.parent = null;
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)                          
     {
-        if (collision.name == enemy.name && !collision.isTrigger)
+        if (collision.name == enemy.name && !collision.isTrigger)                   // если сакула попал водоворотом
         {
+            transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1, enemy.transform.position.z - 1);
             plStEnemy.setJumpForce(0);
             enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            aniPlayer.SetBool("ulta_med", true);
-            ani.SetBool("popal", true);
+            playerAnimator.SetBool("ulta_med", true);
+            whirlpoolAnimator.SetBool("popal", true);
             enemy.GetComponent<Rigidbody2D>().gravityScale = 0;
-            plStEnemy.setSpeed(0f);
-
+            plStEnemy.SetSpeedСoefficient(0);
             _body.velocity = Vector2.zero;
         }
         else if (collision.name != player.name && !collision.isTrigger)
@@ -61,21 +60,21 @@ public class FlyVodavrot : MonoBehaviour
         plStEnemy.TakeDamage(13);
     }
 
-    public void Podem()
+    public void EnemyLifting()                             
     {
         enemy.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.33f, enemy.transform.position.z);
     }
 
-    public void Destr()
+    public void WhirlpoolDestroy()
     {
-        aniPlayer.SetBool("ulta_med", false);
+        playerAnimator.SetBool("ulta_med", false);
         Destroy(gameObject);
     }
 
-    public void Vixod()
+    public void ExitEnemyFromWhirlpool()
     {
         enemy.GetComponent<Rigidbody2D>().gravityScale = 3;
-        plStEnemy.setSpeed(500);
+        plStEnemy.SetSpeedСoefficient(1);
         plStEnemy.setJumpForce(15);
         /*enemy.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1, enemy.transform.position.z);
         enemy.GetComponent<SpriteRenderer>().sprite = null;*/

@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class ControllerSakylaAbility : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
     private GameObject enemy;
     private PlayerStatus plStEnemy;
+    private int abilityDamage = 30;
     private void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
@@ -23,10 +24,10 @@ public class Controller : MonoBehaviour
     {
         if (collision.name == enemy.name && !collision.isTrigger)
         {
-            plStEnemy.TakeDamage(20);
+            plStEnemy.TakeDamage(abilityDamage);
         }
     }
-    void KrugOff(){
+    void waterTraceOff() {                        // функция, уничтожающая водный шлейф
         Destroy(gameObject);
     }
 }

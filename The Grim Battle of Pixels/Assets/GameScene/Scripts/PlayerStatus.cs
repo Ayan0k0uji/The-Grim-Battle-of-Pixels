@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    private GameObject player;
     private Animator animator;
     private CapsuleCollider2D circle;
     private SpawnHeroes spawnHeroes;
     private Rigidbody2D rb;
     private Vector2 force = Vector2.zero;
-    private float speed = 500.0f;
-    private float jumpForce = 15.0f;
+    private float speed = 500f;
+    private float jumpForce = 15f;
     private bool facingRight = true;
     private bool squat = false;
     private float deltaX = 0;
-    private bool pl = false;
-    private int mulDamage = 1;
-    private int deathCount = 0;
+    private bool isPlayer1 = false;
+    private float damageCoefficient = 1;
+    private int numberOfDeaths = 0;
+    private float speed—oefficient = 1;
     private bool proverka;
     private bool grounded = false;
     private bool forceEnemy = false;
@@ -25,39 +25,35 @@ public class PlayerStatus : MonoBehaviour
     private int maxMana = 100;
     private int maxHeath = 100;
     private int currentMana = 0;
-    private int currentHeath = 0;
+    private int currentHeath = 100;
     private int currentArmor = 0;
     private bool flagPoison = false;
+
     private void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
 
         if (name == spawnHeroes.GetNamePl1())
-        {
-            player = GameObject.Find(spawnHeroes.GetNamePl1());
-            pl = true;
-        }
+            isPlayer1 = true;
         else
-        {
-            player = GameObject.Find(spawnHeroes.GetNamePl2());
             Flip();
-        }
 
-        animator = player.GetComponent<Animator>();
-        circle = player.GetComponent<CapsuleCollider2D>();
-        currentHeath = maxHeath;
-        rb = player.GetComponent<Rigidbody2D>();
+
+        animator = GetComponent<Animator>();
+        circle = GetComponent<CapsuleCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        if (pl)
+        if (isPlayer1)
         {
             proverka = animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") || animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick")
                                         || animator.GetCurrentAnimatorStateInfo(0).IsName("ulta") || animator.GetCurrentAnimatorStateInfo(0).IsName("ability")
                                         || animator.GetCurrentAnimatorStateInfo(0).IsName("ability1") || animator.GetCurrentAnimatorStateInfo(0).IsName("abilityEnd")
                                         || animator.GetCurrentAnimatorStateInfo(0).IsName("death") || animator.GetCurrentAnimatorStateInfo(0).IsName("reincarnation")
                                         || animator.GetCurrentAnimatorStateInfo(0).IsName("ulta1") || animator.GetCurrentAnimatorStateInfo(0).IsName("ultaEnd");
+
             Vector3 max = circle.bounds.max;
             Vector3 min = circle.bounds.min;
 
@@ -103,7 +99,7 @@ public class PlayerStatus : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (pl)
+        if (isPlayer1)
         {
             if (grounded && Input.GetAxisRaw("Jump1").Equals(1) && !squat && !proverka && flagJump)
             {
@@ -116,7 +112,7 @@ public class PlayerStatus : MonoBehaviour
                 squat = true;
             else
                 squat = false;
-            deltaX = Input.GetAxis("Horizontal1") * speed * Time.deltaTime;
+            deltaX = Input.GetAxis("Horizontal1") * speed * Time.deltaTime * speed—oefficient;
             Vector2 movement = new Vector2(deltaX, rb.velocity.y);
             if (forceEnemy)
             {
@@ -142,7 +138,7 @@ public class PlayerStatus : MonoBehaviour
                 squat = true;
             else
                 squat = false;
-            deltaX = Input.GetAxis("Horizontal2") * speed * Time.deltaTime;
+            deltaX = Input.GetAxis("Horizontal2") * speed * Time.deltaTime * speed—oefficient;
             Vector2 movement = new Vector2(deltaX, rb.velocity.y);
             if (forceEnemy)
             {
@@ -159,9 +155,11 @@ public class PlayerStatus : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        damage *= mulDamage;
+        damage = (int)(damageCoefficient * damage);
+
         if (!flagPoison)
             StartCoroutine(colr());
+
         if (currentArmor > 0)
         {
             if (currentArmor - damage > 0)
@@ -177,7 +175,7 @@ public class PlayerStatus : MonoBehaviour
 
         if (currentHeath <= 0)
         {
-            deathCount++;
+            numberOfDeaths++;
             StartCoroutine(reincarnation());
         }
     }
@@ -191,7 +189,7 @@ public class PlayerStatus : MonoBehaviour
         yield return new WaitForSeconds(5f);
         rb.bodyType = RigidbodyType2D.Dynamic;
 
-        if (pl)
+        if (isPlayer1)
             transform.position = new Vector3(-7, -5, 0);
         else
             transform.position = new Vector3(7, -5, 0);
@@ -203,9 +201,9 @@ public class PlayerStatus : MonoBehaviour
 
     IEnumerator colr()
     {
-        player.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
-        yield return new WaitForSeconds(0.5f);
-        player.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
+        yield return new WaitForSeconds(0.3f);
+        GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
     }
     
 
@@ -225,9 +223,9 @@ public class PlayerStatus : MonoBehaviour
     private void Flip()
     {
         facingRight = !facingRight;
-        Vector3 theScale = player.transform.localScale;
+        Vector3 theScale = transform.localScale;
         theScale.x *= -1;
-        player.transform.localScale = theScale;
+        transform.localScale = theScale;
     }
 
     public float getCurrentHeath() { return currentHeath; }
@@ -236,6 +234,8 @@ public class PlayerStatus : MonoBehaviour
     public int getMaxHeath() { return maxHeath; }
     public bool getSquat() { return squat; }
     public float getDeltaX() { return deltaX; }
+
+    public float getSpeed() { return speed; }
     public void setSpeed(float newSpeed) { speed = newSpeed; }
     public void setForceEnemy(bool flag) { forceEnemy = flag; }
     public void setForce(Vector2 vec) { force = vec; }
@@ -246,7 +246,8 @@ public class PlayerStatus : MonoBehaviour
     {
         if (currentMana + newMana >= maxMana)
             currentMana = maxMana;
-        else currentMana += newMana;
+        else 
+            currentMana += newMana;
     }
 
     public void SetCurrentArmor(int a)
@@ -257,5 +258,15 @@ public class PlayerStatus : MonoBehaviour
     public int GetCurrentArmor()
     {
         return currentArmor;
+    }
+
+    public void SetSpeed—oefficient(int a)
+    {
+        speed—oefficient = a;
+    }
+
+    public float GetSpeed—oefficient()
+    {
+        return speed—oefficient;
     }
 }

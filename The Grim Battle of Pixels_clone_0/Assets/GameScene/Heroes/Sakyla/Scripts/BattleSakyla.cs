@@ -9,9 +9,9 @@ public class BattleSakyla : MonoBehaviour
     private PlayerStatus plSt;
     private PlayerStatus plStEnemy;
     private GameObject Enemy;
-    private bool check_kick;
-    private bool bk, tk;
-    private bool bot_kick = false, t_kick = false;
+    private bool check_kick;                            // проигрывается ли анимация удара
+    private bool botKick, topKick;                      // можно ли бить
+    private bool bot_kick = false, top_kick = false;    // произошел удар или нет
     private int bot_damage = 22, top_damage = 30;
 
     void Start()
@@ -34,41 +34,41 @@ public class BattleSakyla : MonoBehaviour
 
     void Update()
     {
-        if (check_kick)
-            tk = bk = true;
+        if (check_kick)                     // проверяет не использует ли удар
+            topKick = botKick = true;
         check_kick = !animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick")
                             && !animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick");
     }
 
     void FixedUpdate()
     {
-        if (bk)
+        if (botKick)
         {
             bot_kick = true;
-            bk = false;
+            botKick = false;
         }
-        else if (tk)
+        else if (topKick)
         {
-            t_kick = true;
-            tk = false;
+            top_kick = true;
+            topKick = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (bot_kick && collision != null && collision.name == Enemy.name
-                    && animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick") && !collision.isTrigger)
+        if (bot_kick && collision != null && collision.name == Enemy.name                   
+                    && animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick") && !collision.isTrigger)       // если попал нижним
         {
             plStEnemy.setCurrentMana(5);
             plSt.TakeDamage(bot_damage);
             bot_kick = false;
         }
-        if (t_kick && collision != null && collision.name == Enemy.name
-                    && animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !collision.isTrigger)
+        if (top_kick && collision != null && collision.name == Enemy.name
+                    && animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !collision.isTrigger)          // если попал верхним
         {
             plStEnemy.setCurrentMana(5);
             plSt.TakeDamage(top_damage);
-            t_kick = false;
+            top_kick = false;
         }
     }
 }

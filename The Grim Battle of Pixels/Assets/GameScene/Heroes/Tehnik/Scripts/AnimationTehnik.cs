@@ -8,12 +8,12 @@ public class AnimationTehnik : AnimationAbstract
     private Rigidbody2D rb;
     private BoxCollider2D box;
     private PlayerStatus plSt;
-    private bool pl;
+    private bool isPlayer1;
     private bool flagAbility = true;
     private float time = 0;
     private Transform UltaPosition;
-    [SerializeField] GameObject shar;
-    private bool flag = true;
+    [SerializeField] GameObject sphere;
+    private bool isAbilityReady = true;
 
 
     private void Start()
@@ -21,30 +21,30 @@ public class AnimationTehnik : AnimationAbstract
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         box = GetComponent<BoxCollider2D>();
         plSt = GetComponent<PlayerStatus>();
-        if (name == spawnHeroes.GetNamePl1())
-            pl = true;
-        else
-            pl = false;
+        if (name == spawnHeroes.GetNamePl1())       // если первый игрок
+            isPlayer1 = true;
+        else                                        // если второй игрок
+            isPlayer1 = false;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick"))      // если не бьем отключаем коллайдер, отвечающий за урон
             box.enabled = false;
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))             // если активирована ульта, обнуляем запас маны
             plSt.nullMana();
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityReady)        //  если использована способность, включаем её перезарядку
         {
             flagAbility = false;
             StartCoroutine("timeAbility");
-            flag = false;
+            isAbilityReady = false;
 
         }
-        if (pl)
+        if (isPlayer1)
         {
-            if (!plSt.getSquat())
+            if (!plSt.getSquat())                           // если персонаж не сидит
             {
                 animator.SetBool("squat", false);
 
@@ -83,7 +83,7 @@ public class AnimationTehnik : AnimationAbstract
                 animator.SetFloat("velocity_Y", rb.velocity.y);
             }
             else
-                animator.SetBool("squat", true);
+                animator.SetBool("squat", true);                // если персонаж сидит
         }
         else
         {
@@ -129,7 +129,7 @@ public class AnimationTehnik : AnimationAbstract
         }
     }
 
-    IEnumerator timeAbility()
+    IEnumerator timeAbility()                           // корутина, отвечающая за перезарядку способностей
     {
         while (time < 9)
         {
@@ -138,7 +138,7 @@ public class AnimationTehnik : AnimationAbstract
         }
         time = 0;
         flagAbility = true;
-        flag = true;
+        isAbilityReady = true;
     }
 
     override
@@ -153,10 +153,10 @@ public class AnimationTehnik : AnimationAbstract
         return flagAbility;
     }
 
-    public void shar1()
+    public void SphereSpawn()                                     // создание объекта шара
     {
         UltaPosition = transform.GetChild(0).transform;
-        GameObject sn = Instantiate(shar, UltaPosition.position, UltaPosition.rotation);
-        sn.transform.parent = transform;
+        GameObject sphereObject = Instantiate(sphere, UltaPosition.position, UltaPosition.rotation);
+        sphereObject.transform.parent = transform;
     }
 }

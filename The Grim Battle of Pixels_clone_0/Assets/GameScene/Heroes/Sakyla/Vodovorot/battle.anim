@@ -133,21 +133,21 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.375
-    functionName: Podem
+    functionName: EnemyLifting
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.5
-    functionName: Podem
+    functionName: EnemyLifting
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.625
-    functionName: Podem
+    functionName: EnemyLifting
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -189,14 +189,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 2.375
-    functionName: Vixod
+    functionName: ExitEnemyFromWhirlpool
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 2.875
-    functionName: Destr
+    functionName: WhirlpoolDestroy
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

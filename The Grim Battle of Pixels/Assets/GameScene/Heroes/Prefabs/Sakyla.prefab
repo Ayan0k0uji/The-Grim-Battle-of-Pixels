@@ -196,8 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d42761120ac6da4cb1b388574fffe68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vodka: {fileID: 9194047016682260357, guid: d6004c554b61dbb47a355bb88b916469, type: 3}
-  vodavrot: {fileID: 6973988788608976714, guid: 99dd541d681a527428fee5f9bf268108, type: 3}
+  waterTraceObject: {fileID: 9194047016682260357, guid: d6004c554b61dbb47a355bb88b916469, type: 3}
+  whirlpoolObject: {fileID: 6973988788608976714, guid: 99dd541d681a527428fee5f9bf268108, type: 3}
 --- !u!114 &-8753257018761377294
 MonoBehaviour:
   m_ObjectHideFlags: 0
