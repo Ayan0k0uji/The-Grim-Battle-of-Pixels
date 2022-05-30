@@ -19,10 +19,10 @@ public class DiskLeft : MonoBehaviour
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
         plSt1 = GameObject.Find(spawnHeroes.GetNamePl1()).GetComponent<PlayerStatus>();
         plSt2 = GameObject.Find(spawnHeroes.GetNamePl2()).GetComponent<PlayerStatus>();
-        StartCoroutine("DiskiKrytitsi");
+        StartCoroutine("DisksSpin");
     }
 
-    IEnumerator DiskiKrytitsi()
+    IEnumerator DisksSpin()
     {
         for (int i = 0; i < 110; i++)
         {

@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a20a8b2bea07946b613ed604528014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  snot: {fileID: 3378258542108758659, guid: a0836e7d963d6854a916e1e5080ba545, type: 3}
+  snotObject: {fileID: 3378258542108758659, guid: a0836e7d963d6854a916e1e5080ba545, type: 3}
 --- !u!114 &7562950478366144981
 MonoBehaviour:
   m_ObjectHideFlags: 0

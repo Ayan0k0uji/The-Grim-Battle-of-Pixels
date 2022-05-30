@@ -8,12 +8,12 @@ public class AnimationBabka : AnimationAbstract
     private Rigidbody2D rb;
     private PlayerStatus plSt;
     private BoxCollider2D box;
-    private bool pl;
-    private bool flagAbility = true;
+    private bool isPlayer1;
+    private bool isAbilityReady = true;
     private float time = 0;
     private Transform UltaPosition;
-    [SerializeField] GameObject snot;
-    private bool flag = true;
+    [SerializeField] GameObject snotObject;
+    private bool isAbilityRunning = true;
 
 
 
@@ -24,9 +24,9 @@ public class AnimationBabka : AnimationAbstract
         box = GetComponent<BoxCollider2D>();
         plSt = GetComponent<PlayerStatus>();
         if (name == spawnHeroes.GetNamePl1())
-            pl = true;
+            isPlayer1 = true;
         else
-            pl = false;
+            isPlayer1 = false;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -37,14 +37,14 @@ public class AnimationBabka : AnimationAbstract
             box.enabled = false;
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
             plSt.nullMana();
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityRunning)
         {
-            flagAbility = false;
+            isAbilityReady = false;
             StartCoroutine("timeAbility");
-            flag = false;
+            isAbilityRunning = false;
 
         }
-        if (pl)
+        if (isPlayer1)
         {
             if (!plSt.getSquat())
             {
@@ -73,7 +73,7 @@ public class AnimationBabka : AnimationAbstract
                 else
                     animator.SetBool("ulta", false);
 
-                if (Input.GetAxisRaw("Ability1").Equals(1) && flagAbility)
+                if (Input.GetAxisRaw("Ability1").Equals(1) && isAbilityReady)
                     animator.SetBool("ability", true);
                 else
                     animator.SetBool("ability", false);
@@ -115,7 +115,7 @@ public class AnimationBabka : AnimationAbstract
                 else
                     animator.SetBool("ulta", false);
 
-                if (Input.GetAxisRaw("Ability2").Equals(1) && flagAbility)
+                if (Input.GetAxisRaw("Ability2").Equals(1) && isAbilityReady)
                     animator.SetBool("ability", true);
                 else
                     animator.SetBool("ability", false);
@@ -137,8 +137,8 @@ public class AnimationBabka : AnimationAbstract
             time += 0.25f;
         }
         time = 0;
-        flagAbility = true;
-        flag = true;
+        isAbilityReady = true;
+        isAbilityRunning = true;
     }
 
     override
@@ -150,13 +150,13 @@ public class AnimationBabka : AnimationAbstract
     override
     public bool getFlagAbility()
     {
-        return flagAbility;
+        return isAbilityReady;
     }
 
-    public void snot1()
+    public void SnotSpawn()
     {
         UltaPosition = transform.GetChild(0).transform;
-        GameObject sn =  Instantiate(snot, UltaPosition.position, UltaPosition.rotation);
-        sn.transform.parent = transform;
+        GameObject snot =  Instantiate(snotObject, UltaPosition.position, UltaPosition.rotation);
+        snot.transform.parent = transform;
     }
 }

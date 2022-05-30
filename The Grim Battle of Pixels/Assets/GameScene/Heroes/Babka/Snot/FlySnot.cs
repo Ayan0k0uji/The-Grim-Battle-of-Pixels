@@ -10,16 +10,15 @@ public class FlySnot : MonoBehaviour
     private GameObject enemy;
     private GameObject player;
     private PlayerStatus plStEnemy;
-    private SpriteRenderer spriteRenderer;
-    private Animator ani;
-    private int damage = 1;
-    private bool flag = true;
+    private SpriteRenderer spriteRenderer;          // компонент спрайта слизи
+    private Animator snotAnimator;
+    private int damage = 1;                         // множитель урона слизи
 
     private void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
 
-        ani = GetComponent<Animator>();
+        snotAnimator = GetComponent<Animator>();
         _body = GetComponent<Rigidbody2D>();
         player = transform.parent.gameObject;
 
@@ -43,27 +42,21 @@ public class FlySnot : MonoBehaviour
             enemy.GetComponent<PlayerStatus>().setSpeed(200);
             gameObject.GetComponent<CircleCollider2D>().enabled = false;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            StartCoroutine("BatFly");
+            StartCoroutine("PoisonDamage");
         }
-        else if (damage < 2 && flag && collision.name != player.name && !collision.isTrigger)
+        else if (damage < 2 && collision.name != player.name && !collision.isTrigger)
         {
             damage += 1;
             _body.velocity = -1 * _body.velocity;
-            ani.SetBool("FlySnot", true);
-            /*flag = false;
-            Invoke("flag1", 0.2f);*/
+            snotAnimator.SetBool("FlySnot", true);
         }
-        else if (flag && collision.name != player.name && !collision.isTrigger)
+        else if (collision.name != player.name && !collision.isTrigger)
             Destroy(gameObject);
     }
 
-    private void flag1()
-    {
-        flag = true;
-    }
+    
 
-
-    IEnumerator BatFly()
+    IEnumerator PoisonDamage()
     {
         plStEnemy.setFlagPoison(true);
         spriteRenderer.color = new Color(0.7f, 0.4f, 0.6f, 1f);

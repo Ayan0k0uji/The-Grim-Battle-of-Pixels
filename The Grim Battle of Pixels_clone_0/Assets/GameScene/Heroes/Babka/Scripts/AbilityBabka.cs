@@ -8,13 +8,9 @@ public class AbilityBabka : MonoBehaviour
     private Animator animator;
     private GameObject Enemy;
     private PlayerStatus plStEnemy;
-    private PlayerStatus myPlSt;
-    private Rigidbody2D rb;
-    private bool ulta = false;
-    private bool ability = false;
-    private bool flag = true;
-    private Vector2 temp;
-    private Transform UltaPosition;
+    private bool isAbilityReady = false;
+    private bool isAbilityRunning = true;
+    private Vector2 pushDirection;
     [SerializeField] GameObject snot;
 
 
@@ -23,7 +19,6 @@ public class AbilityBabka : MonoBehaviour
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
 
         animator = GetComponent<Animator>();
-        myPlSt = GetComponent<PlayerStatus>();
 
         if (name == spawnHeroes.GetNamePl1())
         {
@@ -35,7 +30,6 @@ public class AbilityBabka : MonoBehaviour
         }
 
         plStEnemy = Enemy.GetComponent<PlayerStatus>();
-        rb = Enemy.GetComponent<Rigidbody2D>();
     }
 
 
@@ -43,30 +37,30 @@ public class AbilityBabka : MonoBehaviour
     {
 
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ability"))
-            flag = true;
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && flag)
+            isAbilityRunning = true;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityRunning)
         {
-            ability = true;
-            flag = false;
+            isAbilityReady = true;
+            isAbilityRunning = false;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (ability && collision != null && collision.name == Enemy.name
+        if (isAbilityReady && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && !collision.isTrigger)
         {
             Enemy.GetComponent<PlayerStatus>().setForceEnemy(true);
             if (Enemy.transform.position.x - transform.position.x < 0)
-                temp = Vector2.left;
+                pushDirection = Vector2.left;
             else
-                temp = Vector2.right;
+                pushDirection = Vector2.right;
 
 
-            Enemy.GetComponent<PlayerStatus>().setForce(9 * temp);
+            Enemy.GetComponent<PlayerStatus>().setForce(9 * pushDirection);
             StartCoroutine("Force");
             plStEnemy.TakeDamage(20);
-            ability = false;
+            isAbilityReady = false;
         }
     }
 
@@ -75,7 +69,7 @@ public class AbilityBabka : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             Enemy.GetComponent<PlayerStatus>().setForceEnemy(true);
-            Enemy.GetComponent<PlayerStatus>().setForce(9 * temp);
+            Enemy.GetComponent<PlayerStatus>().setForce(9 * pushDirection);
             yield return new WaitForSeconds(0.01f);
         }
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KitikBiet : MonoBehaviour
+public class CatHit : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
     private PlayerStatus plSt1;

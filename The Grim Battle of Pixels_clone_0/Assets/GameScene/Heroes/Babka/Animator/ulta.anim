@@ -127,7 +127,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.375
-    functionName: snot1
+    functionName: SnotSpawn
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

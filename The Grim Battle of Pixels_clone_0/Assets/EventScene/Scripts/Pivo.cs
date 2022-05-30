@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Pivo : MonoBehaviour
 {
-    private SpawnHeroes spawnHeroes;
-    private Transform transform1;
+    private SpawnHeroes spawnHeroes;        // объект класса SpawnHeroes
+    private Transform transform1;           // позиция карты
     private PlayerStatus plSt1;
     private PlayerStatus plSt2;
 
@@ -17,10 +17,10 @@ public class Pivo : MonoBehaviour
         plSt1 = GameObject.Find(spawnHeroes.GetNamePl1()).GetComponent<PlayerStatus>();
         plSt2 = GameObject.Find(spawnHeroes.GetNamePl2()).GetComponent<PlayerStatus>();
         transform1 = GetComponent<Transform>();
-        StartCoroutine("PivoTechet");
+        StartCoroutine("PivoMove");
     }
 
-    IEnumerator PivoTechet()
+    IEnumerator PivoMove()
     {
         for (int i = 0; i < 125; i++)
         {

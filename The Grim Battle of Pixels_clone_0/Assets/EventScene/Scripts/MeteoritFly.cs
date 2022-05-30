@@ -9,7 +9,7 @@ public class MeteoritFly : MonoBehaviour
     private Animator animator;
     private PlayerStatus plSt1;
     private PlayerStatus plSt2;
-    private bool flag = true;
+    private bool isTriggeredMeteor = true;
 
     void Start()
     {
@@ -22,7 +22,7 @@ public class MeteoritFly : MonoBehaviour
     }
     IEnumerator MeteorFly()
     {
-        for (int i = 0; flag; i++)
+        for (;isTriggeredMeteor;)
         {
             transform1.position = new Vector3(transform1.position.x, transform.position.y - 0.2f, transform.position.z);
             yield return new WaitForSeconds(0.02f);
@@ -44,7 +44,7 @@ public class MeteoritFly : MonoBehaviour
         if (!collision.isTrigger && collision.tag == "Ground")
         {
             animator.SetBool("Death", true);
-            flag = false;
+            isTriggeredMeteor = false;
         }
 
     }
