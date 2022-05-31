@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DdBusterScript : MonoBehaviour
+public class HostaBusterScript : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
-    private BattleAbstract player1Battle, player2Battle;
+    private PlayerStatus player1Status, player2Status;
     private Animator animatorDd;
     private int timeBuster = 10;
 
     void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
-        player1Battle = GameObject.Find(spawnHeroes.GetNamePl1()).GetComponent<BattleAbstract>();
-        player2Battle = GameObject.Find(spawnHeroes.GetNamePl2()).GetComponent<BattleAbstract>();
+        player1Status = GameObject.Find(spawnHeroes.GetNamePl1()).GetComponent<PlayerStatus>();
+        player2Status = GameObject.Find(spawnHeroes.GetNamePl2()).GetComponent<PlayerStatus>();
         animatorDd = GetComponent<Animator>();
 
     }
@@ -26,12 +26,12 @@ public class DdBusterScript : MonoBehaviour
 
             if (collision.name == spawnHeroes.GetNamePl1())
             {
-                player1Battle.SetDamageCoefficient(2, timeBuster);
+                player1Status.SetSpeedBust—oefficient(2, timeBuster);
 
             }
             else
             {
-                player2Battle.SetDamageCoefficient(2, timeBuster);
+                player2Status.SetSpeedBust—oefficient(2, timeBuster);
 
             }
         }

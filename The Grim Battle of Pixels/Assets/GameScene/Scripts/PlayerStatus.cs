@@ -15,9 +15,10 @@ public class PlayerStatus : MonoBehaviour
     private bool squat = false;
     private float deltaX = 0;
     private bool isPlayer1 = false;
-    private float damageCoefficient = 1;
     private int numberOfDeaths = 0;
     private float speed—oefficient = 1;
+    private float speedBust—oefficient = 1;
+    private float jump—oefficient = 1;
     private bool proverka;
     private bool grounded = false;
     private bool forceEnemy = false;
@@ -46,6 +47,8 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("speedBust—oefficient" + speedBust—oefficient + name);
+        Debug.Log("jump—oefficient" + jump—oefficient + name);
         if (isPlayer1)
         {
             proverka = animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") || animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick")
@@ -103,7 +106,7 @@ public class PlayerStatus : MonoBehaviour
         {
             if (grounded && Input.GetAxisRaw("Jump1").Equals(1) && !squat && !proverka && flagJump)
             {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jumpForce * jump—oefficient, ForceMode2D.Impulse);
                 flagJump = false;
             }
             if (Input.GetAxisRaw("Jump1").Equals(0))
@@ -112,7 +115,7 @@ public class PlayerStatus : MonoBehaviour
                 squat = true;
             else
                 squat = false;
-            deltaX = Input.GetAxis("Horizontal1") * speed * Time.deltaTime * speed—oefficient;
+            deltaX = Input.GetAxis("Horizontal1") * speed * speedBust—oefficient * Time.deltaTime * speed—oefficient;
             Vector2 movement = new Vector2(deltaX, rb.velocity.y);
             if (forceEnemy)
             {
@@ -129,7 +132,7 @@ public class PlayerStatus : MonoBehaviour
         {
             if (grounded && Input.GetAxisRaw("Jump2").Equals(1) && !squat && !proverka && flagJump)
             {
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jumpForce * jump—oefficient, ForceMode2D.Impulse);
                 flagJump = false;
             }
             if (Input.GetAxisRaw("Jump2").Equals(0))
@@ -138,7 +141,7 @@ public class PlayerStatus : MonoBehaviour
                 squat = true;
             else
                 squat = false;
-            deltaX = Input.GetAxis("Horizontal2") * speed * Time.deltaTime * speed—oefficient;
+            deltaX = Input.GetAxis("Horizontal2") * speedBust—oefficient * speed * Time.deltaTime * speed—oefficient;
             Vector2 movement = new Vector2(deltaX, rb.velocity.y);
             if (forceEnemy)
             {
@@ -155,8 +158,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        damage = (int)(damageCoefficient * damage);
-
+        Debug.Log( "Damage" + damage + name);
         if (!flagPoison)
             StartCoroutine(colr());
 
@@ -176,6 +178,8 @@ public class PlayerStatus : MonoBehaviour
         if (currentHeath <= 0)
         {
             numberOfDeaths++;
+            returnJump—oefficient();
+            returnSpeedBust—oefficient();
             StartCoroutine(reincarnation());
         }
     }
@@ -268,5 +272,27 @@ public class PlayerStatus : MonoBehaviour
     public float GetSpeed—oefficient()
     {
         return speed—oefficient;
+    }
+
+    public void SetJump—oefficient(float newCoef, int time)
+    {
+        jump—oefficient = newCoef;
+        Invoke("returnJump—oefficient", time);
+    }
+
+    public void returnJump—oefficient()
+    {
+        jump—oefficient = 1;
+    }
+
+    public void SetSpeedBust—oefficient(float newCoef, int time)
+    {
+        speedBust—oefficient = newCoef;
+        Invoke("returnSpeedBust—oefficient", time);
+    }
+
+    public void returnSpeedBust—oefficient()
+    {
+        speedBust—oefficient = 1;
     }
 }

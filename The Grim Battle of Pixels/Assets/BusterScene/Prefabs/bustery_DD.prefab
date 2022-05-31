@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7250664253967117468}
   - component: {fileID: 2593897664252647233}
   - component: {fileID: 2719076961766863856}
+  - component: {fileID: -9213761070640306152}
   m_Layer: 0
   m_Name: bustery_DD
   m_TagString: Untagged
@@ -129,3 +130,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-9213761070640306152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814086698536133899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eec8e95762774248be25900ec6a0bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DdBusterScript : MonoBehaviour
+public class DjBusterScript : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
-    private BattleAbstract player1Battle, player2Battle;
-    private Animator animatorDd;
+    private PlayerStatus player1Battle, player2Battle;
+    private Animator animatorDj;
     private int timeBuster = 10;
 
     void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
-        player1Battle = GameObject.Find(spawnHeroes.GetNamePl1()).GetComponent<BattleAbstract>();
-        player2Battle = GameObject.Find(spawnHeroes.GetNamePl2()).GetComponent<BattleAbstract>();
-        animatorDd = GetComponent<Animator>();
+        player1Battle = GameObject.Find(spawnHeroes.GetNamePl1()).GetComponent<PlayerStatus>();
+        player2Battle = GameObject.Find(spawnHeroes.GetNamePl2()).GetComponent<PlayerStatus>();
+        animatorDj = GetComponent<Animator>();
 
     }
 
@@ -22,16 +22,16 @@ public class DdBusterScript : MonoBehaviour
     {
         if (collision.name == spawnHeroes.GetNamePl1() || collision.name == spawnHeroes.GetNamePl2() && !collision.isTrigger)
         {
-            animatorDd.SetBool("pincing", true);
+            animatorDj.SetBool("pincing", true);
 
             if (collision.name == spawnHeroes.GetNamePl1())
             {
-                player1Battle.SetDamageCoefficient(2, timeBuster);
+                player1Battle.SetJump—oefficient(1.5f, timeBuster);
 
             }
             else
             {
-                player2Battle.SetDamageCoefficient(2, timeBuster);
+                player2Battle.SetJump—oefficient(1.5f, timeBuster);
 
             }
         }
