@@ -71,9 +71,16 @@ public class BattleTehnik : BattleAbstract
     }
 
     override
-    public void SetDamageCoefficient(int newDamage)
+    public void SetDamageCoefficient(int newDamage, int time)
     {
         damageCoefficient = newDamage;
+        Invoke("returnDamageCoefficient", time);
+    }
+
+    override
+    public void returnDamageCoefficient()
+    {
+        damageCoefficient = 1;
     }
 }
 

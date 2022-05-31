@@ -12,6 +12,7 @@ public class AnimationDed : AnimationAbstract
     private bool isPlayer1;
     private bool isAbilityReady = true;
     private float time = 0;
+    private float timeBusterCoefficient = 1;
     private bool isAbilityRunning = true;
 
 
@@ -129,7 +130,7 @@ public class AnimationDed : AnimationAbstract
         while (time < 9)
         {
             yield return new WaitForSeconds(0.25f);
-            time += 0.25f;
+            time += 0.25f * timeBusterCoefficient;
         }
         time = 0;
         isAbilityReady = true;
@@ -173,6 +174,17 @@ public class AnimationDed : AnimationAbstract
     public void OnChains()
     {
         transform.GetChild(1).gameObject.SetActive(true);
+    }
 
+    override
+    public void SetTimeBusterCoefficient(float newCoef, int time)
+    {
+        timeBusterCoefficient = newCoef;
+        Invoke("returnTimeBusterCoefficient", time);
+    }
+
+    private void returnTimeBusterCoefficient()
+    {
+        timeBusterCoefficient = 1;
     }
 }

@@ -11,6 +11,7 @@ public class AnimationTehnik : AnimationAbstract
     private bool isPlayer1;
     private bool flagAbility = true;
     private float time = 0;
+    private float timeBusterCoefficient = 1;
     private Transform UltaPosition;
     [SerializeField] GameObject sphere;
     private bool isAbilityReady = true;
@@ -134,7 +135,7 @@ public class AnimationTehnik : AnimationAbstract
         while (time < 9)
         {
             yield return new WaitForSeconds(0.25f);
-            time += 0.25f;
+            time += 0.25f * timeBusterCoefficient;
         }
         time = 0;
         flagAbility = true;
@@ -158,5 +159,17 @@ public class AnimationTehnik : AnimationAbstract
         UltaPosition = transform.GetChild(0).transform;
         GameObject sphereObject = Instantiate(sphere, UltaPosition.position, UltaPosition.rotation);
         sphereObject.transform.parent = transform;
+    }
+
+    override
+    public void SetTimeBusterCoefficient(float newCoef, int time)
+    {
+        timeBusterCoefficient = newCoef;
+        Invoke("returnTimeBusterCoefficient", time);
+    }
+
+    private void returnTimeBusterCoefficient()
+    {
+        timeBusterCoefficient = 1;
     }
 }

@@ -14,6 +14,7 @@ public class AnimatorSakyla : AnimationAbstract
     private bool isPlayer1;
     private bool isAbilityReady = true;
     private float time = 0;
+    private float timeBusterCoefficient = 1;
     private bool isAbilityRunning = true;
 
 
@@ -143,7 +144,7 @@ public class AnimatorSakyla : AnimationAbstract
         while (time < 9)
         {
             yield return new WaitForSeconds(0.25f);
-            time += 0.25f;
+            time += 0.25f * timeBusterCoefficient;
         }
         time = 0;
         isAbilityReady = true;
@@ -173,5 +174,17 @@ public class AnimatorSakyla : AnimationAbstract
         GameObject whirlpool = Instantiate(this.whirlpoolObject, transform.GetChild(0).position, Quaternion.identity);
         whirlpool.transform.localScale = transform.localScale;
         whirlpool.transform.parent = transform;
+    }
+
+    override
+    public void SetTimeBusterCoefficient(float newCoef, int time)
+    {
+        timeBusterCoefficient = newCoef;
+        Invoke("returnTimeBusterCoefficient", time);
+    }
+
+    private void returnTimeBusterCoefficient()
+    {
+        timeBusterCoefficient = 1;
     }
 }

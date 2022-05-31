@@ -36,7 +36,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: pincking
+    m_ConditionEvent: pincing
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -478074388343220545}
@@ -87,7 +87,7 @@ AnimatorController:
   m_Name: bustery (1)_1
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: pincking
+  - m_Name: pincing
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

@@ -11,6 +11,7 @@ public class AnimationBabkaOnline : AnimationAbstract
     private bool pl;
     private bool flagAbility = true;
     private float time = 0;
+    private float timeBusterCoefficient = 1;
     private Transform UltaPosition;
     [SerializeField] GameObject snot;
     private bool flag = true;
@@ -158,5 +159,12 @@ public class AnimationBabkaOnline : AnimationAbstract
         UltaPosition = transform.GetChild(0).transform;
         GameObject sn =  Instantiate(snot, UltaPosition.position, UltaPosition.rotation);
         sn.transform.parent = transform;
+    }
+
+    override
+    public void SetTimeBusterCoefficient(float newCoef, int time)
+    {
+        timeBusterCoefficient = newCoef;
+        Invoke("", time);
     }
 }

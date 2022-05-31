@@ -11,6 +11,7 @@ public class AnimationPonchicOnline : AnimationAbstract
     private bool pl;
     private bool flagAbility = true;
     private float time = 0;
+    private float timeBusterCoefficient = 1;
     private bool flag = true;
 
 
@@ -149,5 +150,12 @@ public class AnimationPonchicOnline : AnimationAbstract
     public bool getFlagAbility()
     {
         return flagAbility;
+    }
+
+    override
+    public void SetTimeBusterCoefficient(float newCoef, int time)
+    {
+        timeBusterCoefficient = newCoef;
+        Invoke("", time);
     }
 }
