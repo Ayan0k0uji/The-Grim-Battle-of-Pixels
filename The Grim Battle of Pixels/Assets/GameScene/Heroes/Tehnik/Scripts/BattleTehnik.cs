@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BattleTehnik : MonoBehaviour
+public class BattleTehnik : BattleAbstract
 {
     private SpawnHeroes spawnHeroes;
     private Animator animator;
@@ -10,7 +10,8 @@ public class BattleTehnik : MonoBehaviour
     private bool check_kick;
     private bool botKick, topKick;                  // показывает можно ли бить тем или иным ударом
     private bool bot_kick = false, t_kick = false;  // проверяет произошел удар или нет
-    private int bot_damage = 14, top_damage = 17;   
+    private int bot_damage = 14, top_damage = 17;
+    private int damageCoefficient = 1;
 
     void Start()
     {
@@ -58,15 +59,21 @@ public class BattleTehnik : MonoBehaviour
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick") && !collision.isTrigger)       // если попал нижним ударом
         {
             plSt.setCurrentMana(5);
-            plStEnemy.TakeDamage(bot_damage);
+            plStEnemy.TakeDamage(bot_damage * damageCoefficient);
             bot_kick = false;
         }
         if (t_kick && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !collision.isTrigger)          // ели попал верхним ударом
         {
             plSt.setCurrentMana(5);
-            plStEnemy.TakeDamage(top_damage);
+            plStEnemy.TakeDamage(top_damage * damageCoefficient);
         }
+    }
+
+    override
+    public void SetDamageCoefficient(int newDamage)
+    {
+        damageCoefficient = newDamage;
     }
 }
 

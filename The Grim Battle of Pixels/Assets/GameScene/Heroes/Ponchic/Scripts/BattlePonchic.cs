@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattlePonchic : MonoBehaviour
+public class BattlePonchic : BattleAbstract
 {
     private SpawnHeroes spawnHeroes;
     private Animator animator;
@@ -13,6 +13,7 @@ public class BattlePonchic : MonoBehaviour
     private bool botKick, topKick;
     private bool bot_kick = false, top_kick = false;
     private int bot_damage = 20, top_damage = 12;
+    private int damageCoefficient = 1;
 
     void Start()
     {
@@ -62,15 +63,21 @@ public class BattlePonchic : MonoBehaviour
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick") && !collision.isTrigger)       // если попал нижним ударом
         {
             plSt.setCurrentMana(5);
-            plStEnemy.TakeDamage(bot_damage);
+            plStEnemy.TakeDamage(bot_damage * damageCoefficient);
             bot_kick = false;
         }
         if (top_kick && collision != null && collision.name == Enemy.name        
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !collision.isTrigger)          // если попал верхним ударом
         {
             plSt.setCurrentMana(5);
-            plStEnemy.TakeDamage(top_damage);
+            plStEnemy.TakeDamage(top_damage * damageCoefficient);
             top_kick = false;
         }
+    }
+
+    override
+    public void SetDamageCoefficient(int newDamage)
+    {
+        damageCoefficient = newDamage;
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BattleBabka : MonoBehaviour
+public class BattleBabka : BattleAbstract
 {
     private SpawnHeroes spawnHeroes;
     private Animator animator;
@@ -11,6 +11,7 @@ public class BattleBabka : MonoBehaviour
     private bool botKick, topKick;
     private bool bot_kick = false, top_kick = false;
     private int bot_damage = 14, top_damage = 12;
+    private int damageCoefficient = 1;
 
     void Start()
     {
@@ -60,16 +61,22 @@ public class BattleBabka : MonoBehaviour
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick") && !collision.isTrigger)
         {
             myPlSt.setCurrentMana(5);
-            plStEnemy.TakeDamage(bot_damage);
+            plStEnemy.TakeDamage(bot_damage * damageCoefficient);
             bot_kick = false;
         }
         if (top_kick && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !collision.isTrigger)
         {
             myPlSt.setCurrentMana(5);
-            plStEnemy.TakeDamage(top_damage);
+            plStEnemy.TakeDamage(top_damage * damageCoefficient);
             top_kick = false;
         }
+    }
+
+    override
+    public void SetDamageCoefficient(int newDamage)
+    {
+        damageCoefficient = newDamage;
     }
 }
 

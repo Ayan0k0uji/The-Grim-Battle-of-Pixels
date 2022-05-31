@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BattleDed : MonoBehaviour
+public class BattleDed : BattleAbstract
 {
     private SpawnHeroes spawnHeroes;
     private Animator animator;
@@ -11,6 +11,7 @@ public class BattleDed : MonoBehaviour
     private bool botKick, topKick;
     private bool bot_kick = false, top_kick = false;
     private int bot_damage = 7, top_damage = 10;
+    private int damageCoefficient = 1;
 
     void Start()
     {
@@ -59,16 +60,22 @@ public class BattleDed : MonoBehaviour
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick") && !collision.isTrigger)
         {
             plSt.setCurrentMana(5);
-            plStEnemy.TakeDamage(bot_damage);
+            plStEnemy.TakeDamage(bot_damage * damageCoefficient);
             bot_kick = false;
         }
         if (top_kick && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !collision.isTrigger)
         {
             plSt.setCurrentMana(5);
-            plStEnemy.TakeDamage(top_damage);
+            plStEnemy.TakeDamage(top_damage * damageCoefficient);
             top_kick = false;
         }
+    }
+
+    override
+    public void SetDamageCoefficient(int newDamage)
+    {
+        damageCoefficient = newDamage;
     }
 }
 
