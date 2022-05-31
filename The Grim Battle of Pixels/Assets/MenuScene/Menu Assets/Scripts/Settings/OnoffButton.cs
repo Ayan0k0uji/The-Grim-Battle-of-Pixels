@@ -1,16 +1,23 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Audio;
+
 public class OnoffButton : MonoBehaviour, IDeselectHandler, IUpdateSelectedHandler, ISubmitHandler
 {
     Text ButtonText;
     [SerializeField] string onText;
     [SerializeField] string offText;
     bool onSwitch = true;
+    [SerializeField] private AudioMixer am;
 
     void Start()
     {
         ButtonText = this.transform.GetChild(0).gameObject.GetComponent<Text>();
+        float temp;
+        am.GetFloat("masterVolume", out temp);
+        if (temp == -80f)
+            ButtonText.text = "[ ¬€ À ]";
     }
 
     public void OnUpdateSelected(BaseEventData eventData)

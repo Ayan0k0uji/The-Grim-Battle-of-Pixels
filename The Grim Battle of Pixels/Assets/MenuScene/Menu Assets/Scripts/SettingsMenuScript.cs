@@ -12,6 +12,7 @@ public class SettingsMenuScript : MonoBehaviour
     public AudioMixer am;
     public Slider slid;
 
+
     public void FullScreenToggle()
     {
         isFullScreen = !isFullScreen;
