@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour
 {
     private Animator animator;
+    private DeathCounter deathCounter;
     private CapsuleCollider2D circle;
     private SpawnHeroes spawnHeroes;
     private Rigidbody2D rb;
@@ -15,7 +16,6 @@ public class PlayerStatus : MonoBehaviour
     private bool squat = false;
     private float deltaX = 0;
     private bool isPlayer1 = false;
-    private int numberOfDeaths = 0;
     private float speedCoefficient = 1;
     private float speedBustCoefficient = 1;
     private float jumpCoefficient = 1;
@@ -30,10 +30,15 @@ public class PlayerStatus : MonoBehaviour
     private int currentHeath = 100;
     private int currentArmor = 0;
     private bool flagPoison = false;
+    private bool isDeathMode = false;
 
     private void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
+        deathCounter = Camera.main.GetComponent<DeathCounter>();
+
+        if (deathCounter != null)
+            isDeathMode = true;
 
         if (name == spawnHeroes.GetNamePl1())
             isPlayer1 = true;
@@ -48,8 +53,6 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("speedBust—oefficient " + speedBustCoefficient + name);
-        Debug.Log("jump—oefficient " + jumpCoefficient + name);
         if (isPlayer1)
         {
             proverka = animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") || animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick")
@@ -159,7 +162,6 @@ public class PlayerStatus : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log( "Damage " + damage + name);
         if (!flagPoison)
             StartCoroutine(colr());
 
@@ -178,7 +180,9 @@ public class PlayerStatus : MonoBehaviour
 
         if (currentHeath <= 0)
         {
-            numberOfDeaths++;
+            if (isDeathMode)
+                deathCounter.DeathPlayer(isPlayer1);
+
             returnJump—oefficient();
             returnSpeedBust—oefficient();
             StartCoroutine(reincarnation());
