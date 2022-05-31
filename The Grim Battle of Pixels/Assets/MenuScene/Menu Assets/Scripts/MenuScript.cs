@@ -12,7 +12,7 @@ public class MenuScript : MonoBehaviour
     //public enum characterList { character1, character2, character3, character4, character5 };
     public static int P1;
     public static int P2;
-    private bool gameMode = false;
+    private int gameMode = 0;
     [SerializeField] Sprite[] HeroesIcons = new Sprite[5];
     [SerializeField] Image P1I;
     [SerializeField] Image P2I;
@@ -56,28 +56,16 @@ public class MenuScript : MonoBehaviour
         P2I.sprite = HeroesIcons[P2];
     }
 
-    public void NormalModeButton()
+    public void SetModeButton(int numberScene)
     {
-        //EventSystem.current.SetSelectedGameObject(null);
-        //lastSelectedGO = GameObject.Find("Charecter1pl1");
         EventSystem.current.SetSelectedGameObject(GameObject.Find("Charecter1pl1"));
-        gameMode = false;
+        gameMode = numberScene;
     }
 
-    public void EventModeButton()
-    {
-        //EventSystem.current.SetSelectedGameObject(null);
-        //lastSelectedGO = GameObject.Find("Charecter1pl1");
-        EventSystem.current.SetSelectedGameObject(GameObject.Find("Charecter1pl1"));
-        gameMode = true;
-    }
 
     public void PlayGameButton()
     {
-        if (gameMode)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
-        else
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + gameMode);
     }
 
     public void ExitButton()
