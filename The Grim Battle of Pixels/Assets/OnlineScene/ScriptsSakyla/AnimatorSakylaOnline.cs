@@ -14,6 +14,7 @@ public class AnimatorSakylaOnline : AnimationAbstract
     private bool pl;
     private bool flagAbility = true;
     private float time = 0;
+    private float timeBusterCoefficient = 1;
     private bool flag = true;
 
 
@@ -173,5 +174,12 @@ public class AnimatorSakylaOnline : AnimationAbstract
         GameObject sn = Instantiate(vodavrot, transform.GetChild(0).position, Quaternion.identity);
         sn.transform.localScale = transform.localScale;
         sn.transform.parent = transform;
+    }
+
+    override
+    public void SetTimeBusterCoefficient(float newCoef, int time)
+    {
+        timeBusterCoefficient = newCoef;
+        Invoke("", time);
     }
 }

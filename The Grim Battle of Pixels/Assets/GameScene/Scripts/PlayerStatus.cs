@@ -16,9 +16,10 @@ public class PlayerStatus : MonoBehaviour
     private float deltaX = 0;
     private bool isPlayer1 = false;
     private int numberOfDeaths = 0;
-    private float speed—oefficient = 1;
-    private float speedBust—oefficient = 1;
-    private float jump—oefficient = 1;
+    private float speedCoefficient = 1;
+    private float speedBustCoefficient = 1;
+    private float jumpCoefficient = 1;
+    private float manaSetCoefficient = 1;
     private bool proverka;
     private bool grounded = false;
     private bool forceEnemy = false;
@@ -47,8 +48,8 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("speedBust—oefficient" + speedBust—oefficient + name);
-        Debug.Log("jump—oefficient" + jump—oefficient + name);
+        Debug.Log("speedBust—oefficient " + speedBustCoefficient + name);
+        Debug.Log("jump—oefficient " + jumpCoefficient + name);
         if (isPlayer1)
         {
             proverka = animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") || animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick")
@@ -106,7 +107,7 @@ public class PlayerStatus : MonoBehaviour
         {
             if (grounded && Input.GetAxisRaw("Jump1").Equals(1) && !squat && !proverka && flagJump)
             {
-                rb.AddForce(Vector2.up * jumpForce * jump—oefficient, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jumpForce * jumpCoefficient, ForceMode2D.Impulse);
                 flagJump = false;
             }
             if (Input.GetAxisRaw("Jump1").Equals(0))
@@ -115,7 +116,7 @@ public class PlayerStatus : MonoBehaviour
                 squat = true;
             else
                 squat = false;
-            deltaX = Input.GetAxis("Horizontal1") * speed * speedBust—oefficient * Time.deltaTime * speed—oefficient;
+            deltaX = Input.GetAxis("Horizontal1") * speed * speedBustCoefficient * Time.deltaTime * speedCoefficient;
             Vector2 movement = new Vector2(deltaX, rb.velocity.y);
             if (forceEnemy)
             {
@@ -132,7 +133,7 @@ public class PlayerStatus : MonoBehaviour
         {
             if (grounded && Input.GetAxisRaw("Jump2").Equals(1) && !squat && !proverka && flagJump)
             {
-                rb.AddForce(Vector2.up * jumpForce * jump—oefficient, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * jumpForce * jumpCoefficient, ForceMode2D.Impulse);
                 flagJump = false;
             }
             if (Input.GetAxisRaw("Jump2").Equals(0))
@@ -141,7 +142,7 @@ public class PlayerStatus : MonoBehaviour
                 squat = true;
             else
                 squat = false;
-            deltaX = Input.GetAxis("Horizontal2") * speedBust—oefficient * speed * Time.deltaTime * speed—oefficient;
+            deltaX = Input.GetAxis("Horizontal2") * speedBustCoefficient * speed * Time.deltaTime * speedCoefficient;
             Vector2 movement = new Vector2(deltaX, rb.velocity.y);
             if (forceEnemy)
             {
@@ -158,7 +159,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        Debug.Log( "Damage" + damage + name);
+        Debug.Log( "Damage " + damage + name);
         if (!flagPoison)
             StartCoroutine(colr());
 
@@ -248,10 +249,10 @@ public class PlayerStatus : MonoBehaviour
     public void setJumpForce(int a) { jumpForce = a;}
     public void setCurrentMana(int newMana)
     {
-        if (currentMana + newMana >= maxMana)
+        if (currentMana + (int)(newMana * manaSetCoefficient) >= maxMana)
             currentMana = maxMana;
         else 
-            currentMana += newMana;
+            currentMana += (int)(newMana * manaSetCoefficient);
     }
 
     public void SetCurrentArmor(int a)
@@ -266,33 +267,44 @@ public class PlayerStatus : MonoBehaviour
 
     public void SetSpeed—oefficient(int a)
     {
-        speed—oefficient = a;
+        speedCoefficient = a;
     }
 
     public float GetSpeed—oefficient()
     {
-        return speed—oefficient;
+        return speedCoefficient;
     }
 
     public void SetJump—oefficient(float newCoef, int time)
     {
-        jump—oefficient = newCoef;
+        jumpCoefficient = newCoef;
         Invoke("returnJump—oefficient", time);
     }
 
     public void returnJump—oefficient()
     {
-        jump—oefficient = 1;
+        jumpCoefficient = 1;
     }
 
     public void SetSpeedBust—oefficient(float newCoef, int time)
     {
-        speedBust—oefficient = newCoef;
+        speedBustCoefficient = newCoef;
         Invoke("returnSpeedBust—oefficient", time);
     }
 
     public void returnSpeedBust—oefficient()
     {
-        speedBust—oefficient = 1;
+        speedBustCoefficient = 1;
+    }
+
+    public void SetManaSetCoefficient(float newCoef, int time)
+    {
+        manaSetCoefficient = newCoef;
+        Invoke("returnManaSetCoefficient", time);
+    }
+
+    public void returnManaSetCoefficient()
+    {
+        manaSetCoefficient = 1;
     }
 }

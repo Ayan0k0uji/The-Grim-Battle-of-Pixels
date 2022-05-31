@@ -10,7 +10,7 @@ public class SpawnBuster : MonoBehaviour
     private SpawnHeroes spawnHeroes;
     private System.Random rnd = new System.Random();
     private int nForRandom = 0;
-    private int timeSpawn = 3;
+    private int timeSpawn = 10;
     void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();

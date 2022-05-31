@@ -58,7 +58,6 @@ public class AbilityPonchic : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("ass");
         if (isUltaReady && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("ulta_walking") && !collision.isTrigger && isUltaRunning)
         {
