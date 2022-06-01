@@ -1418,7 +1418,7 @@ RectTransform:
   - {fileID: 1486228585}
   - {fileID: 1007104627}
   m_Father: {fileID: 1902747989}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2662,8 +2662,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PauseScript, Assembly-CSharp
+      - m_Target: {fileID: 1902747990}
+        m_TargetAssemblyTypeName: ClassicPauseScript, Assembly-CSharp
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -2674,8 +2674,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOverScript, Assembly-CSharp
+      - m_Target: {fileID: 1902747992}
+        m_TargetAssemblyTypeName: ClassicGaveOver, Assembly-CSharp
         m_MethodName: exitBA
         m_Mode: 1
         m_Arguments:
@@ -3502,7 +3502,7 @@ RectTransform:
   - {fileID: 2019209467}
   - {fileID: 693031585}
   m_Father: {fileID: 1902747989}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5656,7 +5656,7 @@ RectTransform:
   - {fileID: 1885006060}
   - {fileID: 1506193249}
   m_Father: {fileID: 1902747989}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5847,7 +5847,7 @@ RectTransform:
   - {fileID: 478460663}
   - {fileID: 430484352}
   m_Father: {fileID: 1902747989}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6359,11 +6359,11 @@ RectTransform:
   m_Children:
   - {fileID: 780283362}
   - {fileID: 2070691439}
-  - {fileID: 2104580447}
-  - {fileID: 829521653}
   - {fileID: 1641490482}
   - {fileID: 363606810}
   - {fileID: 1592789073}
+  - {fileID: 2104580447}
+  - {fileID: 829521653}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7020,7 +7020,7 @@ RectTransform:
   - {fileID: 1958902929}
   - {fileID: 89296179}
   m_Father: {fileID: 1902747989}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

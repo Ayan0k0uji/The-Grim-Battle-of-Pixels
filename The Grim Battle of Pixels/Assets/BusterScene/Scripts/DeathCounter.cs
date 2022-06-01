@@ -28,8 +28,6 @@ public class DeathCounter: MonoBehaviour
             deathCountPlayer1++;
         else
             deathCountPlayer2++;
-        Debug.Log(deathCountPlayer1);
-        Debug.Log(deathCountPlayer2);
     }
 
 }
