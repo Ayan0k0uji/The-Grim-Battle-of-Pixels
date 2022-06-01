@@ -24,4 +24,14 @@ public class DeathCounter: MonoBehaviour
             deathCountPlayer2++;
     }
 
+    public int GetDeathCountPlayer1()
+    {
+        return deathCountPlayer1;
+    }
+
+    public int GetDeathCountPlayer2()
+    {
+        return deathCountPlayer2;
+    }
+
 }
