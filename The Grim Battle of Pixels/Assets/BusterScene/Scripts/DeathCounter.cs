@@ -9,6 +9,12 @@ public class DeathCounter: MonoBehaviour
     private int deathCountPlayer1 = 0, deathCountPlayer2 = 0;
     private int maxDeath = 3;
 
+    public int getDCP1() { return deathCountPlayer1; }
+
+    public int getDCP2() { return deathCountPlayer2; }
+
+    public int getMD() { return maxDeath; }
+
     void Start()
     {
         spawnHeroes = Camera.main.GetComponent<SpawnHeroes>();
@@ -22,6 +28,8 @@ public class DeathCounter: MonoBehaviour
             deathCountPlayer1++;
         else
             deathCountPlayer2++;
+        Debug.Log(deathCountPlayer1);
+        Debug.Log(deathCountPlayer2);
     }
 
 }
