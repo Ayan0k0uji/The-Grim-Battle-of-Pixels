@@ -12,7 +12,7 @@ public class AnimatorSakyla : AnimationAbstract
     private BoxCollider2D box;              // коллайдер, отвечающий за удары сакулы
     private PlayerStatus plSt;
     private bool isPlayer1;
-    private bool isAbilityReady = true;
+    private bool isAbilityReady = false;
     private float time = 0;
     private float timeBusterCoefficient = 1;
     private bool isAbilityRunning = true;
@@ -33,13 +33,20 @@ public class AnimatorSakyla : AnimationAbstract
 
     void Update()
     {
+
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !animator.GetCurrentAnimatorStateInfo(0).IsName("botton_kick"))
             box.enabled = false;
+
+/*        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("walking"))
+            flag = true;
+        else
+            flag = false;*/
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
             plSt.nullMana();
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityRunning)
         {
-            isAbilityReady = false;
+            isAbilityReady = true;
             StartCoroutine("timeAbility");
             isAbilityRunning = false;
 
@@ -144,7 +151,7 @@ public class AnimatorSakyla : AnimationAbstract
 
     IEnumerator timeAbility()
     {
-        while (time < 9)
+        while (time < 1)
         {
             yield return new WaitForSeconds(0.25f);
             time += 0.25f * timeBusterCoefficient;

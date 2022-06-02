@@ -89,6 +89,8 @@ public class BattleTehnik : BattleAbstract
     {
         flag = true;
     }
+
+    
 }
 
 

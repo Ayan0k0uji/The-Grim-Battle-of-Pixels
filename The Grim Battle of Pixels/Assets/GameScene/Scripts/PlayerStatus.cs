@@ -187,9 +187,7 @@ public class PlayerStatus : MonoBehaviour
             if (isDeathMode)
                 deathCounter.DeathPlayer(isPlayer1);
 
-            speed = 500;
-            returnJump—oefficient();
-            returnSpeedBust—oefficient();
+            
             StartCoroutine(reincarnation());
         }
     }
@@ -210,6 +208,9 @@ public class PlayerStatus : MonoBehaviour
 
         animator.SetBool("die", false);
 
+        speed = 500;
+        returnJump—oefficient();
+        returnSpeedBust—oefficient();
         currentHeath = maxHeath;
     }
 

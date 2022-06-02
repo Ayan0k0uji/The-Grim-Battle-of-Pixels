@@ -12,7 +12,7 @@ public class BattlePonchic : BattleAbstract
     private GameObject Enemy;
     private bool botKick, topKick;
     private bool bot_kick = false, top_kick = false;
-    private int bot_damage = 20, top_damage = 12;
+    private int bot_damage = 1, top_damage = 1;
     private int damageCoefficient = 1;
 
     void Start()
@@ -86,5 +86,11 @@ public class BattlePonchic : BattleAbstract
     public void returnDamageCoefficient()
     {
         damageCoefficient = 1;
+    }
+
+    public void SetKick()
+    {
+        bot_kick = true;
+        top_kick = true;
     }
 }
