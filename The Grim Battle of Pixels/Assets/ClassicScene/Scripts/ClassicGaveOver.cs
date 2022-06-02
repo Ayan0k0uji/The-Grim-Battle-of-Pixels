@@ -21,17 +21,14 @@ public class ClassicGaveOver : MonoBehaviour
     {
         pauseScr.Pause();
         gameOverPanel.transform.gameObject.SetActive(true);
+        if (!playerB)
+            player1Label.gameObject.SetActive(true);
+        else
+            player2Label.gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(GameObject.Find("ButtonPlayAgain"));
         gsms.setLSB(GameObject.Find("ButtonPlayAgain"));
         gameOver = true;
-        if (playerB)
-        {
-            player1Label.transform.gameObject.SetActive(true);
-        }
-        else
-        {
-            player2Label.transform.gameObject.SetActive(true);
-        }
+        
     }
 
     
@@ -54,6 +51,7 @@ public class ClassicGaveOver : MonoBehaviour
                     break;
                 case 3:
                     hearthsP1[0].gameObject.SetActive(false);
+                    gameOver = true;
                     gameOverClassic(true);
                     break;
                 default:
@@ -70,6 +68,7 @@ public class ClassicGaveOver : MonoBehaviour
                     break;
                 case 3:
                     hearthsP2[0].gameObject.SetActive(false);
+                    gameOver = true;
                     gameOverClassic(false);
                     break;
                 default:
@@ -80,7 +79,7 @@ public class ClassicGaveOver : MonoBehaviour
 
     public void playAgaingBA()
     {
-        //pauseScr.Resume();
+        pauseScr.Resume();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
