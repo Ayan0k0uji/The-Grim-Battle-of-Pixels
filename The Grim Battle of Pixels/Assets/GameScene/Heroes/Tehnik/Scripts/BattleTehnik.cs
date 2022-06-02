@@ -12,6 +12,7 @@ public class BattleTehnik : BattleAbstract
     private bool bot_kick = false, t_kick = false;  // проверяет произошел удар или нет
     private int bot_damage = 14, top_damage = 17;
     private int damageCoefficient = 1;
+    private bool flag = true;
 
     void Start()
     {
@@ -63,8 +64,9 @@ public class BattleTehnik : BattleAbstract
             bot_kick = false;
         }
         if (t_kick && collision != null && collision.name == Enemy.name
-                    && animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !collision.isTrigger)          // ели попал верхним ударом
+                    && animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !collision.isTrigger && flag)          // ели попал верхним ударом
         {
+            flag = false;
             plSt.setCurrentMana(5);
             plStEnemy.TakeDamage(top_damage * damageCoefficient);
         }
@@ -81,6 +83,11 @@ public class BattleTehnik : BattleAbstract
     public void returnDamageCoefficient()
     {
         damageCoefficient = 1;
+    }
+
+    public void SetFlag()
+    {
+        flag = true;
     }
 }
 
