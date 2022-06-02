@@ -80,7 +80,6 @@ public class AnimationDed : AnimationAbstract
 
                     animator.SetFloat("speed_X", Mathf.Abs(plSt.getDeltaX()));
 
-
                     animator.SetFloat("velocity_Y", rb.velocity.y);
                 }
                 else

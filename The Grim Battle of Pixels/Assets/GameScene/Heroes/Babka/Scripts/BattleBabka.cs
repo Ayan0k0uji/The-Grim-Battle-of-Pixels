@@ -7,7 +7,7 @@ public class BattleBabka : BattleAbstract
     private PlayerStatus plStEnemy;
     private PlayerStatus myPlSt;
     private GameObject Enemy;
-    private bool check_kick;
+    private bool check_kick = false;
     private bool botKick, topKick;
     private bool bot_kick = false, top_kick = false;
     private int bot_damage = 14, top_damage = 12;
@@ -57,6 +57,7 @@ public class BattleBabka : BattleAbstract
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("1");
         if (bot_kick && collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("bottom_kick") && !collision.isTrigger)
         {
