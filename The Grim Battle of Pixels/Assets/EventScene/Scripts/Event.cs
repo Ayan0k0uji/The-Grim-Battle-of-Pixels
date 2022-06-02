@@ -8,7 +8,7 @@ public class Event : MonoBehaviour
     [SerializeField] GameObject Kotiki;
     [SerializeField] GameObject Diski;
     [SerializeField] GameObject Meteor;
-    private int time = 3;
+    private int time = 15;
     private int timer = 0;
     private System.Random rnd = new System.Random();
     private int n;

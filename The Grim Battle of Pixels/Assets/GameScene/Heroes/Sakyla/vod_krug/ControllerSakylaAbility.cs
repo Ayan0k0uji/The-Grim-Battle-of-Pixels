@@ -18,6 +18,7 @@ public class ControllerSakylaAbility : MonoBehaviour
             enemy = GameObject.Find(spawnHeroes.GetNamePl1());
 
         plStEnemy = enemy.GetComponent<PlayerStatus>();
+        transform.parent = null;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

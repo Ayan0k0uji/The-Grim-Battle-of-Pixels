@@ -5,13 +5,15 @@ using UnityEngine;
 public class FlyVodavrot : MonoBehaviour
 {
     private SpawnHeroes spawnHeroes;
-    private float speed = 3000f;                        // скорость водоворота
+    private float speed = 1000f;                        // скорость водоворота
     private Rigidbody2D _body;
     private GameObject enemy;
     private GameObject player;
     private PlayerStatus plStEnemy;
     private Animator whirlpoolAnimator;                   // аниматор водоворота
     private Animator playerAnimator;                     // аниматор сакулы
+    private float napr;
+    private bool flag = true;
 
     private void Start()
     {
@@ -33,15 +35,26 @@ public class FlyVodavrot : MonoBehaviour
 
         playerAnimator = player.GetComponent<Animator>();
         plStEnemy = enemy.GetComponent<PlayerStatus>();
-        Vector2 movement = Vector2.right * speed * Time.deltaTime * player.GetComponent<Transform>().localScale.x;
+        napr = player.GetComponent<Transform>().localScale.x;
+        Vector2 movement = Vector2.right * speed * Time.deltaTime * napr;
         _body.velocity = movement;
         transform.parent = null;
+    }
+
+    private void FixedUpdate()
+    {
+        if (flag)
+        {
+            Vector2 movement = Vector2.right * speed * Time.deltaTime * napr;
+            _body.velocity = movement;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)                          
     {
         if (collision.name == enemy.name && !collision.isTrigger)                   // если сакула попал водоворотом
         {
+            flag = false;
             transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1, enemy.transform.position.z - 1);
             plStEnemy.setJumpForce(0);
             enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -76,7 +89,5 @@ public class FlyVodavrot : MonoBehaviour
         enemy.GetComponent<Rigidbody2D>().gravityScale = 3;
         plStEnemy.SetSpeedСoefficient(1);
         plStEnemy.setJumpForce(15);
-        /*enemy.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1, enemy.transform.position.z);
-        enemy.GetComponent<SpriteRenderer>().sprite = null;*/
     }
 }
