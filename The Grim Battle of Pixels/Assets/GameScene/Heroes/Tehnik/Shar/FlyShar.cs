@@ -13,6 +13,7 @@ public class FlyShar : MonoBehaviour
     private Animator SphereAnimator;                // компонент аниматора у шара
     private float deltaY, deltaX;                   // итоговые скорости по вертикали и горизонтали
     private bool isPlayer1 = false;                 // является ли игрок первым
+    private Animator playerAnimator;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class FlyShar : MonoBehaviour
         SphereAnimator = GetComponent<Animator>();
         _body = GetComponent<Rigidbody2D>();
         player = transform.parent.gameObject;
+        playerAnimator = player.GetComponent<Animator>();
         if (player.name == spawnHeroes.GetNamePl1())    // если игрок первый
         {
             isPlayer1 = true;
@@ -34,6 +36,10 @@ public class FlyShar : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("death"))
+        {
+            Destroy(gameObject);
+        }
         if (isPlayer1)
         {
             SphereAnimator.SetFloat("Horizontal", Input.GetAxis("Horizontal1"));

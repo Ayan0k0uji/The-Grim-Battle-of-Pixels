@@ -9,7 +9,6 @@ public class AbilityPonchic : MonoBehaviour
     private GameObject Enemy;
     private PlayerStatus plSt;
     private PlayerStatus plStEnemy;
-    private bool isUltaReady = false;
     private bool isAbilityReady = false;
     private bool isAbilityRunning = true;
     private bool isUltaRunning = true;
@@ -41,9 +40,6 @@ public class AbilityPonchic : MonoBehaviour
             Enemy.GetComponent<SpriteRenderer>().color = new Color(0.7f, 0.4f, 0.6f, 1f);
         }
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
-            isUltaReady = true;
-
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ability"))
             isAbilityRunning = true;
 
@@ -56,9 +52,9 @@ public class AbilityPonchic : MonoBehaviour
     }
 
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isUltaReady && collision != null && collision.name == Enemy.name
+        if (collision != null && collision.name == Enemy.name
                     && animator.GetCurrentAnimatorStateInfo(0).IsName("ulta_walking") && !collision.isTrigger && isUltaRunning)
         {
             Enemy.GetComponent<PlayerStatus>().setForceEnemy(true);
@@ -100,6 +96,5 @@ public class AbilityPonchic : MonoBehaviour
     public void newSpeed1()             // присвоить скорость после ульты
     {
         plSt.setSpeed(500);
-        isUltaReady = false;
     }
 }
