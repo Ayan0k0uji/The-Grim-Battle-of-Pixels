@@ -16,7 +16,7 @@ public class AnimatorSakylaOnline : AnimationAbstract
     private float time = 0;
     private float timeBusterCoefficient = 1;
     private bool flag = true;
-
+    private bool stan = false;
 
     private void Start()
     {
@@ -181,5 +181,11 @@ public class AnimatorSakylaOnline : AnimationAbstract
     {
         timeBusterCoefficient = newCoef;
         Invoke("", time);
+    }
+
+    override
+    public void SetStan(bool flag)
+    {
+        stan = flag;
     }
 }

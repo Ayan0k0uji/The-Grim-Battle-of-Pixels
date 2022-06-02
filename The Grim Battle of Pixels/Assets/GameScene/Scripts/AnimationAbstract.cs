@@ -9,4 +9,6 @@ public abstract class AnimationAbstract: MonoBehaviour
     public abstract bool getFlagAbility();
 
     public abstract void SetTimeBusterCoefficient(float newCoef, int time);
+
+    public abstract void SetStan(bool flag);
 }

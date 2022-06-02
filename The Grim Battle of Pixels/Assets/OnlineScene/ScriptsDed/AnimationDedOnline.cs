@@ -16,7 +16,7 @@ public class AnimationDedOnline : AnimationAbstract
     private float timeBusterCoefficient = 1;
     private Transform UltaPosition;
     private bool flag = true;
-
+    private bool stan = false;
 
 
     private void Start()
@@ -185,5 +185,11 @@ public class AnimationDedOnline : AnimationAbstract
     {
         timeBusterCoefficient = newCoef;
         Invoke("", time);
+    }
+
+    override
+    public void SetStan(bool flag)
+    {
+        stan = flag;
     }
 }

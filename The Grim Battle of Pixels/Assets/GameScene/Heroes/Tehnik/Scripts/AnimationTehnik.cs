@@ -15,7 +15,7 @@ public class AnimationTehnik : AnimationAbstract
     private Transform UltaPosition;
     [SerializeField] GameObject sphere;
     private bool isAbilityReady = true;
-
+    private bool stan = false;
 
     private void Start()
     {
@@ -171,5 +171,11 @@ public class AnimationTehnik : AnimationAbstract
     private void returnTimeBusterCoefficient()
     {
         timeBusterCoefficient = 1;
+    }
+
+    override
+    public void SetStan(bool flag)
+    {
+        stan = flag;
     }
 }

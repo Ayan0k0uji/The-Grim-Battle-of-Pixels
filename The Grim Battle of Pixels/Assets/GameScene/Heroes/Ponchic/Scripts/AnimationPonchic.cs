@@ -13,6 +13,7 @@ public class AnimationPonchic : AnimationAbstract
     private float time = 0;
     private float timeBusterCoefficient = 1;
     private bool isAbilityRunning = true;
+    private bool stan = false;
 
 
     private void Start()
@@ -43,88 +44,91 @@ public class AnimationPonchic : AnimationAbstract
             isAbilityRunning = false;
 
         }
-        if (isPlayer1)
+        if (!stan)
         {
-            if (!plSt.getSquat())
+            if (isPlayer1)
             {
-                animator.SetBool("squat", false);
-
-                if (Input.GetAxisRaw("Kick1").Equals(-1))
+                if (!plSt.getSquat())
                 {
-                    animator.SetBool("top_kick", true);
-                    box.enabled = true;
+                    animator.SetBool("squat", false);
+
+                    if (Input.GetAxisRaw("Kick1").Equals(-1))
+                    {
+                        animator.SetBool("top_kick", true);
+                        box.enabled = true;
+                    }
+                    else
+                        animator.SetBool("top_kick", false);
+
+                    if (Input.GetAxisRaw("Kick1").Equals(1))
+                    {
+                        animator.SetBool("bottom_kick", true);
+                        box.enabled = true;
+                    }
+                    else
+                        animator.SetBool("bottom_kick", false);
+
+                    if (Input.GetAxisRaw("Ability1").Equals(-1) && plSt.getCurrentMana() == 100)
+                    {
+                        animator.SetBool("ulta", true);
+                    }
+                    else
+                        animator.SetBool("ulta", false);
+
+                    if (Input.GetAxisRaw("Ability1").Equals(1) && isAbilityReady)
+                        animator.SetBool("ability", true);
+                    else
+                        animator.SetBool("ability", false);
+
+                    animator.SetFloat("speed_X", Mathf.Abs(plSt.getDeltaX()));
+
+
+                    animator.SetFloat("velocity_Y", rb.velocity.y);
                 }
                 else
-                    animator.SetBool("top_kick", false);
-
-                if (Input.GetAxisRaw("Kick1").Equals(1))
-                {
-                    animator.SetBool("bottom_kick", true);
-                    box.enabled = true;
-                }
-                else
-                    animator.SetBool("bottom_kick", false);
-
-                if (Input.GetAxisRaw("Ability1").Equals(-1) && plSt.getCurrentMana() == 100)
-                {
-                    animator.SetBool("ulta", true);
-                }
-                else
-                    animator.SetBool("ulta", false);
-
-                if (Input.GetAxisRaw("Ability1").Equals(1) && isAbilityReady)
-                    animator.SetBool("ability", true);
-                else
-                    animator.SetBool("ability", false);
-
-                animator.SetFloat("speed_X", Mathf.Abs(plSt.getDeltaX()));
-
-
-                animator.SetFloat("velocity_Y", rb.velocity.y);
+                    animator.SetBool("squat", true);
             }
             else
-                animator.SetBool("squat", true);
-        }
-        else
-        {
-            if (!plSt.getSquat())
             {
-                animator.SetBool("squat", false);
-
-                if (Input.GetAxisRaw("Kick2").Equals(-1))
+                if (!plSt.getSquat())
                 {
-                    animator.SetBool("top_kick", true);
-                    box.enabled = true;
+                    animator.SetBool("squat", false);
+
+                    if (Input.GetAxisRaw("Kick2").Equals(-1))
+                    {
+                        animator.SetBool("top_kick", true);
+                        box.enabled = true;
+                    }
+                    else
+                        animator.SetBool("top_kick", false);
+
+                    if (Input.GetAxisRaw("Kick2").Equals(1))
+                    {
+                        animator.SetBool("bottom_kick", true);
+                        box.enabled = true;
+                    }
+                    else
+                        animator.SetBool("bottom_kick", false);
+
+                    if (Input.GetAxisRaw("Ability2").Equals(-1) && plSt.getCurrentMana() == 100)
+                    {
+                        animator.SetBool("ulta", true);
+                    }
+                    else
+                        animator.SetBool("ulta", false);
+
+                    if (Input.GetAxisRaw("Ability2").Equals(1) && isAbilityReady)
+                        animator.SetBool("ability", true);
+                    else
+                        animator.SetBool("ability", false);
+
+                    animator.SetFloat("speed_X", Mathf.Abs(plSt.getDeltaX()));
+
+                    animator.SetFloat("velocity_Y", rb.velocity.y);
                 }
                 else
-                    animator.SetBool("top_kick", false);
-
-                if (Input.GetAxisRaw("Kick2").Equals(1))
-                {
-                    animator.SetBool("bottom_kick", true);
-                    box.enabled = true;
-                }
-                else
-                    animator.SetBool("bottom_kick", false);
-
-                if (Input.GetAxisRaw("Ability2").Equals(-1) && plSt.getCurrentMana() == 100)
-                {
-                    animator.SetBool("ulta", true);
-                }
-                else
-                    animator.SetBool("ulta", false);
-
-                if (Input.GetAxisRaw("Ability2").Equals(1) && isAbilityReady)
-                    animator.SetBool("ability", true);
-                else
-                    animator.SetBool("ability", false);
-
-                animator.SetFloat("speed_X", Mathf.Abs(plSt.getDeltaX()));
-
-                animator.SetFloat("velocity_Y", rb.velocity.y);
+                    animator.SetBool("squat", true);
             }
-            else
-                animator.SetBool("squat", true);
         }
     }
 
@@ -162,5 +166,11 @@ public class AnimationPonchic : AnimationAbstract
     private void returnTimeBusterCoefficient()
     {
         timeBusterCoefficient = 1;
+    }
+
+    override
+    public void SetStan(bool flag)
+    {
+        stan = flag;
     }
 }

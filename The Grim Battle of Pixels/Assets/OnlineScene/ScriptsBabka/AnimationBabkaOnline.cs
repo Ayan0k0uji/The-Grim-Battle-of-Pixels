@@ -15,7 +15,7 @@ public class AnimationBabkaOnline : AnimationAbstract
     private Transform UltaPosition;
     [SerializeField] GameObject snot;
     private bool flag = true;
-
+    private bool stan = false;
 
 
     private void Start()
@@ -166,5 +166,11 @@ public class AnimationBabkaOnline : AnimationAbstract
     {
         timeBusterCoefficient = newCoef;
         Invoke("", time);
+    }
+
+    override
+    public void SetStan(bool flag)
+    {
+        stan = flag;
     }
 }

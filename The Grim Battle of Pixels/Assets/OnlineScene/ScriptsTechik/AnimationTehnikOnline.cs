@@ -15,6 +15,7 @@ public class AnimationTehnikOnline : AnimationAbstract
     private Transform UltaPosition;
     [SerializeField] GameObject shar;
     private bool flag = true;
+    private bool stan = false;
 
 
     private void Start()
@@ -166,5 +167,11 @@ public class AnimationTehnikOnline : AnimationAbstract
     {
         timeBusterCoefficient = newCoef;
         Invoke("", time);
+    }
+
+    override
+    public void SetStan(bool flag)
+    {
+        stan = flag;
     }
 }

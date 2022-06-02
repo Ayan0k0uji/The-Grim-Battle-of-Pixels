@@ -55,6 +55,7 @@ public class FlyVodavrot : MonoBehaviour
         if (collision.name == enemy.name && !collision.isTrigger)                   // если сакула попал водоворотом
         {
             flag = false;
+            enemy.GetComponent<AnimationAbstract>().SetStan(true);
             transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1, enemy.transform.position.z - 1);
             plStEnemy.setJumpForce(0);
             enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -80,6 +81,7 @@ public class FlyVodavrot : MonoBehaviour
 
     public void WhirlpoolDestroy()
     {
+        enemy.GetComponent<AnimationAbstract>().SetStan(false);
         playerAnimator.SetBool("ulta_med", false);
         Destroy(gameObject);
     }
