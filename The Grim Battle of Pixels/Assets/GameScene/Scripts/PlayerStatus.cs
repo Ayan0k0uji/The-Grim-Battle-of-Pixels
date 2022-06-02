@@ -31,6 +31,7 @@ public class PlayerStatus : MonoBehaviour
     private int currentArmor = 0;
     private bool flagPoison = false;
     private bool isDeathMode = false;
+    private bool stan = false;
 
     private void Start()
     {
@@ -106,57 +107,60 @@ public class PlayerStatus : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isPlayer1)
+        if (!stan)
         {
-            if (grounded && Input.GetAxisRaw("Jump1").Equals(1) && !squat && !proverka && flagJump)
+            if (isPlayer1)
             {
-                rb.AddForce(Vector2.up * jumpForce * jumpCoefficient, ForceMode2D.Impulse);
-                flagJump = false;
+                if (grounded && Input.GetAxisRaw("Jump1").Equals(1) && !squat && !proverka && flagJump)
+                {
+                    rb.AddForce(Vector2.up * jumpForce * jumpCoefficient, ForceMode2D.Impulse);
+                    flagJump = false;
+                }
+                if (Input.GetAxisRaw("Jump1").Equals(0))
+                    flagJump = true;
+                if (Input.GetAxisRaw("Jump1").Equals(-1) && grounded && !proverka)
+                    squat = true;
+                else
+                    squat = false;
+                deltaX = Input.GetAxis("Horizontal1") * speed * speedBustCoefficient * Time.deltaTime * speedCoefficient;
+                Vector2 movement = new Vector2(deltaX, rb.velocity.y);
+                if (forceEnemy)
+                {
+                    rb.AddForce(force, ForceMode2D.Impulse);
+                    force = new Vector2(0, 0);
+                    forceEnemy = false;
+                }
+                else if (!squat && !proverka)
+                    rb.velocity = movement;
+                else
+                    rb.velocity = new Vector2(0, rb.velocity.y);
             }
-            if (Input.GetAxisRaw("Jump1").Equals(0))
-                flagJump = true;
-            if (Input.GetAxisRaw("Jump1").Equals(-1) && grounded && !proverka)
-                squat = true;
             else
-                squat = false;
-            deltaX = Input.GetAxis("Horizontal1") * speed * speedBustCoefficient * Time.deltaTime * speedCoefficient;
-            Vector2 movement = new Vector2(deltaX, rb.velocity.y);
-            if (forceEnemy)
             {
-                rb.AddForce(force, ForceMode2D.Impulse);
-                force = new Vector2(0, 0);
-                forceEnemy = false;
+                if (grounded && Input.GetAxisRaw("Jump2").Equals(1) && !squat && !proverka && flagJump)
+                {
+                    rb.AddForce(Vector2.up * jumpForce * jumpCoefficient, ForceMode2D.Impulse);
+                    flagJump = false;
+                }
+                if (Input.GetAxisRaw("Jump2").Equals(0))
+                    flagJump = true;
+                if (Input.GetAxisRaw("Jump2").Equals(-1) && grounded && !proverka)
+                    squat = true;
+                else
+                    squat = false;
+                deltaX = Input.GetAxis("Horizontal2") * speedBustCoefficient * speed * Time.deltaTime * speedCoefficient;
+                Vector2 movement = new Vector2(deltaX, rb.velocity.y);
+                if (forceEnemy)
+                {
+                    rb.AddForce(force, ForceMode2D.Impulse);
+                    force = new Vector2(0, 0);
+                    forceEnemy = false;
+                }
+                else if (!squat && !proverka)
+                    rb.velocity = movement;
+                else
+                    rb.velocity = new Vector2(0, rb.velocity.y);
             }
-            else if (!squat && !proverka)
-                rb.velocity = movement;
-            else
-                rb.velocity = new Vector2(0, rb.velocity.y);
-        }
-        else
-        {
-            if (grounded && Input.GetAxisRaw("Jump2").Equals(1) && !squat && !proverka && flagJump)
-            {
-                rb.AddForce(Vector2.up * jumpForce * jumpCoefficient, ForceMode2D.Impulse);
-                flagJump = false;
-            }
-            if (Input.GetAxisRaw("Jump2").Equals(0))
-                flagJump = true;
-            if (Input.GetAxisRaw("Jump2").Equals(-1) && grounded && !proverka)
-                squat = true;
-            else
-                squat = false;
-            deltaX = Input.GetAxis("Horizontal2") * speedBustCoefficient * speed * Time.deltaTime * speedCoefficient;
-            Vector2 movement = new Vector2(deltaX, rb.velocity.y);
-            if (forceEnemy)
-            {
-                rb.AddForce(force, ForceMode2D.Impulse);
-                force = new Vector2(0, 0);
-                forceEnemy = false;
-            }
-            else if (!squat && !proverka)
-                rb.velocity = movement;
-            else
-                rb.velocity = new Vector2(0, rb.velocity.y);
         }
     }
 
@@ -310,5 +314,9 @@ public class PlayerStatus : MonoBehaviour
     public void returnManaSetCoefficient()
     {
         manaSetCoefficient = 1;
+    }
+
+    public void SetStan(bool flag) {
+        stan = flag;
     }
 }

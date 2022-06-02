@@ -57,12 +57,13 @@ public class FlyVodavrot : MonoBehaviour
             flag = false;
             enemy.GetComponent<AnimationAbstract>().SetStan(true);
             transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1, enemy.transform.position.z - 1);
-            plStEnemy.setJumpForce(0);
+            //plStEnemy.setJumpForce(0);
             enemy.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             playerAnimator.SetBool("ulta_med", true);
             whirlpoolAnimator.SetBool("popal", true);
             enemy.GetComponent<Rigidbody2D>().gravityScale = 0;
-            plStEnemy.SetSpeed—oefficient(0);
+            //plStEnemy.SetSpeed—oefficient(0);
+            enemy.GetComponent<PlayerStatus>().SetStan(true);
             _body.velocity = Vector2.zero;
         }
         else if (collision.name != player.name && !collision.isTrigger)
@@ -81,6 +82,7 @@ public class FlyVodavrot : MonoBehaviour
 
     public void WhirlpoolDestroy()
     {
+        
         enemy.GetComponent<AnimationAbstract>().SetStan(false);
         playerAnimator.SetBool("ulta_med", false);
         Destroy(gameObject);
@@ -88,8 +90,9 @@ public class FlyVodavrot : MonoBehaviour
 
     public void ExitEnemyFromWhirlpool()
     {
+        enemy.GetComponent<PlayerStatus>().SetStan(false);
         enemy.GetComponent<Rigidbody2D>().gravityScale = 3;
-        plStEnemy.SetSpeed—oefficient(1);
-        plStEnemy.setJumpForce(15);
+        //plStEnemy.SetSpeed—oefficient(1);
+        //plStEnemy.setJumpForce(15);
     }
 }
