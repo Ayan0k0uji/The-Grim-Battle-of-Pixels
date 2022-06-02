@@ -10,7 +10,7 @@ public class BattleDed : BattleAbstract
     private bool check_kick;
     private bool botKick, topKick;
     private bool bot_kick = false, top_kick = false;
-    private int bot_damage = 7, top_damage = 10;
+    private int bot_damage = 13, top_damage = 13;
     private int damageCoefficient = 1;
 
     void Start()

@@ -10,7 +10,7 @@ public class BattleTehnik : BattleAbstract
     private bool check_kick;
     private bool botKick, topKick;                  // показывает можно ли бить тем или иным ударом
     private bool bot_kick = false, t_kick = false;  // проверяет произошел удар или нет
-    private int bot_damage = 14, top_damage = 17;
+    private int bot_damage = 20, top_damage = 8;
     private int damageCoefficient = 1;
     private bool flag = true;
 

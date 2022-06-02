@@ -9,7 +9,7 @@ public class Hilka : MonoBehaviour
     private BoxCollider2D box;
     private SpriteRenderer sprite;
     System.Random rnd = new System.Random();
-    private int timeSpawn = 7;
+    private int timeSpawn = 15;
     private int hp = 20;
     private int nForRandom = 0;
     private string Player1;

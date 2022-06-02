@@ -12,7 +12,7 @@ public class BattleSakyla : BattleAbstract
     private bool check_kick;                            // проигрывается ли анимация удара
     private bool botKick, topKick;                      // можно ли бить
     private bool bot_kick = false, top_kick = false;    // произошел удар или нет
-    private int bot_damage = 22, top_damage = 30;
+    private int bot_damage = 15, top_damage = 12;
     private int damageCoefficient = 1;
 
     void Start()

@@ -10,7 +10,7 @@ public class BattleBabka : BattleAbstract
     private bool check_kick = false;
     private bool botKick, topKick;
     private bool bot_kick = false, top_kick = false;
-    private int bot_damage = 1, top_damage = 1;
+    private int bot_damage = 14, top_damage = 12;
     private int damageCoefficient = 1;
 
     void Start()

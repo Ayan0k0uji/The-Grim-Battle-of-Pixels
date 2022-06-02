@@ -9,8 +9,8 @@ public class Mana : MonoBehaviour
     private BoxCollider2D box;
     private string Player1;
     private string Player2;
-    private int mana = 100;
-    private float timeManaSpawn = 1f;
+    private int mana = 33;
+    private float timeManaSpawn = 10f;
 
     private void Start()
     {
