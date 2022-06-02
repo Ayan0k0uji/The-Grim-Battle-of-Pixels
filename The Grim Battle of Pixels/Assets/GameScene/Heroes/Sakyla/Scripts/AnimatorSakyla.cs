@@ -37,20 +37,19 @@ public class AnimatorSakyla : AnimationAbstract
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("top_kick") && !animator.GetCurrentAnimatorStateInfo(0).IsName("botton_kick"))
             box.enabled = false;
 
-/*        if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle") || animator.GetCurrentAnimatorStateInfo(0).IsName("walking"))
-            flag = true;
-        else
-            flag = false;*/
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ulta"))
             plSt.nullMana();
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("ability") && isAbilityRunning)
         {
-            isAbilityReady = true;
             StartCoroutine("timeAbility");
             isAbilityRunning = false;
+            WaterTraceSpawn();
+            transform.position = new Vector3(transform.position.x + 4 * transform.localScale.x, transform.position.y, transform.position.z);
 
         }
+
+
         if (!stan)
         {
             if (isPlayer1)
@@ -83,12 +82,9 @@ public class AnimatorSakyla : AnimationAbstract
                     else
                         animator.SetBool("ulta", false);
 
-                    if (Input.GetAxisRaw("Ability1").Equals(1) && isAbilityReady)
+                    if (Input.GetAxisRaw("Ability1").Equals(1) && isAbilityRunning)
                     {
                         animator.SetBool("ability", true);
-                        WaterTraceSpawn();
-                        transform.position = new Vector3(transform.position.x + 4 * transform.localScale.x, transform.position.y, transform.position.z);
-
                     }
                     else
                         animator.SetBool("ability", false);
@@ -130,11 +126,9 @@ public class AnimatorSakyla : AnimationAbstract
                     else
                         animator.SetBool("ulta", false);
 
-                    if (Input.GetAxisRaw("Ability2").Equals(1) && isAbilityReady)
+                    if (Input.GetAxisRaw("Ability2").Equals(1) && isAbilityRunning)
                     {
                         animator.SetBool("ability", true);
-                        WaterTraceSpawn();
-                        transform.position = new Vector3(transform.position.x + 4 * transform.localScale.x, transform.position.y, transform.position.z);
                     }
                     else
                         animator.SetBool("ability", false);
@@ -151,13 +145,12 @@ public class AnimatorSakyla : AnimationAbstract
 
     IEnumerator timeAbility()
     {
-        while (time < 1)
+        while (time < 10)
         {
             yield return new WaitForSeconds(0.25f);
             time += 0.25f * timeBusterCoefficient;
         }
         time = 0;
-        isAbilityReady = true;
         isAbilityRunning = true;
     }
 

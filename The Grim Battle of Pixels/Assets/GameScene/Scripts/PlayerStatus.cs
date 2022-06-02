@@ -321,4 +321,9 @@ public class PlayerStatus : MonoBehaviour
     public void SetStan(bool flag) {
         stan = flag;
     }
+
+    public bool GetGroung()
+    {
+        return grounded;
+    }
 }
