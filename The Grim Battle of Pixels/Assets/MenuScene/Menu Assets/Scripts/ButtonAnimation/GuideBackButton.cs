@@ -7,6 +7,12 @@ public class GuideBackButton : MonoBehaviour, IDeselectHandler, IUpdateSelectedH
     [SerializeField] private GameObject abliText;
     [SerializeField] private GameObject ultText;
     [SerializeField] private GameObject backText;
+    private MenuScript ms;
+
+    void Start()
+    {
+        ms = GameObject.Find("Canvas").GetComponent<MenuScript>();
+    }
 
     public void OnDeselect(BaseEventData eventData)
     {
@@ -17,6 +23,7 @@ public class GuideBackButton : MonoBehaviour, IDeselectHandler, IUpdateSelectedH
 
     public void OnUpdateSelected(BaseEventData eventData)
     {
+        ms.setLSB(this.gameObject);
         abliText.SetActive(false);
         ultText.SetActive(false);
         backText.SetActive(true);

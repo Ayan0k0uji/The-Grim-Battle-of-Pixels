@@ -16,13 +16,13 @@ public class MenuScript : MonoBehaviour
     [SerializeField] Sprite[] HeroesIcons = new Sprite[5];
     [SerializeField] Image P1I;
     [SerializeField] Image P2I;
-
+   
     [SerializeField] GameObject namesAuthors;
     [SerializeField] GameObject linksAuthors;
 
     private bool authorSwitch = true;
 
-    GameObject lastSelectedGO;
+    private GameObject lastSelectedButton;
 
     public int getP1() { return P1; }
     public int getP2() { return P2; }
@@ -31,6 +31,7 @@ public class MenuScript : MonoBehaviour
     public void CharacterChooseP1Button(int chrP)
     {
         EventSystem.current.SetSelectedGameObject(GameObject.Find("Charecter1pl2"));
+        lastSelectedButton = GameObject.Find("Charecter1pl2");
         P1 = chrP;
         P1I.sprite = HeroesIcons[P1];
     }
@@ -38,6 +39,7 @@ public class MenuScript : MonoBehaviour
     public void CharacterChooseP1ButtonRandom()
     {
         EventSystem.current.SetSelectedGameObject(GameObject.Find("Charecter1pl2"));
+        lastSelectedButton = GameObject.Find("Charecter1pl2");
         P1 = Random.Range(0, 5);
         P1I.sprite = HeroesIcons[P1];
     }
@@ -45,6 +47,7 @@ public class MenuScript : MonoBehaviour
     public void CharacterChooseP2Button(int chrP)
     {
         EventSystem.current.SetSelectedGameObject(GameObject.Find("StartPlayButton"));
+        lastSelectedButton = GameObject.Find("StartPlayButton");
         P2 = chrP;
         P2I.sprite = HeroesIcons[P2];
     }
@@ -52,6 +55,7 @@ public class MenuScript : MonoBehaviour
     public void CharacterChooseP2ButtonRandom()
     {
         EventSystem.current.SetSelectedGameObject(GameObject.Find("StartPlayButton"));
+        lastSelectedButton = GameObject.Find("StartPlayButton");
         P2 = Random.Range(0, 5);
         P2I.sprite = HeroesIcons[P2];
     }
@@ -59,6 +63,7 @@ public class MenuScript : MonoBehaviour
     public void SetModeButton(int numberScene)
     {
         EventSystem.current.SetSelectedGameObject(GameObject.Find("Charecter1pl1"));
+        lastSelectedButton = GameObject.Find("Charecter1pl1");
         gameMode = numberScene;
     }
 
@@ -78,6 +83,7 @@ public class MenuScript : MonoBehaviour
         //EventSystem.current.SetSelectedGameObject(null);
         //lastSelectedGO = s;
         EventSystem.current.SetSelectedGameObject(s);
+        lastSelectedButton = s;
     }
 
     public void AuthorSwitchButton()
@@ -108,12 +114,20 @@ public class MenuScript : MonoBehaviour
         //GameObject.Find("ChooseMenu").transform.GetChild(2).gameObject.SetActive(false);
         //GameObject.Find("ChooseMenu").SetActive(false);
         //GameObject.Find("MainMenu").transform.GetChild(0).gameObject.GetComponent<Button>().Select();
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Update()
     {
-        //EventSystem.current.SetSelectedGameObject(lastSelectedGO);
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(lastSelectedButton);
+        }
+    }
+
+    public void setLSB(GameObject LSB)
+    {
+        lastSelectedButton = LSB;
     }
 }

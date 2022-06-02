@@ -8,10 +8,11 @@ public class ClassicPauseScript : MonoBehaviour
     private bool gamePaused = false;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] ClassicGaveOver gov;
+    private GSMenuScript gsms;
 
     private void Start()
     {
-
+        gsms = GameObject.Find("HUD").GetComponent<GSMenuScript>();
     }
 
     private void Update()
@@ -22,6 +23,7 @@ public class ClassicPauseScript : MonoBehaviour
             {
                 pauseMenu.SetActive(true);
                 EventSystem.current.SetSelectedGameObject(GameObject.Find("ButtonResume"));
+                gsms.setLSB(GameObject.Find("ButtonResume"));
                 Pause();
             }
         }

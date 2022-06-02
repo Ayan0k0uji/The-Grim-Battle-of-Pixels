@@ -12,12 +12,14 @@ public class VolumeSlider : MonoBehaviour, IDeselectHandler, IUpdateSelectedHand
     [SerializeField] private AudioMixer am;
     [SerializeField] private Text textValue;
     private bool musWokr = true;
+    private MenuScript ms;
 
 
 
 
-   void Start()
+    void Start()
     {
+        ms = GameObject.Find("Canvas").GetComponent<MenuScript>();
         if (volume != -80f && musWokr) //
         {
             am.GetFloat("masterVolume", out volume);
@@ -34,6 +36,7 @@ public class VolumeSlider : MonoBehaviour, IDeselectHandler, IUpdateSelectedHand
 
     public void OnUpdateSelected(BaseEventData eventData)
     {
+        ms.setLSB(this.gameObject);
         //if (textValue.text != "[ " + stringVolume + " ]")
         if (volume != -80f) //
         {

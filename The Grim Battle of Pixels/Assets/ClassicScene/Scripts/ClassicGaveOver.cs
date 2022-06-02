@@ -15,12 +15,14 @@ public class ClassicGaveOver : MonoBehaviour
     private bool gameOver = false;
     [SerializeField] Image[] hearthsP1 = new Image[3];
     [SerializeField] Image[] hearthsP2 = new Image[3];
+    private GSMenuScript gsms;
 
     private void gameOverClassic(bool playerB)
     {
         pauseScr.Pause();
         gameOverPanel.transform.gameObject.SetActive(true);
         EventSystem.current.SetSelectedGameObject(GameObject.Find("ButtonPlayAgain"));
+        gsms.setLSB(GameObject.Find("ButtonPlayAgain"));
         gameOver = true;
         if (playerB)
         {

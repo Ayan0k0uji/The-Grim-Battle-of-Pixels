@@ -6,14 +6,17 @@ public class ButtonAnimKost2Script : MonoBehaviour, ISelectHandler, IDeselectHan
 {
     Text ButtonText;
     [SerializeField] string standartText;
+    private MenuScript ms;
 
     void Start()
     {
+        ms = GameObject.Find("Canvas").GetComponent<MenuScript>();
         ButtonText = this.transform.GetChild(0).gameObject.GetComponent<Text>();
     }
 
     public void OnSelect(BaseEventData eventData)
     {
+        ms.setLSB(this.gameObject);
         ButtonText.text = "[ " + standartText + " ]";
     }
 

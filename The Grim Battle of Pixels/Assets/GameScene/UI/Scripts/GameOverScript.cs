@@ -13,10 +13,11 @@ public class GameOverScript : MonoBehaviour
     [SerializeField] Image player1Label;
     [SerializeField] Image player2Label;
     private bool gameOver = false;
+    private GSMenuScript gsms;
 
     private void Start()
     {
-        
+        gsms = GameObject.Find("HUD").GetComponent<GSMenuScript>();
     }
 
     private void Update()
@@ -26,6 +27,7 @@ public class GameOverScript : MonoBehaviour
             pauseScr.Pause();
             gameOverPanel.transform.gameObject.SetActive(true);
             EventSystem.current.SetSelectedGameObject(GameObject.Find("ButtonPlayAgain"));
+            gsms.setLSB(GameObject.Find("ButtonPlayAgain"));
             gameOver = true;
             if (cpt.getWin() == 1)
             {
